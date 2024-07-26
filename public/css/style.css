@@ -1,10 +1,23 @@
 /* Global Styles */
 body {
-    font-family: 'Nunito', sans-serif;
-    color: #636b6f;
-    background-color: #fff;
-    font-weight: 200;
-    margin: 0;
+    background-color: #380000;
+    color: #666666;
+    font: 14px 'Calibri', sans-serif;
+    line-height: 20px;
+    word-wrap: break-word;
+}
+p{
+    line-height: 24px !important;
+    margin-bottom: 15px !important;
+}
+#page{
+        width: 97% !important;
+        /* max-width: 1038px !important;  */
+}
+li{
+    font-size: 14px;
+    font-family: Calibri, sans-serif;
+    color: #666666;
 }
 
 /* Navbar Styles */
@@ -69,14 +82,7 @@ body {
     border-radius: 4px !important;
 }
 
-/* Welcome Page Styles */
-html, body {
-    background-color: #fff;
-    color: #636b6f;
-    font-family: 'Nunito', sans-serif;
-    font-weight: 200;
-    margin: 0;
-}
+
 
 .carousel-item img {
     width: 100%;
@@ -87,7 +93,9 @@ html, body {
 .container-custom {
     max-width: 1200px;
     margin: 0 auto;
-    padding: 0 15px;
+    /* padding: 0 15px; */
+    background-color: #f1eee8;
+
 }
 
 .row-padding {
@@ -153,7 +161,21 @@ html, body {
     height: 100vh;
 }
 
-
+.header-post-title-class {
+    /* padding-left: 25px; */
+    padding-right: 25px;
+    color: #823535;
+    font-weight: lighter;
+    font-size: 22px;
+    margin-left: 35px;
+}
+.fancytitle{
+    color: #823535;
+    font-family: Calibri, sans-serif;
+    text-align: center;
+    font-size: 22px;
+    line-height:32px;
+}
 /* Footer */
     footer{
         background-color:#000000 !important;

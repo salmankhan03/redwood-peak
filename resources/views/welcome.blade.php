@@ -6,93 +6,14 @@
 
     <title>Redwood Peak Limited – Hong Kong based asset manager focused on fund & separate account management</title>
 
-    <!-- Fonts -->
     <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@200;600&display=swap" rel="stylesheet">
     <link href="{{ asset('css/style.css') }}" rel="stylesheet">
-
-    <!-- Styles -->
-    <!-- <style>
-        html, body {
-            background-color: #fff;
-            color: #636b6f;
-            font-family: 'Nunito', sans-serif;
-            font-weight: 200;
-            margin: 0;
-        }
-        .carousel-item img {
-            width: 100%;
-            height: 100vh;
-            object-fit: cover;
-        }
-        .container-custom {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 0 15px;
-        }
-        .row-padding {
-            padding: 15px 0;
-        }
-        .card {
-            height: 100%;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            border: none !important;
-            border-radius: 0px !important;
-        }
-        .card-bg-img {
-            background: url('https://demo2.eightheme.com/zenith/wp-content/uploads/sites/24/2023/10/professional-designs-done-on-time-and-on-budget-2023-05-13-01-51-27-utc.jpg') center center no-repeat;
-            background-size: cover;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: white;
-            height: 100%;
-        }
-        .card p {
-            padding: 20px;
-            text-align: center;
-        }
-        .card-img-top {
-            width: 100%;
-            transition: transform 0.3s ease;
-        }
-        .card-img-top:hover {
-            transform: scale(1.1);
-        }
-        .card-shadow{
-          box-shadow: 0px 0px 10px 0px rgba(237.99999999999997, 237.99999999999997, 237.99999999999997, 0.84);
-          border-style: none;
-          background-color: #fff;
-        }
-        .card-body {
-            flex: 1;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            padding:2rem !important
-        }
-        .card-footer {
-            display: flex;
-            justify-content: left;
-            background-color: #fff !important;
-            border:none !important;
-            padding:2rem !important
-
-        }
-        .full-height {
-            height: 100vh;
-        }
-    </style> -->
-    <!-- Bootstrap CSS -->
     <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
 
 </head>
 <body>
     <div class="container-custom">
         @include('header')
-        <!-- Main Content -->
-        <!-- Full-width image slider -->
         <div id="carouselExampleIndicators" class="carousel slide">
             <!-- <ol class="carousel-indicators">
                 <li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>

@@ -97,16 +97,17 @@
                     <!-- Second row: Navbar items -->
                     <ul class="navbar-nav navbarFontsSize">
                         <li class="nav-item active">
-                            <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
+                            <a class="nav-link" href="{{ url('/') }}">Home <span class="sr-only">(current)</span></a>
                         </li>
                         <li class="nav-item dropdown">
                             <a class="nav-link no-caret" href="#" id="aboutUsDropdown" role="button" aria-haspopup="true" aria-expanded="false">
                                 About Us
                             </a>
                             <div class="dropdown-menu" aria-labelledby="aboutUsDropdown">
-                                <a class="dropdown-item" href="#">Our Mission</a>
-                                <a class="dropdown-item" href="#">Overview</a>
-                                <a class="dropdown-item" href="#">Senior Team</a>
+                                <!-- <a class="dropdown-item" href="#">Our Mission</a> -->
+                                <a class="dropdown-item" href="{{ route('ourMission') }}">Our Mission</a>
+                                <a class="dropdown-item" href="{{ route('overView') }}">Overview</a>
+                                <a class="dropdown-item" href="{{ route('seniorTeam') }}">Senior Team</a>
                             </div>
                         </li>
                         <li class="nav-item dropdown">
@@ -114,12 +115,12 @@
                                 Investment Management
                             </a>
                             <div class="dropdown-menu" aria-labelledby="investmentManagementDropdown">
-                                <a class="dropdown-item" href="#">Hedge Fund</a>
-                                <a class="dropdown-item" href="#">Managed Account</a>
+                                <a class="dropdown-item" href="{{ route('hedgeFund') }}">Hedge Fund</a>
+                                <a class="dropdown-item" href="{{ route('managedAccount') }}">Managed Account</a>
                             </div>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="#">Our Approach</a>
+                            <a class="nav-link" href="{{ route('ourApproach') }}">Our Approach</a>
                         </li>   
                         <li class="nav-item dropdown">
                             <a class="nav-link no-caret" href="#" id="publicationUpdatesDropdown" role="button" aria-haspopup="true" aria-expanded="false">

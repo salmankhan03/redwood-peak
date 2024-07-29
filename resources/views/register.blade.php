@@ -161,9 +161,9 @@
                             </button>
                         </div>
                         <div class="ml-3">
-                            <button type="submit" class="btn btn-primary">
-                                {{ __('Login') }}
-                            </button>
+                        <button type="button" class="btn btn-secondary" onclick="redirectToLogin()">
+                            {{ __('Login') }}
+                        </button>
                         </div>
                     </div>
                     </form>
@@ -181,6 +181,9 @@
                 allowClear: true
             });
         });
+        function redirectToLogin() {
+            window.location.href = "{{ route('login') }}";
+        }
     </script>
    
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>

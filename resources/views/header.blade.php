@@ -69,7 +69,7 @@
     </head>
     <body>
         <nav class="navbar navbar-expand-lg navbar-light HeaderBGColor pl-4 pr-4 pt-3 pb-3">
-            <a class="navbar-brand" href="#">
+            <a class="navbar-brand" href="{{ url('/') }}">
                 <img src="{{ asset('assets/images/logo.png') }}" class="d-inline-block align-top" alt="Logo">
             </a>
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">

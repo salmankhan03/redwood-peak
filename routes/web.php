@@ -15,6 +15,7 @@ Route::get('/managed-account', [PageController::class, 'managedAccount'])->name(
 Route::get('/our-approach', [PageController::class, 'ourApproach'])->name('ourApproach');
 Route::get('/register', [PageController::class, 'register'])->name('register');
 Route::get('/login', [PageController::class, 'login'])->name('login');
+Route::get('/contact-us', [PageController::class, 'contactUs'])->name('contactUs');
 
 
 

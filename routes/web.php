@@ -13,6 +13,7 @@ Route::get('/senior-team', [PageController::class, 'seniorTeam'])->name('seniorT
 Route::get('/hedge-fund', [PageController::class, 'hedgeFund'])->name('hedgeFund');
 Route::get('/managed-account', [PageController::class, 'managedAccount'])->name('managedAccount');
 Route::get('/our-approach', [PageController::class, 'ourApproach'])->name('ourApproach');
+Route::get('/register', [PageController::class, 'register'])->name('register');
 
 
 

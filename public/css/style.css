@@ -14,6 +14,22 @@ p{
         width: 97% !important;
         /* max-width: 1038px !important;  */
 }
+.container-custom {
+    max-width: 1200px;
+    margin: 0 auto;
+    /* padding: 0 15px; */
+    background-color: #f1eee8;
+
+}
+.inside-container{
+    max-width: 600px;
+    margin: auto;
+}
+label {
+    font-size: 15px !important;
+    line-height: 22px !important;
+    font-weight: 600;
+}
 li{
     font-size: 14px;
     font-family: Calibri, sans-serif;
@@ -90,13 +106,7 @@ li{
     object-fit: cover;
 }
 
-.container-custom {
-    max-width: 1200px;
-    margin: 0 auto;
-    /* padding: 0 15px; */
-    background-color: #f1eee8;
 
-}
 
 .row-padding {
     padding: 15px 0;

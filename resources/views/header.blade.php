@@ -85,7 +85,7 @@
                         </div>
                         <div class="form-group mb-1">
                             <button type="button" class="btn btn-primary m-1">Go</button>
-                            <button type="button" class="btn btn-secondary m-1">Register</button>
+                            <button type="button" class="btn btn-secondary m-1" onclick="redirectToRegister()">Register</button>
                         </div>
                         <div>
                             <!-- <a href="#" class=""> -->
@@ -151,5 +151,10 @@
                 </div>
             </div>
         </nav>
+        <script>
+        function redirectToRegister() {
+            window.location.href = '{{ route('register') }}'; 
+        }
+    </script>
     </body>
     </html>

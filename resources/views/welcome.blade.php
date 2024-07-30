@@ -71,56 +71,74 @@
                 </div>
             </div>
         </div>
-        <div class="text-center mt-5">
+        <div class="text-center mt-5 ml-5 mr-5">
             <h5 class="text-center"> / Services</h5>
             <h4 class="pt-2">
                 Discover our expertise by <br /> learning what we offer
             </h4>
             <div class="mt-3 mb-5">
             <div class="row row-padding">
-            <div class="col-md-4">
-                <div class="card card-shadow">
-                    <img src="{{ asset('assets/images/service_img1.jpg') }}" class="card-img-top" alt="Image 1">
-                    <div class="card-body text-left">
-                        <h5 class="card-title">Portfolio Management</h5>
-                        <p class="card-text text-left p-0">
-                          Cultivating change enthusiasts fuels success, resulting in superior, more efficient, and robust innovations.
-                        </p>
+                <div class="col-md-4">
+                    <div class="card card-shadow">
+                        <img src="{{ asset('assets/images/service_img1.jpg') }}" class="card-img-top" alt="Image 1">
+                        <div class="card-body text-left">
+                            <h5 class="card-title">Portfolio Management</h5>
+                            <p class="card-text text-left p-0">
+                            Cultivating change enthusiasts fuels success, resulting in superior, more efficient, and robust innovations.
+                            </p>
+                        </div>
+                        <div class="card-footer text-left">
+                        <button type="button" class="btn btn-primary">Learn More</button>
+                        </div>
                     </div>
-                    <div class="card-footer text-left">
-                      <button type="button" class="btn btn-primary">Learn More</button>
+                </div>
+                <div class="col-md-4">
+                    <div class="card card-shadow">
+                        <img src="{{ asset('assets/images/service_img2.jpg') }}" class="card-img-top" alt="Image 2">
+                        <div class="card-body text-left">
+                            <h5 class="card-title">Financial Planning</h5>
+                            <p class="card-text text-left p-0">
+                            Cultivating change enthusiasts fuels success, resulting in superior, more efficient, and robust innovations.
+                            </p>
+                        </div>
+                        <div class="card-footer text-left">
+                        <button type="button" class="btn btn-primary">Learn More</button>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="card card-shadow">
+                        <img src="{{ asset('assets/images/service_img3.jpg') }}" class="card-img-top" alt="Image 3">
+                        <div class="card-body text-left">
+                            <h5 class="card-title">Wealth Management</h5>
+                            <p class="card-text text-left p-0">
+                            Cultivating change enthusiasts fuels success, resulting in superior, more efficient, and robust innovations.
+                            </p>                   
+                        </div>
+                        <div class="card-footer text-left">
+                        <button type="button" class="btn btn-primary">Learn More</button>
+                        </div>
                     </div>
                 </div>
             </div>
-            <div class="col-md-4">
-                <div class="card card-shadow">
-                    <img src="{{ asset('assets/images/service_img2.jpg') }}" class="card-img-top" alt="Image 2">
-                    <div class="card-body text-left">
-                        <h5 class="card-title">Financial Planning</h5>
-                        <p class="card-text text-left p-0">
-                          Cultivating change enthusiasts fuels success, resulting in superior, more efficient, and robust innovations.
-                        </p>
-                    </div>
-                    <div class="card-footer text-left">
-                      <button type="button" class="btn btn-primary">Learn More</button>
-                    </div>
-                </div>
-            </div>
-            <div class="col-md-4">
-                <div class="card card-shadow">
-                    <img src="{{ asset('assets/images/service_img3.jpg') }}" class="card-img-top" alt="Image 3">
-                    <div class="card-body text-left">
-                        <h5 class="card-title">Wealth Management</h5>
-                        <p class="card-text text-left p-0">
-                          Cultivating change enthusiasts fuels success, resulting in superior, more efficient, and robust innovations.
-                        </p>                   
-                    </div>
-                    <div class="card-footer text-left">
-                      <button type="button" class="btn btn-primary">Learn More</button>
-                    </div>
-                </div>
             </div>
         </div>
+        <div class="mt-5 ml-5 mr-5">
+            <div class="row">
+                <div class="col-md-6">
+                    <h1 class="header-post-title-class">Our View</h1>
+                    <div class="mt-3">
+                        <ul>
+                            <li>China Outlook Q1 2023</li>
+                            <li>China Outlook Q4 2022</li>
+                            <li>China Outlook Q3 2022</li>
+                            <li>China Outlook Q2 2022</li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <h1 class="header-post-title-class">Latest News</h1>
+                </div>
             </div>
         </div>
         @include('footer')

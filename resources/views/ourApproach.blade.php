@@ -16,7 +16,7 @@
         @include('header')
         <div class="">
             <div>
-                <img src="{{ asset('assets/images/banner_publications.jpg') }}" class="w-100" alt="Image 1">
+                <img src="{{ asset('assets/images/about-slider.jpg') }}" class="w-100" alt="Image 1">
             </div>
             <div class="container-custom mt-1 mb-5 p-4">
             <h1 class="header-post-title-class">Our Approach</h1>

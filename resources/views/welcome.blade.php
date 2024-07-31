@@ -37,13 +37,20 @@
         .meta-date i {
             margin-right: 5px;
         }
+        .bgImges{
+            background-image: url('{{ asset('assets/images/background.png') }}');
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat; 
+            background-attachment: fixed;
+        }
     </style>
 </head>
 <body>
     <div class="container">
         @include('header')
     </div>
-    <div>
+    <div class="bgImges">
         <div id="carouselExampleIndicators" class="carousel slide">
             <!-- <ol class="carousel-indicators">
                 <li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>

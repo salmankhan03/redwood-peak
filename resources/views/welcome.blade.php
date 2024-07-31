@@ -44,6 +44,14 @@
             background-repeat: no-repeat; 
             background-attachment: fixed;
         }
+        .modal-body {
+            max-height: 300px;
+            overflow-y: auto;
+        }
+
+        .modal-dialog {
+            max-width: 800px;
+        }
     </style>
 </head>
 <body>
@@ -52,43 +60,22 @@
     </div>
     <div class="bgImges">
         <div id="carouselExampleIndicators" class="carousel slide">
-            <!-- <ol class="carousel-indicators">
-                <li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>
-                <li data-target="#carouselExampleIndicators" data-slide-to="1"></li>
-                <li data-target="#carouselExampleIndicators" data-slide-to="2"></li>
-            </ol> -->
             <div class="carousel-inner">
                 <div class="carousel-item active">
                     <img src="{{ asset('assets/images/slider_img1.jpg') }}" alt="Slide 1">
                 </div>
-                <!-- <div class="carousel-item">
-                    <img src="https://via.placeholder.com/1600x600" alt="Slide 2">
-                </div>
-                <div class="carousel-item">
-                    <img src="https://via.placeholder.com/1600x600" alt="Slide 3">
-                </div> -->
             </div>
-            <!-- <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
-                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                <span class="sr-only">Previous</span>
-            </a>
-            <a class="carousel-control-next" href="#carouselExampleIndicators" role="button" data-slide="next">
-                <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                <span class="sr-only">Next</span>
-            </a> -->
         </div>
-        <!-- New Row of Three Columns -->
-         <div class="container">
+        <div class="container">
             <div class="row pt-0 mr-0 ml-0 row-padding">
                 <div class="col-md-4 pr-0 pl-0">
                     <div class="card p-5" style="background-color:#04243d">
                         <div class="d-flex flex-column justify-content-center h-100">
                             <h6 class="card-title text-white">22 OCTOBER 2023, 08.00 PM EDT</h6>
                             <h3 class="text-white">Smart investing strategies:<br> building wealth for the future</h3>
-                            <!-- <button type="button" class="btn btn-secondary m-1">Register yourself now</button> -->
                         </div>
                         <div class="card-footer p-0 pt-3" style="background-color:#fff0 !important">
-                        <button type="button" class="btn btn-primary">Learn More</button>
+                            <button type="button" class="btn btn-primary">Learn More</button>
                         </div>
                     </div>
                 </div>
@@ -115,50 +102,50 @@
                     Discover our expertise by <br /> learning what we offer
                 </h2>
                 <div class="mt-3 mb-5">
-                <div class="row row-padding">
-                    <div class="col-md-4">
-                        <div class="card card-shadow">
-                            <img src="{{ asset('assets/images/service_img1.jpg') }}" class="card-img-top" alt="Image 1">
-                            <div class="card-body text-left">
-                                <h5 class="card-title">Portfolio Management</h5>
-                                <p class="card-text text-left p-0">
-                                Cultivating change enthusiasts fuels success, resulting in superior, more efficient, and robust innovations.
-                                </p>
+                    <div class="row row-padding">
+                        <div class="col-md-4">
+                            <div class="card card-shadow">
+                                <img src="{{ asset('assets/images/service_img1.jpg') }}" class="card-img-top" alt="Image 1">
+                                <div class="card-body text-left">
+                                    <h5 class="card-title">Portfolio Management</h5>
+                                    <p class="card-text text-left p-0">
+                                        Cultivating change enthusiasts fuels success, resulting in superior, more efficient, and robust innovations.
+                                    </p>
+                                </div>
+                                <div class="card-footer text-left">
+                                    <button type="button" class="btn btn-primary">Learn More</button>
+                                </div>
                             </div>
-                            <div class="card-footer text-left">
-                            <button type="button" class="btn btn-primary">Learn More</button>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="card card-shadow">
+                                <img src="{{ asset('assets/images/service_img2.jpg') }}" class="card-img-top" alt="Image 2">
+                                <div class="card-body text-left">
+                                    <h5 class="card-title">Financial Planning</h5>
+                                    <p class="card-text text-left p-0">
+                                        Cultivating change enthusiasts fuels success, resulting in superior, more efficient, and robust innovations.
+                                    </p>
+                                </div>
+                                <div class="card-footer text-left">
+                                    <button type="button" class="btn btn-primary">Learn More</button>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="card card-shadow">
+                                <img src="{{ asset('assets/images/service_img3.jpg') }}" class="card-img-top" alt="Image 3">
+                                <div class="card-body text-left">
+                                    <h5 class="card-title">Wealth Management</h5>
+                                    <p class="card-text text-left p-0">
+                                        Cultivating change enthusiasts fuels success, resulting in superior, more efficient, and robust innovations.
+                                    </p>                   
+                                </div>
+                                <div class="card-footer text-left">
+                                    <button type="button" class="btn btn-primary">Learn More</button>
+                                </div>
                             </div>
                         </div>
                     </div>
-                    <div class="col-md-4">
-                        <div class="card card-shadow">
-                            <img src="{{ asset('assets/images/service_img2.jpg') }}" class="card-img-top" alt="Image 2">
-                            <div class="card-body text-left">
-                                <h5 class="card-title">Financial Planning</h5>
-                                <p class="card-text text-left p-0">
-                                Cultivating change enthusiasts fuels success, resulting in superior, more efficient, and robust innovations.
-                                </p>
-                            </div>
-                            <div class="card-footer text-left">
-                            <button type="button" class="btn btn-primary">Learn More</button>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-md-4">
-                        <div class="card card-shadow">
-                            <img src="{{ asset('assets/images/service_img3.jpg') }}" class="card-img-top" alt="Image 3">
-                            <div class="card-body text-left">
-                                <h5 class="card-title">Wealth Management</h5>
-                                <p class="card-text text-left p-0">
-                                Cultivating change enthusiasts fuels success, resulting in superior, more efficient, and robust innovations.
-                                </p>                   
-                            </div>
-                            <div class="card-footer text-left">
-                            <button type="button" class="btn btn-primary">Learn More</button>
-                            </div>
-                        </div>
-                    </div>
-                </div>
                 </div>
             </div>
             <div class="mt-5 ml-5 mr-5">
@@ -185,9 +172,9 @@
                                             <span class="elementor-icon-list-text">Global Investment Trends: Opportunities and Risks in 2023</span>
                                             <div class="meta-lists">
                                                 <span class="meta-date">
-                                                    <i aria-hidden="true" class="icon icon-clock2"></i>	
-                                                    03 Apr 2022	
-                                                </span>		
+                                                    <i aria-hidden="true" class="icon icon-clock2"></i>    
+                                                    03 Apr 2022    
+                                                </span>        
                                             </div>
                                         </div>
                                     </a>
@@ -199,8 +186,8 @@
                                             <span class="elementor-icon-list-text">Effective Asset Management Strategies for Sustainable Growth</span>
                                             <div class="meta-lists">
                                                 <span class="meta-date">
-                                                    <i aria-hidden="true" class="icon icon-clock2"></i>	
-                                                    03 Apr 2022	
+                                                    <i aria-hidden="true" class="icon icon-clock2"></i>    
+                                                    03 Apr 2022    
                                                 </span>
                                             </div>
                                         </div>
@@ -213,8 +200,8 @@
                                             <span class="elementor-icon-list-text">Tech Giants' Investment Plans in Artificial Intelligence Raise Eyebrows</span>
                                             <div class="meta-lists">
                                                 <span class="meta-date">
-                                                    <i aria-hidden="true" class="icon icon-clock2"></i>	
-                                                    03 Apr 2022	
+                                                    <i aria-hidden="true" class="icon icon-clock2"></i>    
+                                                    03 Apr 2022    
                                                 </span>
                                             </div>
                                         </div>
@@ -227,8 +214,8 @@
                                             <span class="elementor-icon-list-text">ESG Principles Transforming Investment Landscape: What You Need to Know</span>
                                             <div class="meta-lists">
                                                 <span class="meta-date">
-                                                    <i aria-hidden="true" class="icon icon-clock2"></i>	
-                                                    03 Apr 2022	
+                                                    <i aria-hidden="true" class="icon icon-clock2"></i>    
+                                                    03 Apr 2022    
                                                 </span>
                                             </div>
                                         </div>
@@ -243,8 +230,79 @@
         @include('footer')
     </div>
 
+    <!-- Modal HTML -->
+    <div class="modal fade" id="disclaimerModal" tabindex="-1" role="dialog" aria-labelledby="disclaimerModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="disclaimerModalLabel" style="color:#380000">Website – Disclaimer and Registration</h5>
+        <!-- <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button> -->
+      </div>
+      <div class="modal-body">
+        <form id="disclaimerForm">
+          <p>The information contained in this website is issued by Redwood Peak Limited (“Redwood Peak”). This website is not directed to any person in any jurisdiction where doing so would contravene any laws or regulations.
+
+Redwood Peak’s services and products have not been authorized by the Securities and Futures Commission of Hong Kong pursuant to the Cap 571 of the Securities & Futures Ordinance (“SFO”) of the laws of Hong Kong. If you are resident in Hong Kong, you are confirming that you are a “Professional Investor” as defined under the SFO by accessing any information in this website.
+
+The content of this website does not constitute an offer to sell or a solicitation to purchase, nor an advice or a recommendation to acquire or dispose of any investment or to engage in any other transaction, and should not be distributed to, or used by, any person or entity, in any jurisdiction where such activities would be unlawful or where it would require Redwood Peak to be registered, licensed, authorized, approved or otherwise qualified. The information contained in this website is not intended to provide professional advice and should not be relied upon in that regard. Persons accessing this website are advised to obtain appropriate professional advice where necessary.
+
+Redwood Peak has taken all reasonable care in preparing this website and the information in this website is provided to the best of its knowledge. However, no representation or warranty, expressed or implied, is made as to the accuracy, adequacy, completeness or thoroughness of this website, and Redwood Peak will not accept any liability (including any third party liability) for any errors or omissions nor for any losses or damages losses caused by the information or the use of the information in this website.
+
+Redwood Peak may post new information from time to time without prior notice, and it does not assume any obligation to update or correct any information and explicitly disclaims any duty to do so. All copyright, patent, intellectual and other property rights contained herein is owned by Redwood Peak, with the exception of material included with the permission of the rights’ owner. Information in this website may not be reproduced, distributed or published without prior consent of Redwood Peak.
+
+Investment involves risk. Past performance is not indicative of future result of an investment. The value of an investment may fall as well as rise and may become valueless; investors may not be able to recover the amount invested.
+
+If you proceed to visit this website, it will be considered that you have acknowledged and ensured that you are permitted to access and use the information in this website by local laws and rules of the place where you are residing (“Qualified User”), as well as that you have read and understood the disclaimer, which you have accepted and agreed with.
+
+If you want to visit this website, you have to confirm that you are aware that you are a Qualified User, otherwise, please do not visit this website.</p>
+          
+          <div class="form-check">
+            <input class="form-check-input" type="checkbox" id="agreeCheckbox">
+            <label class="form-check-label" for="agreeCheckbox">
+              I agree to the terms and conditions
+            </label>
+          </div>
+          
+          <div class="form-group mt-3">
+            <button type="button" class="btn btn-primary " id="submitDisclaimer" disabled style="width:auto">Accept Disclaimer</button>
+            <button type="button" class="btn btn-primary  ml-2" data-dismiss="modal" style="width:auto">Reject Disclaimer</button>
+
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+
+    <!-- Add Bootstrap JS and dependencies -->
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
-</body> 
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            $('#disclaimerModal').modal('show');
+
+            const checkbox = document.getElementById('agreeCheckbox');
+            const submitButton = document.getElementById('submitDisclaimer');
+            
+            checkbox.addEventListener('change', function () {
+            submitButton.disabled = !checkbox.checked;
+            });
+            
+            document.getElementById('submitDisclaimer').addEventListener('click', function () {
+            alert('You have agreed to the terms and conditions.');
+            $('#disclaimerModal').modal('hide');
+            });
+
+            $('#disclaimerModal').on('hide.bs.modal', function (e) {
+            if (!checkbox.checked) {
+                e.preventDefault();
+            }
+            });
+        });
+    </script>
+</body>
 </html>

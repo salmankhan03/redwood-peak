@@ -102,7 +102,7 @@
         </div>
     </div>
     <div class="sign-in-container mt-3">
-        <button type="button" class="btn btn-primary">Sign In</button>
+        <button type="button" class="btn btn-primary" onclick="redirectToLogin()">Sign In</button>
     </div>
 </nav>
 
@@ -164,6 +164,9 @@
             $('.drawer-content').removeClass('open');
         });
     });
+    function redirectToLogin() {
+        window.location.href = "{{ route('login') }}";
+    }
 </script>
 
 </body>

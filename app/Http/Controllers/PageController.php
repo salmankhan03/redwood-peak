@@ -40,7 +40,7 @@ class PageController extends Controller
     }
     public function ContactUs()
     {
-        return view('ContactUs');
+        return view('contactUs');
     }
     
     

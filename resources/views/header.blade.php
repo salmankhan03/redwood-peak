@@ -17,27 +17,31 @@
             left: 0;
             width: 100%;
             height: 100%;
-            background-color: rgba(0, 0, 0, 0.5); /* semi-transparent background */
-            z-index: 1040; /* Bootstrap's default modal z-index is 1040 */
+            background-color: rgba(0, 0, 0, 0.5);
+            z-index: 1040;
             display: none;
         }
         .drawer-content {
             position: fixed;
             top: 0;
             left: 0;
-            width: 80%; /* Adjust drawer width as needed */
-            max-width: 300px; /* Maximum width for the drawer */
+            width: 80%;
+            max-width: 300px; 
             height: 100%;
-            background-color: #fff; /* Drawer background color */
-            box-shadow: 2px 0 5px rgba(0, 0, 0, 0.2); /* Optional: box shadow for the drawer */
+            background-color: #fff;
+            box-shadow: 2px 0 5px rgba(0, 0, 0, 0.2); 
             transform: translateX(-100%);
             transition: transform 0.3s ease;
-            z-index: 1050; /* Higher than the overlay */
-            overflow-y: auto; /* Enable scrolling if content overflows */
+            z-index: 1050; 
+            overflow-y: auto;
         }
         .drawer-content.open {
             transform: translateX(0);
         }
+        .nav-link:hover {
+            color:#380000 !important;
+        }
+    
     </style>
 </head>
 <body>
@@ -51,10 +55,10 @@
     <div class="collapse navbar-collapse" id="navbarNav">
         <div class="navbar-container mt-3 ml-2">
             <ul class="navbar-nav navbarFontsSize">
-                <li class="nav-item active">
+                <li class="nav-item {{ Request::is('/') ? 'active' : '' }}">
                     <a class="nav-link" href="{{ url('/') }}">Home <span class="sr-only">(current)</span></a>
                 </li>
-                <li class="nav-item dropdown">
+                <li class="nav-item dropdown {{ Request::is('our-mission', 'overview', 'senior-team') ? 'active' : '' }}">
                     <a class="nav-link no-caret" href="{{ route('ourMission') }}" id="aboutUsDropdown" role="button" aria-haspopup="true" aria-expanded="false">
                         About Us
                     </a>
@@ -64,7 +68,7 @@
                         <a class="dropdown-item" href="{{ route('seniorTeam') }}">Senior Team</a>
                     </div>
                 </li>
-                <li class="nav-item dropdown">
+                <li class="nav-item dropdown {{ Request::is('hedge-fund', 'managed-account') ? 'active' : '' }}">
                     <a class="nav-link no-caret" href="{{ route('hedgeFund') }}" id="investmentManagementDropdown" role="button" aria-haspopup="true" aria-expanded="false">
                         Investment Management
                     </a>
@@ -73,10 +77,10 @@
                         <a class="dropdown-item" href="{{ route('managedAccount') }}">Managed Account</a>
                     </div>
                 </li>
-                <li class="nav-item">
+                <li class="nav-item {{ Request::is('our-approach') ? 'active' : '' }}">
                     <a class="nav-link" href="{{ route('ourApproach') }}">Our Approach</a>
                 </li>   
-                <li class="nav-item dropdown">
+                <li class="nav-item dropdown {{ Request::is('publicationUpdates') ? 'active' : '' }}">
                     <a class="nav-link no-caret" href="#" id="publicationUpdatesDropdown" role="button" aria-haspopup="true" aria-expanded="false">
                         Publication & Updates
                     </a>
@@ -86,7 +90,7 @@
                         <a class="dropdown-item" href="#">Visits</a>
                     </div>
                 </li>
-                <li class="nav-item dropdown">
+                <li class="nav-item dropdown {{ Request::is('investorResources') ? 'active' : '' }}">
                     <a class="nav-link no-caret" href="#" id="investorResourcesDropdown" role="button" aria-haspopup="true" aria-expanded="false">
                         Investor Resources
                     </a>
@@ -95,7 +99,7 @@
                         <a class="dropdown-item" href="#">Managed Account Reports</a>
                     </div>
                 </li>
-                <li class="nav-item">
+                <li class="nav-item {{ Request::is('contact-us') ? 'active' : '' }}">
                     <a class="nav-link" href="{{ route('contactUs') }}">Contact Us</a>
                 </li>
             </ul>

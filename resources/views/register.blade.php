@@ -9,14 +9,20 @@
     <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@200;600&display=swap" rel="stylesheet">
     <link href="{{ asset('css/style.css') }}" rel="stylesheet">
     <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
-
+    <style>
+        .min-heights{
+            min-height:90vh
+        }
+    </style>
 </head>
 <body>
-<div class="container-custom" id="page">
+<div class="container" id="page">
     @include('header')
+</div>
 
         <!-- New Row of Three Columns -->
-            <div class="container-custom mb-5 p-2">
+        <div class="container">
+            <div class="container-custom mb-5 p-2 min-heights">
                 <h1 class="header-post-title-class">Register</h1>
                 <div class="mt-4 inside-container">
                     <div class="">
@@ -169,9 +175,9 @@
                     </div>
                 </div>
 
+            </div>
         </div>
         @include('footer')
-    </div>
 
     <script>
         $(document).ready(function() {

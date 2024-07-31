@@ -43,7 +43,7 @@
                         <p class="text-center mt-5 mb-5">
                             <img 
                                 decoding="async" 
-                                class="aligncenter size-full wp-image-2037" 
+                                class="aligncenter size-full wp-image-2037 w-100" 
                                 src="https://www.redwoodpeak.com/wp-content/uploads/2015/04/risk_management.png" 
                                 alt="investment-approach">
                         </p>

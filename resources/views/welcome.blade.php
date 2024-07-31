@@ -103,10 +103,10 @@
                 </div>
             </div>
             <div class="text-center mt-5 ml-5 mr-5">
-                <h5 class="text-center"> / Services</h5>
-                <h4 class="pt-2">
+                <h5 class="text-center" style="color:#380000"> / Services</h5>
+                <h2 class="pt-2" >
                     Discover our expertise by <br /> learning what we offer
-                </h4>
+                </h2>
                 <div class="mt-3 mb-5">
                 <div class="row row-padding">
                     <div class="col-md-4">

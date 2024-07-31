@@ -203,6 +203,8 @@ li > a{
     font-weight: lighter;
     font-size: 22px;
     margin-left: 35px;
+    font-weight: bold;
+
     /* top banner inside set */
     position: relative;
     top: -150px;

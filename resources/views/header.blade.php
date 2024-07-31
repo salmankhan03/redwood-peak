@@ -59,7 +59,7 @@
                     <a class="nav-link" href="{{ url('/') }}">Home <span class="sr-only">(current)</span></a>
                 </li>
                 <li class="nav-item dropdown {{ Request::is('our-mission', 'overview', 'senior-team') ? 'active' : '' }}">
-                    <a class="nav-link no-caret" href="{{ route('ourMission') }}" id="aboutUsDropdown" role="button" aria-haspopup="true" aria-expanded="false">
+                    <a class="nav-link no-caret" href="#" id="aboutUsDropdown" role="button" aria-haspopup="true" aria-expanded="false">
                         About Us
                     </a>
                     <div class="dropdown-menu" aria-labelledby="aboutUsDropdown">
@@ -69,7 +69,7 @@
                     </div>
                 </li>
                 <li class="nav-item dropdown {{ Request::is('hedge-fund', 'managed-account') ? 'active' : '' }}">
-                    <a class="nav-link no-caret" href="{{ route('hedgeFund') }}" id="investmentManagementDropdown" role="button" aria-haspopup="true" aria-expanded="false">
+                    <a class="nav-link no-caret" href="#" id="investmentManagementDropdown" role="button" aria-haspopup="true" aria-expanded="false">
                         Investment Management
                     </a>
                     <div class="dropdown-menu" aria-labelledby="investmentManagementDropdown">

@@ -50,8 +50,47 @@
         }
 
         .modal-dialog {
-            max-width: 800px;
+            /* max-width: 800px; */
         }
+        .popupContent{
+            /* position: absolute; */
+            /* top: 20px; */
+            /* /* left: 20px;
+            right: 20px; 
+            bottom: 70px; */
+            overflow: auto;
+            background-color: #ffffff;
+            /* padding: 15px; */
+        }
+
+        #submitDisclaimer {
+            color: #fff;
+        }
+
+        #submitDisclaimer:hover,
+        #submitDisclaimer:focus {
+            color: #000;
+        }
+
+        #submitDisclaimer:disabled {
+            color: #ccc;
+        }
+
+        #rejectDisclaimer {
+            color: #fff;
+        }
+
+        #rejectDisclaimer:hover,
+        #rejectDisclaimer:focus {
+            color: #000;
+        }
+
+        #rejectDisclaimer:disabled {
+            color: #ccc;
+        }
+
+
+
     </style>
 </head>
 <body>
@@ -233,45 +272,38 @@
     <!-- Modal HTML -->
     <div class="modal fade" id="disclaimerModal" tabindex="-1" role="dialog" aria-labelledby="disclaimerModalLabel" aria-hidden="true">
   <div class="modal-dialog modal-dialog-centered" role="document">
-    <div class="modal-content">
-      <div class="modal-header">
+    <div class="modal-content" style="background: rgba(15,15,15,.6) !important;border-radius: 12px;">
+      <!-- <div class="modal-header">
         <h5 class="modal-title" id="disclaimerModalLabel" style="color:#380000">Website – Disclaimer and Registration</h5>
-        <!-- <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
-        </button> -->
-      </div>
-      <div class="modal-body">
+        </button> 
+      </div> -->
+      <div class="modal-body popupContent m-3">
+        <center class="pt-3 pb-3"><span style="font-size: 20px; font-family: Calibri, sans-serif; color: #700000;"><strong>Website – Disclaimer and Registration</strong></span></center>
         <form id="disclaimerForm">
-          <p>The information contained in this website is issued by Redwood Peak Limited (“Redwood Peak”). This website is not directed to any person in any jurisdiction where doing so would contravene any laws or regulations.
-
-Redwood Peak’s services and products have not been authorized by the Securities and Futures Commission of Hong Kong pursuant to the Cap 571 of the Securities & Futures Ordinance (“SFO”) of the laws of Hong Kong. If you are resident in Hong Kong, you are confirming that you are a “Professional Investor” as defined under the SFO by accessing any information in this website.
-
-The content of this website does not constitute an offer to sell or a solicitation to purchase, nor an advice or a recommendation to acquire or dispose of any investment or to engage in any other transaction, and should not be distributed to, or used by, any person or entity, in any jurisdiction where such activities would be unlawful or where it would require Redwood Peak to be registered, licensed, authorized, approved or otherwise qualified. The information contained in this website is not intended to provide professional advice and should not be relied upon in that regard. Persons accessing this website are advised to obtain appropriate professional advice where necessary.
-
-Redwood Peak has taken all reasonable care in preparing this website and the information in this website is provided to the best of its knowledge. However, no representation or warranty, expressed or implied, is made as to the accuracy, adequacy, completeness or thoroughness of this website, and Redwood Peak will not accept any liability (including any third party liability) for any errors or omissions nor for any losses or damages losses caused by the information or the use of the information in this website.
-
-Redwood Peak may post new information from time to time without prior notice, and it does not assume any obligation to update or correct any information and explicitly disclaims any duty to do so. All copyright, patent, intellectual and other property rights contained herein is owned by Redwood Peak, with the exception of material included with the permission of the rights’ owner. Information in this website may not be reproduced, distributed or published without prior consent of Redwood Peak.
-
-Investment involves risk. Past performance is not indicative of future result of an investment. The value of an investment may fall as well as rise and may become valueless; investors may not be able to recover the amount invested.
-
-If you proceed to visit this website, it will be considered that you have acknowledged and ensured that you are permitted to access and use the information in this website by local laws and rules of the place where you are residing (“Qualified User”), as well as that you have read and understood the disclaimer, which you have accepted and agreed with.
-
-If you want to visit this website, you have to confirm that you are aware that you are a Qualified User, otherwise, please do not visit this website.</p>
-          
-          <div class="form-check">
+        <p style="font-size: 14px; font-family: Calibri, sans-serif; color: #666666;">The information contained in this website is issued by Redwood Peak Limited (“Redwood Peak”). This website is not directed to any person in any jurisdiction where doing so would contravene any laws or regulations.</p>
+        <p style="font-size: 14px; font-family: Calibri, sans-serif; color: #666666;">Redwood Peak’s services and products have not been authorized by the Securities and Futures Commission of Hong Kong pursuant to the Cap 571 of the Securities &amp; Futures Ordinance (“SFO”) of the laws of Hong Kong. If you are resident in Hong Kong, you are confirming that you are a “Professional Investor” as defined under the SFO by accessing any information in this website.</p>
+        <p style="font-size: 14px; font-family: Calibri, sans-serif; color: #666666;">The content of this website does not constitute an offer to sell or a solicitation to purchase, nor an advice or a recommendation to acquire or dispose of any investment or to engage in any other transaction, and should not be distributed to, or used by, any person or entity, in any jurisdiction where such activities would be unlawful or where it would require Redwood Peak to be registered, licensed, authorized, approved or otherwise qualified. The information contained in this website is not intended to provide professional advice and should not be relied upon in that regard. Persons accessing this website are advised to obtain appropriate professional advice where necessary.</p>
+        <p style="font-size: 14px; font-family: Calibri, sans-serif; color: #666666;">Redwood Peak has taken all reasonable care in preparing this website and the information in this website is provided to the best of its knowledge. However, no representation or warranty, expressed or implied, is made as to the accuracy, adequacy, completeness or thoroughness of this website, and Redwood Peak will not accept any liability (including any third party liability) for any errors or omissions nor for any losses or damages losses caused by the information or the use of the information in this website.</p>
+        <p style="font-size: 14px; font-family: Calibri, sans-serif; color: #666666;">Redwood Peak may post new information from time to time without prior notice, and it does not assume any obligation to update or correct any information and explicitly disclaims any duty to do so. All copyright, patent, intellectual and other property rights contained herein is owned by Redwood Peak, with the exception of material included with the permission of the rights’ owner. Information in this website may not be reproduced, distributed or published without prior consent of Redwood Peak.</p>
+        <p style="font-size: 14px; font-family: Calibri, sans-serif; color: #666666;">Investment involves risk. Past performance is not indicative of future result of an investment. The value of an investment may fall as well as rise and may become valueless; investors may not be able to recover the amount invested.</p>
+        <p style="font-size: 14px; font-family: Calibri, sans-serif; color: #666666;">If you proceed to visit this website, it will be considered that you have acknowledged and ensured that you are permitted to access and use the information in this website by local laws and rules of the place where you are residing (“Qualified User”), as well as that you have read and understood the disclaimer, which you have accepted and agreed with.</p>
+        <p style="font-size: 14px; font-family: Calibri, sans-serif; color: #666666;">If you want to visit this website, you have to confirm that you are aware that you are a Qualified User, otherwise, please do not visit this website.</p>    
+        <p>&nbsp;</p>  
+        <p>User Declaration:</p>
+        <div class="form-check">
             <input class="form-check-input" type="checkbox" id="agreeCheckbox">
-            <label class="form-check-label" for="agreeCheckbox">
-              I agree to the terms and conditions
-            </label>
-          </div>
-          
-          <div class="form-group mt-3">
-            <button type="button" class="btn btn-primary " id="submitDisclaimer" disabled style="width:auto">Accept Disclaimer</button>
-            <button type="button" class="btn btn-primary  ml-2" data-dismiss="modal" style="width:auto">Reject Disclaimer</button>
-
+            <p for="agreeCheckbox">
+                I declare that I am a Qualified User and have read, understood and agreed to all the terms as set out in the Disclaimer, and choose to proceed to the website and access its information contained therein.
+            </p>
           </div>
         </form>
       </div>
+      <div class="modal-footer" style="justify-content: flex-start; border-top:none">
+            <button type="button" class="btn btn-primary border-0 shadow-none" id="submitDisclaimer" disabled style="width:auto;">Accept Disclaimer</button>
+            <button type="button" class="btn btn-primary border-0 shadow-none ml-2" id="rejectDisclaimer" data-dismiss="modal" style="width:auto">Reject Disclaimer</button>
+        </div>
     </div>
   </div>
 </div>
@@ -293,7 +325,7 @@ If you want to visit this website, you have to confirm that you are aware that y
             });
             
             document.getElementById('submitDisclaimer').addEventListener('click', function () {
-            alert('You have agreed to the terms and conditions.');
+            
             $('#disclaimerModal').modal('hide');
             });
 

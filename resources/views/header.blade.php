@@ -26,22 +26,31 @@
             top: 0;
             left: 0;
             width: 80%;
-            max-width: 300px; 
+            max-width: 300px;
             height: 100%;
             background-color: #fff;
-            box-shadow: 2px 0 5px rgba(0, 0, 0, 0.2); 
+            box-shadow: 2px 0 5px rgba(0, 0, 0, 0.2);
             transform: translateX(-100%);
             transition: transform 0.3s ease;
-            z-index: 1050; 
+            z-index: 1050;
             overflow-y: auto;
         }
         .drawer-content.open {
             transform: translateX(0);
         }
         .nav-link:hover {
-            color:#380000 !important;
+            color: #380000 !important;
         }
     
+        .nav-item.dropdown:hover .dropdown-menu {
+            display: block;
+            margin-top: 0; 
+        }
+        .dropdown-menu:hover {
+            display: block;
+            margin-top: 0; 
+            
+        }
     </style>
 </head>
 <body>
@@ -79,7 +88,7 @@
                 </li>
                 <li class="nav-item {{ Request::is('our-approach') ? 'active' : '' }}">
                     <a class="nav-link" href="{{ route('ourApproach') }}">Our Approach</a>
-                </li>   
+                </li>
                 <li class="nav-item dropdown {{ Request::is('publicationUpdates') ? 'active' : '' }}">
                     <a class="nav-link no-caret" href="#" id="publicationUpdatesDropdown" role="button" aria-haspopup="true" aria-expanded="false">
                         Publication & Updates
@@ -157,6 +166,36 @@
 </div>
 
 <script>
+     let dropdownTimeout;
+
+    document.querySelectorAll('.nav-item.dropdown').forEach(function(dropdown) {
+        dropdown.addEventListener('mouseenter', function() {
+            clearTimeout(dropdownTimeout);
+
+        document.querySelectorAll('.nav-item.dropdown .dropdown-menu.show').forEach(function(openDropdown) {
+            openDropdown.classList.remove('show');
+        });
+
+        dropdown.querySelector('.dropdown-menu').classList.add('show');
+    });
+
+    dropdown.addEventListener('mouseleave', function() {
+        dropdownTimeout = setTimeout(function() {
+            dropdown.querySelector('.dropdown-menu').classList.remove('show');
+        }, 300); 
+    });
+
+    dropdown.querySelector('.dropdown-menu').addEventListener('mouseenter', function() {
+        clearTimeout(dropdownTimeout);
+    });
+
+    dropdown.querySelector('.dropdown-menu').addEventListener('mouseleave', function() {
+        dropdownTimeout = setTimeout(function() {
+            dropdown.classList.remove('show');
+        }, 300); 
+    });
+});
+
     $(document).ready(function() {
         $('.navbar-toggler').click(function() {
             $('.drawer-overlay').fadeToggle();

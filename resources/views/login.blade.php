@@ -23,7 +23,7 @@
         <!-- New Row of Three Columns -->
         <div class="container ">
             <div class="container-custom mb-5 p-2 min-heights">
-                <h1 class="header-post-title-class">Login</h1>
+                <!-- <h1 class="header-post-title-class static-position">Login</h1> -->
                 <div class="mt-4">
                     <!-- Login Form -->
                     <div class="mt-5 m-3">

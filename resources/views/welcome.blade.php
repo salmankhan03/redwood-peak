@@ -15,7 +15,7 @@
             content: '\f1c1'; /* Example content for PDF icon, assuming using FontAwesome */
             font-family: 'FontAwesome';
             padding-right: 8px;
-            font-size:36px;
+            font-size:25px;
             color:red
         }
        
@@ -190,23 +190,23 @@
             <div class="mt-5 ml-5 mr-5">
                 <div class="row">
                     <div class="col-md-6">
-                        <h1 class="welcome-title-class">Our View</h1>
+                        <h2 class="welcome-title-class">Our View</h2>
                         <div class="mt-3">
-                            <ul>
-                                <li>China Outlook Q1 2023</li>
-                                <li>China Outlook Q4 2022</li>
-                                <li>China Outlook Q3 2022</li>
-                                <li>China Outlook Q2 2022</li>
+                            <ul style="list-style: none">
+                                <li class="mt-2"> <span class="icon-pdf"> </span> China Outlook Q1 2023</li>
+                                <li class="mt-2">  <span class="icon-pdf"> </span> China Outlook Q4 2022</li>
+                                <li class="mt-2">  <span class="icon-pdf"> </span> China Outlook Q3 2022</li>
+                                <li class="mt-2">  <span class="icon-pdf"> </span> China Outlook Q2 2022</li>
                             </ul>
                         </div>
                     </div>
                     <div class="col-md-6">
-                        <h1 class="welcome-title-class">Latest News</h1>
+                        <h2 class="welcome-title-class">Latest News</h2>
                         <div class="mt-3">
                             <ul class="list-unstyled">
                                 <li class="elementor-icon-list-item">
                                     <a href="{{ route('login') }}">
-                                        <span class="icon-pdf"> </span>
+                                        <!-- <span class="icon-pdf"> </span> -->
                                         <div class="ekit_post_list_content_wraper">
                                             <span class="elementor-icon-list-text">Global Investment Trends: Opportunities and Risks in 2023</span>
                                             <div class="meta-lists">

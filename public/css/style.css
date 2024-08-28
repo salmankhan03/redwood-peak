@@ -191,9 +191,10 @@ li > a{
      /* padding-left: 25px; */
      padding-right: 25px;
      color: #823535;
-     font-weight: lighter;
-     font-size: 22px;
+     /* font-weight: lighter; */
+     /* font-size: 22px; */
      margin-left: 35px;
+     font-family: 'Barlow', Sans-serif;
 }
 
 .header-post-title-class {

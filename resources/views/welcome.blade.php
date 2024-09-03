@@ -107,30 +107,30 @@
         </div>
         <div class="container">
             <div class="row pt-0 mr-0 ml-0 row-padding">
-                <div class="col-md-4 pr-0 pl-0">
+                <div class="col-md-12 col-lg-4 pr-0 pl-0">  
                     <div class="card p-5" style="background-color:#04243d">
                         <div class="d-flex flex-column justify-content-center h-100">
-                            <h6 class="card-title text-white">22 OCTOBER 2023, 08.00 PM EDT</h6>
-                            <h3 class="text-white">Smart investing strategies:<br> building wealth for the future</h3>
+                            <h5 class="card-title cards-titles">22 OCTOBER 2023, 08.00 PM EDT</h5>
+                            <h2 class="cards-headings text-white">Smart investing strategies:<br> building wealth for the future</h2>
                         </div>
-                        <div class="card-footer p-0 pt-3" style="background-color:#fff0 !important">
+                        <div class="p-0 pt-3" style="background-color:#fff0 !important">
                             <button type="button" class="btn btn-primary">Learn More</button>
                         </div>
                     </div>
                 </div>
-                <div class="col-md-4 mr-0 ml-0 pr-0 pl-0">
+                <div class="col-md-6 col-lg-4 mr-0 ml-0 pr-0 pl-0">
                     <div class="card p-5 card-bg-img">
-                        <p class="card-text">
+                        <h5 class="cards-headings">
                             Some quick example text to build on the card title and make up the bulk of the card's content.
-                        </p>
+                        </h5>
                     </div>
                 </div>
-                <div class="col-md-4 mr-0 ml-0 pr-0 pl-0">
-                    <div class="card p-5" style="background-color:#fff">
+                <div class="col-md-6 col-lg-4 mr-0 ml-0 pr-0 pl-0">
+                    <div class="card p-5 d-none" style="background-color:#fff">
                         <div class="d-flex flex-column justify-content-center h-100">
-                            <h6 class="card-title">News</h6>
-                            <h3>Global Investment Trends:<br> Opportunities and Risks in 202</h3>
-                            <h6 class="card-title">APRIL 3, 2022</h6>
+                            <h5 class="card-title cards-titles primaryColor">News</h5>
+                            <h2 class="cards-Label mb-3 mt-3">Global Investment Trends:<br> Opportunities and Risks in 202</h2>
+                            <h6 class="card-title mt-3">APRIL 3, 2022</h6>
                         </div>
                     </div>
                 </div>
@@ -142,46 +142,54 @@
                 </h2>
                 <div class="mt-3 mb-5">
                     <div class="row row-padding">
-                        <div class="col-md-4">
-                            <div class="card card-shadow">
+                        <div class="col-md-4 mt-4">
+                            <div class="card card-shadow ">
                                 <img src="{{ asset('assets/images/service_img1.jpg') }}" class="card-img-top" alt="Image 1">
-                                <div class="card-body text-left">
-                                    <h5 class="card-title">Portfolio Management</h5>
+                                <div class="card-body text-left ">
+                                    <h5 class="card-title cards-Label primaryColor">Portfolio Management</h5>
                                     <p class="card-text text-left p-0">
                                         Cultivating change enthusiasts fuels success, resulting in superior, more efficient, and robust innovations.
                                     </p>
+                                    <div>
+                                        <button type="button" class="btn btn-primary w-auto mt-3">Learn More</button>
+                                    </div>
                                 </div>
-                                <div class="card-footer text-left">
-                                    <button type="button" class="btn btn-primary">Learn More</button>
-                                </div>
+                                <!-- <div class="card-footer text-left">
+                                </div> -->
                             </div>
                         </div>
-                        <div class="col-md-4">
-                            <div class="card card-shadow">
+                        <div class="col-md-4 mt-4">
+                            <div class="card card-shadow ">
                                 <img src="{{ asset('assets/images/service_img2.jpg') }}" class="card-img-top" alt="Image 2">
                                 <div class="card-body text-left">
-                                    <h5 class="card-title">Financial Planning</h5>
+                                    <h5 class="card-title cards-Label primaryColor">Financial Planning</h5>
                                     <p class="card-text text-left p-0">
                                         Cultivating change enthusiasts fuels success, resulting in superior, more efficient, and robust innovations.
                                     </p>
+                                    <div>
+                                        <button type="button" class="btn btn-primary w-auto mt-3">Learn More</button>
+                                    </div>
                                 </div>
-                                <div class="card-footer text-left">
+                                <!-- <div class="card-footer text-left">
                                     <button type="button" class="btn btn-primary">Learn More</button>
-                                </div>
+                                </div> -->
                             </div>
                         </div>
-                        <div class="col-md-4">
-                            <div class="card card-shadow">
+                        <div class="col-md-4 mt-4">
+                            <div class="card card-shadow ">
                                 <img src="{{ asset('assets/images/service_img3.jpg') }}" class="card-img-top" alt="Image 3">
                                 <div class="card-body text-left">
-                                    <h5 class="card-title">Wealth Management</h5>
+                                    <h5 class="card-title cards-Label primaryColor">Wealth Management</h5>
                                     <p class="card-text text-left p-0">
                                         Cultivating change enthusiasts fuels success, resulting in superior, more efficient, and robust innovations.
-                                    </p>                   
+                                    </p>      
+                                    <div>
+                                        <button type="button" class="btn btn-primary w-auto mt-3">Learn More</button>
+                                    </div>             
                                 </div>
-                                <div class="card-footer text-left">
+                                <!-- <div class="card-footer text-left">
                                     <button type="button" class="btn btn-primary">Learn More</button>
-                                </div>
+                                </div> -->
                             </div>
                         </div>
                     </div>

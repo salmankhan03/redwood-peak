@@ -162,18 +162,19 @@
                     </form>
                 </div>
             </div>
-            <!-- Toast Component -->
-            <div aria-live="polite" aria-atomic="true" style="position: fixed; top: 50px; right: 20px; z-index: 1050;">
-                <div class="toast" id="customToast" style="display: none;">
-                    <div class="toast-header">
-                        <strong class="mr-auto" id="toastTitle">Notification</strong>
-                        <button type="button" class="ml-2 mb-1 close" data-dismiss="toast" aria-label="Close">
-                            <span aria-hidden="true">&times;</span>
-                        </button>
+            <!-- Toast Component Start -->
+                <div aria-live="polite" aria-atomic="true" style="position: fixed; top: 50px; right: 20px; z-index: 1050;">
+                    <div class="toast" id="customToast" style="display: none;">
+                        <div class="toast-header">
+                            <strong class="mr-auto" id="toastTitle">Notification</strong>
+                            <button type="button" class="ml-2 mb-1 close" data-dismiss="toast" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                        <div class="toast-body" id="toastBody"></div>
                     </div>
-                    <div class="toast-body" id="toastBody"></div>
                 </div>
-            </div>
+            <!-- Toast Component Close-->
         </div>
     </div>
         @include('footer')
@@ -245,43 +246,45 @@
                 window.location.href = "{{ route('login') }}";
             }
         </script>
-        <script>
-                $(document).ready(function() {
-                    $('#registrationForm').on('submit', function(e) {
-                        e.preventDefault(); // Prevent the default form submission
+        <!-- Toast Script Start -->
+            <script>
+                    $(document).ready(function() {
+                        $('#registrationForm').on('submit', function(e) {
+                            e.preventDefault(); // Prevent the default form submission
 
-                        // Prepare data for AJAX request
-                        var formData = $(this).serialize();
+                            // Prepare data for AJAX request
+                            var formData = $(this).serialize();
 
-                        $.ajax({
-                            url: $(this).attr('action'), // Use form action
-                            type: 'POST',
-                            data: formData,
-                            success: function(response) {
-                                showToast('Success!', 'Registration successful!', 'bg-success text-white');
-                            },
-                            error: function(xhr) {
-                                var errors = xhr.responseJSON.errors;
-                                var errorMessage = '';
+                            $.ajax({
+                                url: $(this).attr('action'), // Use form action
+                                type: 'POST',
+                                data: formData,
+                                success: function(response) {
+                                    showToast('Success!', 'Registration successful!', 'bg-success text-white');
+                                },
+                                error: function(xhr) {
+                                    var errors = xhr.responseJSON.errors;
+                                    var errorMessage = '';
 
-                                // Display all errors
-                                $.each(errors, function(key, value) {
-                                    errorMessage += value[0] + '<br>'; // Take the first error message
-                                });
+                                    // Display all errors
+                                    $.each(errors, function(key, value) {
+                                        errorMessage += value[0] + '<br>'; // Take the first error message
+                                    });
 
-                                showToast('Error!', errorMessage, 'bg-danger text-white');
-                            }
+                                    showToast('Error!', errorMessage, 'bg-danger text-white');
+                                }
+                            });
                         });
                     });
-                });
 
-                function showToast(title, body, classes) {
-                    $('#toastTitle').text(title);
-                    $('#toastBody').html(body);
-                    $('#customToast').removeClass('bg-success bg-danger text-white').addClass(classes);
-                    $('#customToast').fadeIn().toast({ delay: 3000 }).toast('show');
-                }
-        </script>
+                    function showToast(title, body, classes) {
+                        $('#toastTitle').text(title);
+                        $('#toastBody').html(body);
+                        $('#customToast').removeClass('bg-success bg-danger text-white').addClass(classes);
+                        $('#customToast').fadeIn().toast({ delay: 3000 }).toast('show');
+                    }
+            </script>
+        <!-- Toast Script Close -->
         <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
         <!-- <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script> -->
         <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>

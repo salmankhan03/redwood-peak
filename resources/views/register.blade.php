@@ -39,7 +39,7 @@
                     </div>
                     <!-- Registration Form -->
                     <div class="mt-5">
-                        <form method="POST" action="{{ route('register') }}">
+                        <form method="POST" action="{{ route('customerSignup') }}">
                             @csrf
 
                             <div class="row mt-4">
@@ -75,7 +75,7 @@
                                 </div>
                                 <div class="col-md-6">
                                     <label for="password-confirm">{{ __('Confirm Password') }}</label>
-                                    <input id="password-confirm" type="password" class="form-control" name="password_confirmation" required autocomplete="new-password">
+                                    <input id="password-confirm" type="password" class="form-control" name="confirm_password" required autocomplete="new-password">
                                 </div>                               
                             </div>
 
@@ -125,7 +125,7 @@
                                 </div>
                                 <div class="col-md-6">
                                     <label for="contact">{{ __('Contact') }}</label> <br/>
-                                    <input id="contact" type="text" class="form-control @error('contact') is-invalid @enderror" name="contact" value="{{ old('contact') }}" required autocomplete="contact">
+                                    <input id="contact" type="text" class="form-control @error('contact') is-invalid @enderror" name="contact_no" value="{{ old('contact') }}" required autocomplete="contact">
 
                                     @error('contact')
                                         <span class="invalid-feedback" role="alert">

@@ -25,7 +25,7 @@
             <div class="mt-4">
                 <!-- Login Form -->
                 <div class="mt-5 m-3">
-                    <form method="POST" action="{{ route('login') }}">
+                    <form method="POST" action="{{ route('customerLogin') }}">
                         @csrf
 
                         <div class="row mt-4">

@@ -16,6 +16,8 @@ Route::get('/our-approach', [PageController::class, 'ourApproach'])->name('ourAp
 Route::get('/register', [PageController::class, 'register'])->name('register');
 Route::get('/login', [PageController::class, 'login'])->name('login');
 Route::get('/contact-us', [PageController::class, 'contactUs'])->name('contactUs');
+Route::get('/admin-login', [PageController::class, 'adminLogin'])->name('adminLogin');
+
 
 
 

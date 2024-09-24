@@ -42,6 +42,10 @@ class PageController extends Controller
     {
         return view('contactUs');
     }
+    public function AdminLogin()
+    {
+        return view('adminLogin');
+    }
     
     
 }

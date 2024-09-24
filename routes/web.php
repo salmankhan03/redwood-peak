@@ -19,13 +19,6 @@ Route::post('/register', [RegisterController::class, 'register']);
 Route::get('/login', [PageController::class, 'login'])->name('login');
 Route::get('/contact-us', [PageController::class, 'contactUs'])->name('contactUs');
 Route::get('/admin-login', [PageController::class, 'adminLogin'])->name('adminLogin');
-
-
-
-
-
-
-
-
-
+Route::get('/admin/dashboard', [PageController::class, 'adminDashboard'])->name('adminDashboard');
+Route::get('/admin/user', [PageController::class, 'user'])->name('user');
 

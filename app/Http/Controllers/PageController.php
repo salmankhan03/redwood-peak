@@ -46,6 +46,14 @@ class PageController extends Controller
     {
         return view('adminLogin');
     }
+    public function AdminDashboard()
+    {
+        return view('adminDashboard');
+    } 
+    public function user()
+    {
+        return view('user');
+    }
     
     
 }

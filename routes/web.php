@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\PageController;
+use App\Http\Controllers\Auth\RegisterController;
 
 
 Route::get('/', function () {
@@ -13,7 +14,8 @@ Route::get('/senior-team', [PageController::class, 'seniorTeam'])->name('seniorT
 Route::get('/hedge-fund', [PageController::class, 'hedgeFund'])->name('hedgeFund');
 Route::get('/managed-account', [PageController::class, 'managedAccount'])->name('managedAccount');
 Route::get('/our-approach', [PageController::class, 'ourApproach'])->name('ourApproach');
-Route::get('/register', [PageController::class, 'register'])->name('register');
+Route::get('/register', [RegisterController::class, 'showRegistrationForm'])->name('register');
+Route::post('/register', [RegisterController::class, 'register']);
 Route::get('/login', [PageController::class, 'login'])->name('login');
 Route::get('/contact-us', [PageController::class, 'contactUs'])->name('contactUs');
 Route::get('/admin-login', [PageController::class, 'adminLogin'])->name('adminLogin');

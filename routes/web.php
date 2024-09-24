@@ -1,5 +1,6 @@
 <?php
 
+use App\Api\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\PageController;
 use App\Http\Controllers\Auth\RegisterController;
@@ -7,7 +8,7 @@ use App\Http\Controllers\Auth\RegisterController;
 
 Route::get('/', function () {
     return view('welcome');
-});
+})->name('homePage');
 Route::get('/our-mission', [PageController::class, 'ourMission'])->name('ourMission');
 Route::get('/overview', [PageController::class, 'overView'])->name('overView');
 Route::get('/senior-team', [PageController::class, 'seniorTeam'])->name('seniorTeam');

@@ -67,67 +67,11 @@
 
                                                            
                             </div>
-
-
-
-                            <div class="row mt-4">
-                                <div class="col-md-6">
-                                    <label for="company_name">{{ __('Compnay Name') }}</label>
-                                        <input id="company_name" type="text" class="form-control @error('company_name') is-invalid @enderror" name="company_name" value="{{ old('company_name') }}" required autocomplete="company_name" autofocus>
                        
-                            <div class="row mt-4">
-                                <div class="col-md-6">
-                                    <label for="company_name">{{ __('Compnay Name') }}</label>
-                                        <input id="company_name" type="text" class="form-control @error('company_name') is-invalid @enderror" name="company_name" value="{{ old('company_name') }}" required autocomplete="company_name" autofocus>
-
-
-                                        @error('company_name')
-                                            <span class="invalid-feedback" role="alert">
-                                                <strong>{{ $message }}</strong>
-                                            </span>
-                                        @enderror
-                                </div>
-                                <div class="col-md-6">
-                                    <label for="contact">{{ __('Contact') }}</label> <br/>
-                                    <input id="contact" type="text" class="form-control @error('contact') is-invalid @enderror" name="contact_no" value="{{ old('contact') }}" required autocomplete="contact">
                      
-                                        @error('company_name')
-                                            <span class="invalid-feedback" role="alert">
-                                                <strong>{{ $message }}</strong>
-                                            </span>
-                                        @enderror
-                                </div>
-                                <div class="col-md-6">
-                                    <label for="contact">{{ __('Contact') }}</label> <br/>
-                                    <input id="contact" type="text" class="form-control @error('contact') is-invalid @enderror" name="contact_no" value="{{ old('contact') }}" required autocomplete="contact">
-
-              
+                 
                         <div class="row mt-4">
-
-
-                                    @error('position')
-                        <div class="row mt-4">
-                            <div class="col-md-6">
-                                <label for="email">{{ __('E-mail') }}</label><br />
-                                <input id="email" type="email" class="form-control @error('email') is-invalid @enderror" name="email" value="{{ old('email') }}" required autocomplete="email">
-                                @error('email')
-                                    <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
-                                    </span>
-                                @enderror
-                            </div>
-                           
-                                    @error('position')
-                        <div class="row mt-4">
-                            <div class="col-md-6">
-                                <label for="email">{{ __('E-mail') }}</label><br />
-                                <input id="email" type="email" class="form-control @error('email') is-invalid @enderror" name="email" value="{{ old('email') }}" required autocomplete="email">
-                                @error('email')
-                                    <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
-                                    </span>
-                                @enderror
-                            </div>
+                        
                             <div class="col-md-6">
                                 <label for="password">{{ __('Password') }}</label>
                                 <input id="password" type="password" class="form-control @error('password') is-invalid @enderror" name="password" required autocomplete="new-password">

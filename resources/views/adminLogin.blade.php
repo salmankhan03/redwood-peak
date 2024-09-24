@@ -64,7 +64,7 @@
             </a>
         </div>
         <div class="whiteBg mt-5">        
-            <form>
+            <form id="loginForm" action="{{ route('login') }}" method="POST">
                 <div class="mb-3">
                     <label for="username" class="form-label">Username or Email</label>
                     <input type="text" class="form-control" id="username" placeholder="Enter your username or email">
@@ -83,10 +83,66 @@
                 <a href="#">Lost your password?</a>
             </div>
         </div>
+        <!-- Toast Notification -->
+            <div aria-live="polite" aria-atomic="true" style="position: fixed; top: 50px; right: 20px; z-index: 1050;">
+                <div class="toast" id="loginToast" style="display: none;">
+                    <div class="toast-header">
+                        <strong class="mr-auto" id="toastTitle">Notification</strong>
+                        <button type="button" class="ml-2 mb-1 close" data-dismiss="toast" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="toast-body" id="toastBody"></div>
+                </div>
+            </div>
+        <!-- Toast Notification -->
     </div>
 
     <!-- Bootstrap JS -->
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <script>
+        $(document).ready(function() {
+            $('#loginForm').on('submit', function(e) {
+                e.preventDefault(); // Prevent the default form submission
+
+                // Prepare data for AJAX request
+                var formData = $(this).serialize();
+
+                $.ajax({
+                    url: $(this).attr('action'), // Use form action
+                    type: 'POST',
+                    data: formData,
+                    success: function(response) {
+                        // Redirect to admin dashboard
+                        window.location.href = "{{ route('adminDashboard') }}";
+                        // Show success toast
+                        showToast('Success!', 'Successfully logged in!', 'bg-success text-white');
+                    },
+                    error: function(xhr) {
+                        // Handle errors (for example, show an alert or toast)
+                        var errors = xhr.responseJSON.errors;
+                        var errorMessage = '';
+
+                        // Display all errors
+                        $.each(errors, function(key, value) {
+                            errorMessage += value[0] + '<br>'; // Take the first error message
+                        });
+
+                        showToast('Error!', errorMessage, 'bg-danger text-white');
+                    }
+                });
+            });
+        });
+
+        function showToast(title, body, classes) {
+            $('#toastTitle').text(title);
+            $('#toastBody').html(body);
+            $('#loginToast').removeClass('bg-success bg-danger text-white').addClass(classes);
+            $('#loginToast').fadeIn().toast({ delay: 3000 }).toast('show');
+        }
+    </script>
 </body>
 
 </html>

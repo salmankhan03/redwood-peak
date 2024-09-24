@@ -51,7 +51,7 @@
                         </div>
 
                         <div class="form-group form-check mt-5 mb-1">
-                            <input type="checkbox" class="form-check-input" id="remember" name="remember">
+                            <input type="checkbox" class="form-check-input" id="remember" name="remember" style="left:-25px">
                             <label class="form-check-label" for="remember">{{ __('Keep me signed in') }}</label>
                         </div>
 

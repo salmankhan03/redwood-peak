@@ -273,8 +273,8 @@
                                 <option value="Author">Author</option>
                                 <option value="Contributor">Contributor</option>
                                 <option value="Subscriber">Subscriber</option>
-                                <option value="ecommStaff">eComm Staff</option>
-                                <option value="ecommAdmin">eComm Admin</option>
+                                <option value="redwoodStaff">Redwood Staff</option>
+                                <option value="redwoodAdmin">Redwood Admin</option>
                                 <option value="Investor">Investor</option>
                             </select>
                         </div>
@@ -380,8 +380,8 @@
                                             <option value="Author">Author</option>
                                             <option value="Contributor">Contributor</option>
                                             <option value="Subscriber">Subscriber</option>
-                                            <option value="ecommStaff">eComm Staff</option>
-                                            <option value="ecommAdmin">eComm Admin</option>
+                                            <option value="redwoodStaff">Redwood Staff</option>
+                                            <option value="redwoodAdmin">Redwood Admin</option>
                                             <option value="Investor">Investor</option>
                                         </select>
                                     </div>

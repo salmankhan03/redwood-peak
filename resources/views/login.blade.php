@@ -20,6 +20,15 @@
         @include('header')
     </div>
 
+
+    @if(Session::has('success'))
+        <p class="alert alert-success">{{ Session::get('success') }}</p>
+    @endif
+
+    @if(Session::has('error'))
+        <p class="alert alert-danger">{{ Session::get('error') }}</p>
+    @endif
+
     <div class="container">
         <div class="container-custom mb-5 p-2 min-heights">
             <div class="mt-4">

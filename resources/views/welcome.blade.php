@@ -327,7 +327,7 @@
 
     <script>
         document.addEventListener('DOMContentLoaded', function () {
-            $('#disclaimerModal').modal('show');
+            // $('#disclaimerModal').modal('show');
 
             const checkbox = document.getElementById('agreeCheckbox');
             const submitButton = document.getElementById('submitDisclaimer');

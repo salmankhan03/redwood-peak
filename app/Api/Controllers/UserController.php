@@ -38,15 +38,18 @@ class UserController extends Controller
             
             if ($token) {
 
-                Session::flash('success','Login Success');
+                $request->session()->put('accessToken', $token);
+
+                $request->session()->flash('success', 'Login Success');
                 return redirect()->route('homePage');
             } else {
-                Session::flash('success','Login Failed');
+
+                $request->session()->flash('error', 'Login Failed');
                 return redirect()->route('login');
             }
         } catch (JWTException $e) {
-            Session::flash('success','Login Failed');
-            return redirect()->route('Couldnot Create Token');
+            $request->session()->flash('error', 'Login Failed');
+            return redirect()->route('login');
         }
     }
 
@@ -69,7 +72,7 @@ class UserController extends Controller
             if ($data['password'] != $data['confirm_password']){
 
                 Session::flash('error','Password And Confirm Password Not Match');
-                return redirect()->route('login');
+                return redirect()->route('register');
 
             }
 
@@ -78,7 +81,7 @@ class UserController extends Controller
             if ($alreadyExistUser->count()) {
 
                 Session::flash('error','User With this Email Already Exist');
-                return redirect()->route('login');
+                return redirect()->route('register');
 
             }
 

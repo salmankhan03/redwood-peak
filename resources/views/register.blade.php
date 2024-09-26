@@ -20,6 +20,14 @@
         @include('header')
     </div>
 
+    @if(Session::has('success'))
+        <p class="alert alert-success">{{ Session::get('success') }}</p>
+    @endif
+
+    @if(Session::has('error'))
+        <p class="alert alert-danger">{{ Session::get('error') }}</p>
+    @endif
+
     <div class="container">
         <div class="container-custom mb-5 p-2 min-heights">
             <h1 class="header-post-title-class">Register</h1>
@@ -39,7 +47,7 @@
                 </div>
                 <!-- Registration Form -->
                 <div class="mt-5">
-                    <!-- <form method="POST" action="{{ route('register') }}"> -->
+                    
                     <form id="registrationForm" method="POST" action="{{ route('customerSignup') }}">
 
                         @csrf
@@ -259,34 +267,34 @@
         </script>
         <!-- Toast Script Start -->
             <script>
-                    $(document).ready(function() {
-                        $('#registrationForm').on('submit', function(e) {
-                            e.preventDefault(); // Prevent the default form submission
+                    // $(document).ready(function() {
+                    //     $('#registrationForm').on('submit', function(e) {
+                    //         e.preventDefault(); // Prevent the default form submission
 
-                            // Prepare data for AJAX request
-                            var formData = $(this).serialize();
+                    //         // Prepare data for AJAX request
+                    //         var formData = $(this).serialize();
 
-                            $.ajax({
-                                url: $(this).attr('action'), // Use form action
-                                type: 'POST',
-                                data: formData,
-                                success: function(response) {
-                                    showToast('Success!', 'Registration successful!', 'bg-success text-white');
-                                },
-                                error: function(xhr) {
-                                    var errors = xhr.responseJSON.errors;
-                                    var errorMessage = '';
+                    //         $.ajax({
+                    //             url: $(this).attr('action'), // Use form action
+                    //             type: 'POST',
+                    //             data: formData,
+                    //             success: function(response) {
+                    //                 showToast('Success!', 'Registration successful!', 'bg-success text-white');
+                    //             },
+                    //             error: function(xhr) {
+                    //                 var errors = xhr.responseJSON.errors;
+                    //                 var errorMessage = '';
 
-                                    // Display all errors
-                                    $.each(errors, function(key, value) {
-                                        errorMessage += value[0] + '<br>'; // Take the first error message
-                                    });
+                    //                 // Display all errors
+                    //                 $.each(errors, function(key, value) {
+                    //                     errorMessage += value[0] + '<br>'; // Take the first error message
+                    //                 });
 
-                                    showToast('Error!', errorMessage, 'bg-danger text-white');
-                                }
-                            });
-                        });
-                    });
+                    //                 showToast('Error!', errorMessage, 'bg-danger text-white');
+                    //             }
+                    //         });
+                    //     });
+                    // });
 
                     function showToast(title, body, classes) {
                         $('#toastTitle').text(title);

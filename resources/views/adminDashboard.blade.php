@@ -102,7 +102,7 @@
                 <a class="nav-link" href="#">Posts</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="#">Media</a>
+                <a class="nav-link" href="{{ route('media') }}">Media</a>
             </li>
             <li class="nav-item">
                 <a class="nav-link" href="#">Pages</a>

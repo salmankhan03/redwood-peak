@@ -54,6 +54,11 @@ class PageController extends Controller
     {
         return view('user');
     }
+    public function media()
+    {
+        return view('media');
+    }
+    
     
     
 }

@@ -9,6 +9,7 @@
 
     <!-- Bootstrap 4.5.2 CSS -->
     <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+
     <style>
         body {
             min-height: 100vh;
@@ -92,6 +93,26 @@
             height:100px !important;
             object-fit: cover;
         }
+
+        /*  */
+        .card {
+            position: relative;
+        }
+
+        .card-body{
+            display:block;
+            text-align:center;
+        }
+        .edit-icon {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            color: #007bff; /* Change to your preferred color */
+        }
+        .card:hover .edit-icon {
+            display: block; /* Show the icon on hover */
+        }
+        /*  */
 
     </style>
 </head>
@@ -180,18 +201,18 @@
                         <div class="card mb-4">
                             <img src="{{ asset('assets/dummy_Assetes/img1.jpg') }}" class="card-img-top" alt="Image 1">
                             <div class="card-body">
-                                <h5 class="card-title">Image 1</h5>
-                                <button class="btn btn-danger btn-sm">Delete</button>
+                                <h5 class="card-title">Image dsadsa 1</h5>
+                                <button class="btn btn-danger btn-sm">View</button>
                             </div>
                         </div>
                     </div>
+                  
                     <div class="col-md-3 media-item" data-type="images">
                         <div class="card mb-4">
                             <img src="{{ asset('assets/dummy_Assetes/img2.jpg') }}" class="card-img-top" alt="Image 2">
-
                             <div class="card-body">
                                 <h5 class="card-title">Image 2</h5>
-                                <button class="btn btn-danger btn-sm">Delete</button>
+                                <button class="btn btn-danger btn-sm">View</button>
                             </div>
                         </div>
                     </div>
@@ -204,7 +225,7 @@
                             </video>
                             <div class="card-body">
                                 <h5 class="card-title">Video 1</h5>
-                                <button class="btn btn-danger btn-sm">Delete</button>
+                                <button class="btn btn-danger btn-sm">View</button>
                             </div>
                         </div>
                     </div>
@@ -215,7 +236,7 @@
                                     </a>
                             <div class="card-body">
                                 <h5 class="card-title">Document 1</h5>
-                                <button class="btn btn-danger btn-sm">Delete</button>
+                                <button class="btn btn-danger btn-sm">View</button>
                             </div>
                         </div>
                     </div>
@@ -224,7 +245,7 @@
                             <img src="{{ asset('assets/dummy_Assetes/service_img1.jpg') }}" class="card-img-top" alt="Image 1">
                             <div class="card-body">
                                 <h5 class="card-title">Image 3</h5>
-                                <button class="btn btn-danger btn-sm">Delete</button>
+                                <button class="btn btn-danger btn-sm">View</button>
                             </div>
                         </div>
                     </div>
@@ -234,7 +255,7 @@
 
                             <div class="card-body">
                                 <h5 class="card-title">Image 4</h5>
-                                <button class="btn btn-danger btn-sm">Delete</button>
+                                <button class="btn btn-danger btn-sm">View</button>
                             </div>
                         </div>
                     </div>
@@ -247,7 +268,7 @@
                             </video>
                             <div class="card-body">
                                 <h5 class="card-title">Video 2</h5>
-                                <button class="btn btn-danger btn-sm">Delete</button>
+                                <button class="btn btn-danger btn-sm">View</button>
                             </div>
                         </div>
                     </div>
@@ -258,15 +279,43 @@
                                     </a>
                             <div class="card-body">
                                 <h5 class="card-title">Document 2</h5>
-                                <button class="btn btn-danger btn-sm">Delete</button>
+                                <button class="btn btn-danger center btn-sm">View</button>
                             </div>
                         </div>
                     </div>
                 </div>
             <!-- Static media items Display Close-->
 
-
-
+            <!-- AttachMent Modal Structure -->
+                <div class="modal fade" id="attachmentModal" tabindex="-1" role="dialog" aria-labelledby="attachmentModalLabel" aria-hidden="true" style="">
+                    <div class="modal-dialog modal-dialog-centered" role="document" style="width:80%">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="attachmentModalLabel"></h5>
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                            </div>
+                            <div class="modal-body pt-5 pb-5 ">
+                                <div class="row pl-2 pr-3">
+                                    <div class="col-md-7">
+                                        <img id="attachmentImage" src="" alt="" style="width: 100%; display: none; object-fit: contain;">
+                                        <video id="attachmentVideo" controls style="width: 100%; display: none;">
+                                            <source id="attachmentSource" src="" type="video/mp4">
+                                            Your browser does not support the video tag.
+                                        </video>
+                                        <a id="attachmentLink" href="" target="_blank" style="display: none;">Download Document</a>
+                                    </div>
+                                    <div class="col-md-5">
+                                        <strong>File URL:</strong>
+                                        <p id="fileUrl" style="word-wrap: break-word;"></p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            <!-- AttachMent Modal Structure -->
         <!-- Upload Modal -->
             <div class="modal fade" id="uploadModal" tabindex="-1" role="dialog" aria-labelledby="uploadModalLabel" aria-hidden="true">
                 <div class="modal-dialog modal-dialog-centered" role="document">
@@ -299,6 +348,9 @@
     <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@1.16.1/dist/umd/popper.min.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <!-- <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.bundle.min.js"></script> -->
+    <script src="https://kit.fontawesome.com/a076d05399.js"></script>
     <!-- Header Script -->
         <script>
             // Toggle Sidebar Functionality for Mobile
@@ -438,6 +490,44 @@
                 $('#uploadModal').modal('hide');
             });
         });
+    </script>
+    <script>
+        $('.media-item').on('click', function() {
+        const title = $(this).find('.card-title').text();
+        const type = $(this).data('type');
+
+        // Set the modal title
+        $('#attachmentModalLabel').text(title);
+
+        let fileUrl; // Variable to hold the file URL
+
+        if (type === 'images') {
+            const imgSrc = $(this).find('img').attr('src');
+            $('#attachmentImage').attr('src', imgSrc).show();
+            $('#attachmentVideo').hide();
+            $('#attachmentLink').hide();
+            fileUrl = imgSrc; // Set the file URL for images
+        } else if (type === 'videos') {
+            const videoSrc = $(this).find('video source').attr('src');
+            $('#attachmentSource').attr('src', videoSrc);
+            $('#attachmentVideo').show();
+            $('#attachmentImage').hide();
+            $('#attachmentLink').hide();
+            fileUrl = videoSrc; // Set the file URL for videos
+        } else if (type === 'documents') {
+            const docLink = $(this).find('a').attr('href');
+            $('#attachmentLink').attr('href', docLink).show().text('Download Document');
+            $('#attachmentImage').hide();
+            $('#attachmentVideo').hide();
+            fileUrl = docLink; // Set the file URL for documents
+        }
+
+        // Display the file URL in the modal
+        $('#fileUrl').text(fileUrl);
+        
+        // Show the modal
+        $('#attachmentModal').modal('show');
+    });
     </script>
 
 </body>

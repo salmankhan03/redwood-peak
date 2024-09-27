@@ -149,7 +149,7 @@
         <h4 class="text-white text-center py-3">Dashboard</h4>
         <ul class="nav flex-column">
             <li class="nav-item">
-                <a class="nav-link" href="#">Dashboard</a>
+                <a class="nav-link" href="{{ route('adminDashboard') }}">Dashboard</a>
             </li>
             <li class="nav-item">
                 <a class="nav-link" href="#">Posts</a>
@@ -158,7 +158,7 @@
                 <a class="nav-link" href="{{ route('media') }}">Media</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="#">Pages</a>
+                <a class="nav-link" href="{{ route('pageCreate') }}">Pages</a>
             </li>
             <li class="nav-item">
                 <a class="nav-link" href="#">Comments</a>

@@ -98,16 +98,16 @@
             <li class="nav-item">
                 <a class="nav-link" href="{{ route('adminDashboard') }}">Dashboard</a>
             </li>
-            <li class="nav-item">
+            <!-- <li class="nav-item">
                 <a class="nav-link" href="#">Posts</a>
-            </li>
+            </li> -->
             <li class="nav-item">
                 <a class="nav-link" href="{{ route('media') }}">Media</a>
             </li>
             <li class="nav-item">
                 <a class="nav-link" href="{{ route('pageCreate') }}">Pages</a>
             </li>
-            <li class="nav-item">
+            <!-- <li class="nav-item">
                 <a class="nav-link" href="#">Comments</a>
             </li>
             <li class="nav-item">
@@ -115,16 +115,16 @@
             </li>
             <li class="nav-item">
                 <a class="nav-link" href="#">Plugins</a>
-            </li>
+            </li> -->
             <li class="nav-item">
                 <a class="nav-link" href="{{ route('user') }}">Users</a>
             </li>
-            <li class="nav-item">
+            <!-- <li class="nav-item">
                 <a class="nav-link" href="#">Tools</a>
             </li>
             <li class="nav-item">
                 <a class="nav-link" href="#">Settings</a>
-            </li>
+            </li> -->
         </ul>
     </div>
 

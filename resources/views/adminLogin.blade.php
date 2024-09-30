@@ -66,17 +66,17 @@
         <div class="whiteBg mt-5">        
             <form id="loginForm" action="{{ route('login') }}" method="POST">
                 <div class="mb-3">
-                    <label for="username" class="form-label">Username or Email</label>
-                    <input type="text" class="form-control" id="username" placeholder="Enter your username or email">
+                    <label for="username" class="form-label">Email</label>
+                    <input type="text" class="form-control" id="username" placeholder="Enter your email">
                 </div>
                 <div class="mb-3">
                     <label for="password" class="form-label">Password</label>
                     <input type="password" class="form-control" id="password" placeholder="Enter your password">
                 </div>
-                <div class="mb-4 mt-4 form-check">
+                {{-- <div class="mb-4 mt-4 form-check">
                     <input type="checkbox" class="form-check-input" id="remember">
                     <label class="form-check-label" for="remember">Remember Me</label>
-                </div>
+                </div> --}}
                 <button type="submit" class="btn btn-primary">Log In</button>
             </form>
             <div class="footer-text">
@@ -102,7 +102,7 @@
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
     <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
-    <script>
+    {{-- <script>
         $(document).ready(function() {
             $('#loginForm').on('submit', function(e) {
                 e.preventDefault(); // Prevent the default form submission
@@ -142,7 +142,7 @@
             $('#loginToast').removeClass('bg-success bg-danger text-white').addClass(classes);
             $('#loginToast').fadeIn().toast({ delay: 3000 }).toast('show');
         }
-    </script>
+    </script> --}}
 </body>
 
 </html>

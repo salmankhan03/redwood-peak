@@ -38,7 +38,7 @@ class UserController extends Controller
             
             if ($token) {
 
-                $request->session()->put('accessToken', $token);
+                $request->session()->put('customerAccessToken', $token);
 
                 $request->session()->flash('success', 'Login Success');
                 return redirect()->route('homePage');
@@ -95,6 +95,8 @@ class UserController extends Controller
             $user->orignal_password = $orignal_password;
 
             $token            = \JWTAuth::fromUser($user);
+
+            $request->session()->put('customerAccessToken', $token);
 
             Session::flash('success','Signup Success');
             return redirect()->route('homePage');

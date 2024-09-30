@@ -56,6 +56,14 @@
     </style>
 </head>
 
+@if(Session::has('success'))
+    <p class="alert alert-success">{{ Session::get('success') }}</p>
+@endif
+
+@if(Session::has('error'))
+    <p class="alert alert-danger">{{ Session::get('error') }}</p>
+@endif
+
 <body>
     <div class="login-container">
         <div class="text-center mb-5">
@@ -64,14 +72,14 @@
             </a>
         </div>
         <div class="whiteBg mt-5">        
-            <form id="loginForm" action="{{ route('login') }}" method="POST">
+            <form id="loginForm" action="{{ route('adminLoginPost') }}"  method="POST">
                 <div class="mb-3">
                     <label for="username" class="form-label">Email</label>
-                    <input type="text" class="form-control" id="username" placeholder="Enter your email">
+                    <input type="text" class="form-control" id="username" name="email" placeholder="Enter your email">
                 </div>
                 <div class="mb-3">
                     <label for="password" class="form-label">Password</label>
-                    <input type="password" class="form-control" id="password" placeholder="Enter your password">
+                    <input type="password" class="form-control" id="password" name="password" placeholder="Enter your password">
                 </div>
                 {{-- <div class="mb-4 mt-4 form-check">
                     <input type="checkbox" class="form-check-input" id="remember">

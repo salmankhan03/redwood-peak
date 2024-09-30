@@ -23,7 +23,8 @@ Route::get('/admin-login', [PageController::class, 'adminLogin'])->name('adminLo
 Route::get('/admin/dashboard', [PageController::class, 'adminDashboard'])->name('adminDashboard');
 Route::get('/admin/user', [PageController::class, 'user'])->name('user');
 Route::get('/media', [PageController::class, 'media'])->name('media');
+Route::get('/pages', [PageController::class, 'pages'])->name('pages');
+Route::get('/pages', [PageController::class, 'pages'])->name('pages');
 Route::get('/pages/create', [PageController::class, 'pageCreate'])->name('pageCreate');
-// Route::post('/pages', [PageController::class, 'store'])->name('pages.store');
 
 

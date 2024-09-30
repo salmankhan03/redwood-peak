@@ -155,33 +155,49 @@
                 <div class="container-fluid">
                     <div class="row mt-5">
                         <h3>Pages</h3>
-                        <button id="performAction" class="btn btn-primary ml-3">Add New Pages</button>
+                        <button id="performAction" class="btn btn-primary ml-3" onclick="redirectToCreatePage()">Add New Pages</button>
                     </div>
 
-                    <h2>Create New Page</h2>
-
-                    @if(session('success'))
-                        <div class="alert alert-success">
-                            {{ session('success') }}
+                    <div class="mb-3 mt-5 row d-flex justify-content-between">
+                        <div class="p-1">
+                            <select id="tableActions" class="form-control">
+                                <option value="">Table Action...</option>
+                                <option value="Delete">Delete</option>
+                            </select>    
+                        </div>                    
+                        <div>
+                            <input type="text" id="searchPages" class="form-control form-control-sm" placeholder="Search pages...">
                         </div>
-                    @endif
+                    </div>
+                    <table class="table table-striped" id="user-data-table" style="border:1px solid #ccc">
+                        <thead>
+                            <tr>
+                                <th><input type="checkbox" id="select-all" /></th>
+                                <th>Title</th>
+                                <th>Years</th>
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td><input type="checkbox" class="user-select" data-username="user1"></td>
+                                <td>News</td>
+                                <td>User One</td>
+                                <td><button id="performAction" class="btn btn-primary ml-3" onclick="redirectToCreatePage()">Edit</button></td>
 
-                    <form >
-                        @csrf
-                        <div class="form-group">
-                            <label for="title">Page Title</label>
-                            <input type="text" class="form-control" id="title" name="title" required>
-                        </div>
-
-                        <div class="form-group">
-                            <label for="content">Page Content</label>
-                            <textarea class="form-control" id="content" name="content" rows="10" required></textarea>
-                        </div>
-
-                        <button type="submit" class="btn btn-primary">Create Page</button>
-                    </form>
-
-                   
+                            </tr>
+                            <tr>
+                                <td><input type="checkbox" class="user-select" data-username="user2"></td>
+                                <td>user2</td>
+                                <td>User One</td>
+                                <td><button id="performAction" class="btn btn-primary ml-3" onclick="redirectToCreatePage()">Edit</button></td>
+                            </tr>
+                           
+                            <tr>
+                                <td colspan="7">No user data available yet.</td>
+                            </tr>
+                        </tbody>
+                    </table>       
                 </div>
 
               
@@ -195,8 +211,10 @@
     <script src="https://kit.fontawesome.com/a076d05399.js"></script>
 
     <script>
-                    CKEDITOR.replace('content');
-                </script>
+        function redirectToCreatePage() {
+            window.location.href = "{{ route('pageCreate') }}";
+        }
+    </script>
             
     <!-- Header Script -->
         <script>

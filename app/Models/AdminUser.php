@@ -12,33 +12,7 @@ use Tymon\JWTAuth\Contracts\JWTSubject;
 
 class AdminUser extends Authenticatable implements JWTSubject
 {
-    use  HasFactory, Notifiable, SoftDeletes;
-
-    /**
-     * The attributes that are mass assignable.
-     *
-     * @var array<int, string>
-     */
-    protected $fillable = [
-        'email',
-        'password',
-        'profile_pic',
-        'role_id',
-        'first_name',
-        'last_name',
-        'middle_name',
-        'date_of_birth',
-        'contact_no',
-        'secondary_contact_number',
-        'city',
-        'state',
-        'country',
-        'zipcode',
-        'street_address',
-        'street',
-        'landmark'
-
-    ];
+    use  HasFactory, Notifiable;
 
     /**
      * The attributes that should be hidden for serialization.
@@ -50,25 +24,16 @@ class AdminUser extends Authenticatable implements JWTSubject
         'remember_token',
     ];
 
+    protected $table = 'admin_panel_users';
+
     /**
      * The attributes that should be cast.
      *
      * @var array<string, string>
      */
     protected $casts = [
-        'email_verified_at' => 'datetime',
         'password' => 'hashed',
     ];
-
-
-    public static function boot()
-    {
-        parent::boot();
-        static::created(function ($model) {
-            $model->uuid = (string) Uuid::uuid6();
-            $model->save();
-        });
-    }
 
     /**
      * Get the identifier that will be stored in the subject claim of the JWT.

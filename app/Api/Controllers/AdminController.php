@@ -43,23 +43,23 @@ class AdminController extends Controller
 
         try {
             $credentials = $request->only('email', 'password');
-
+            
             $token = JWTAuth::attempt($credentials);
             
             if ($token) {
 
-                $request->session()->put('customerAccessToken', $token);
+                $request->session()->put('adminAccessToken', $token);
 
                 $request->session()->flash('success', 'Login Success');
-                return redirect()->route('homePage');
+                return redirect()->route('adminDashboard');
             } else {
 
                 $request->session()->flash('error', 'Login Failed');
-                return redirect()->route('login');
+                return redirect()->route('adminLogin');
             }
         } catch (JWTException $e) {
             $request->session()->flash('error', 'Login Failed');
-            return redirect()->route('login');
+            return redirect()->route('adminLogin');
         }
     }
 

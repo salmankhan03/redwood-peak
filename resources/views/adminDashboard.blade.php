@@ -132,7 +132,7 @@
     </div>
 
     <!-- Main Content -->
-    <div class="main-content" id="main-content">
+    <div class="container-fluid main-content" id="main-content">
         <!-- Top Navbar -->
         <nav class="navbar navbar-expand-lg navbar-light">
             <a class="navbar-brand" href="#">My Admin</a>
@@ -152,7 +152,7 @@
         </nav>
 
         <!-- Dashboard Content -->
-        <div class="container-fluid">
+        <div class="">
             <div class="row">
                 <div class="col-md-12">
                     <h1 class="mt-4">Dashboard</h1>

@@ -157,9 +157,9 @@
     </div>
 
     <!-- Main Content -->
-    <div class="main-content" id="main-content">
+    <div class="container-fluid main-content" id="main-content">
         <!-- Dashboard Content -->
-        <div class="container-fluid">
+        <div class="">
             <div class="d-flex justify-content-between mt-5 mb-5 bg-white p-3 shadow-sm">
                 <h3 class="modal-title">Media</h3>
                 <button data-toggle="modal" data-target="#uploadModal" class="btn btn-secondary">Add New Media File</button>

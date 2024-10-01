@@ -136,7 +136,7 @@
     </div>
 
     <!-- Main Content -->
-    <div class="main-content" id="main-content">
+    <div class="container-fluid main-content" id="main-content">
         <nav class="navbar navbar-expand-lg navbar-light">
             <a class="navbar-brand" href="#">My Admin</a>
             <button class="navbar-toggler" type="button" aria-controls="sidebar" aria-expanded="false" aria-label="Toggle sidebar">
@@ -160,8 +160,8 @@
                         <h3>Post</h3>
                         <button id="performAction" class="btn btn-primary ml-3" onclick="redirectToCreatePage()">Add New Post</button>
                     </div>
-
-                    <div class="mb-3 mt-5 row d-flex justify-content-between">
+                </div>
+                    <div class="px-2 mb-3 mt-5 row d-flex justify-content-between">
                         <div class="col-md-4 p-1">
                             <select id="tableActions" class="form-control">
                                 <option value="">Table Action...</option>
@@ -212,7 +212,6 @@
                             </tr>
                         </tbody>
                     </table>       
-                </div>
 
               
     </div>

@@ -117,7 +117,7 @@
     </div>
 
     <!-- Main Content -->
-    <div class="main-content" id="main-content">
+    <div class="container-fluid main-content" id="main-content">
         <nav class="navbar navbar-expand-lg navbar-light">
             <a class="navbar-brand" href="#">My Admin</a>
             <button class="navbar-toggler" type="button" aria-controls="sidebar" aria-expanded="false" aria-label="Toggle sidebar">
@@ -136,11 +136,11 @@
         </nav>
 
         <!-- Dashboard Content -->
-        <div class="container-fluid">
+        <div class="">
             <div class="row mt-5">
                 <button id="performAction" class="btn btn-primary ml-3" onclick="redirectToCreatePage()">Upload New Document</button>
             </div>
-            <div class="mb-3 mt-5 row d-flex justify-content-between">
+            <div class="px-2 mb-3 mt-5 row d-flex justify-content-between">
                 <div class="col-md-3 p-1">
                     <select id="tableActions" class="form-control" onchange="filterTable()">
                         <option value="">Table Action...</option>

@@ -204,7 +204,7 @@
     </div>
 
     <!-- Main Content -->
-    <div class="main-content" id="main-content">
+    <div class="container-fluid main-content" id="main-content">
         <!-- Top Navbar -->
         <nav class="navbar navbar-expand-lg navbar-light">
             <a class="navbar-brand" href="#">My Admin</a>
@@ -224,7 +224,7 @@
         </nav>
 
         <!-- Dashboard Content -->
-        <div class="container-fluid mt-5">
+        <div class="mt-5">
             <div class="card mb-4" id="users-overview-card">
                 <div class="card-header d-flex justify-content-between">
                     <h2>Users Overview</h2>

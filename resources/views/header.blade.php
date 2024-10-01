@@ -94,7 +94,7 @@
                         Publication & Updates
                     </a>
                     <div class="dropdown-menu" aria-labelledby="publicationUpdatesDropdown">
-                        <a class="dropdown-item" href="#">Publications</a>
+                        <a class="dropdown-item" href="{{ route('publications') }}">Publications</a>
                         <a class="dropdown-item" href="#">News</a>
                         <a class="dropdown-item" href="#">Visits</a>
                     </div>
@@ -145,7 +145,7 @@
             <a class="nav-link" href="{{ route('ourApproach') }}">Our Approach</a>
         </li>
         <li class="nav-item">
-            <a class="nav-link" href="#">Publications</a>
+            <a class="nav-link" href="{{ route('publications') }}">Publications</a>
         </li>
         <li class="nav-item">
             <a class="nav-link" href="#">News</a>

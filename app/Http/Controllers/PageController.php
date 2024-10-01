@@ -30,6 +30,10 @@ class PageController extends Controller
     {
         return view('ourApproach');
     }
+    public function publications()
+    {
+        return view('publications');
+    }    
     public function register()
     {
         return view('register');

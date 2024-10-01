@@ -24,7 +24,6 @@ Route::get('/admin/dashboard', [PageController::class, 'adminDashboard'])->name(
 Route::get('/admin/user', [PageController::class, 'user'])->name('user');
 Route::get('/media', [PageController::class, 'media'])->name('media');
 Route::get('/pages', [PageController::class, 'pages'])->name('pages');
-Route::get('/pages', [PageController::class, 'pages'])->name('pages');
 Route::get('/pages/create', [PageController::class, 'pageCreate'])->name('pageCreate');
 
 

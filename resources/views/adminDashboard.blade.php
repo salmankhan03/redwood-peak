@@ -105,7 +105,10 @@
                 <a class="nav-link" href="{{ route('media') }}">Media</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="{{ route('pages') }}">Pages</a>
+                <a class="nav-link" href="{{ route('post') }}">Post</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="{{ route('pages') }}">pages</a>
             </li>
             <!-- <li class="nav-item">
                 <a class="nav-link" href="#">Comments</a>

@@ -112,7 +112,7 @@
                 <a class="nav-link" href="{{ route('post') }}">Post</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="{{ route('pages') }}">Pages</a>
+                <a class="nav-link" href="{{ route('pages') }}">pages</a>
             </li>
             <!-- <li class="nav-item">
                 <a class="nav-link" href="#">Comments</a>
@@ -156,62 +156,47 @@
 
         <!-- Dashboard Content -->
                 <div class="container-fluid">
-                    <div class="row mt-5">
-                        <!-- <h3>Pages</h3> -->
-                        <button id="performAction" class="btn btn-primary ml-3" onclick="redirectToCreatePage()">Upload New Document </button>
-                    </div>
+                    <!-- <div class="row mt-5">
+                        <h3>post</h3>
+                        <button id="performAction" class="btn btn-primary ml-3">Add New Pages</button>
+                    </div> -->
 
-                    <div class="mb-3 mt-5 row d-flex justify-content-between">
-                        <div class="p-1">
-                            <select id="tableActions" class="form-control">
-                                <option value="">Table Action...</option>
-                                <option value="Delete">Delete</option>
-                            </select>    
-                        </div>                    
-                        <div>
-                            <input type="text" id="searchPages" class="form-control form-control-sm" placeholder="Search pages...">
+                    <h2 class="mt-5 mb-4">Create New Page</h2>
+
+                    @if(session('success'))
+                        <div class="alert alert-success">
+                            {{ session('success') }}
                         </div>
-                    </div>
-                    <table class="table table-striped" id="user-data-table" style="border:1px solid #ccc">
-                        <thead>
-                            <tr>
-                                <th><input type="checkbox" id="select-all" /></th>
-                                <th>Documents Title</th>
-                                <th>Documents Types</th>
-                                <th>Years</th>
-                                <th>Actions</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr>
-                                <td><input type="checkbox" class="user-select" data-username="user1"></td>
-                                <td>Redwood Peak – China Outlook Q1 2023</td>
-                                <td>Publications</td>
-                                <td>2018</td>
-                                <td><button id="performAction" class="btn btn-primary ml-3" onclick="redirectToCreatePage()">Edit</button></td>
+                    @endif
 
-                            </tr>
-                            <tr>
-                                <td><input type="checkbox" class="user-select" data-username="user2"></td>
-                                <td>Redwood Peak Opportunities Master Fund – Portfolio Summary June 2024</td>
-                                <td>Hedge Fund Reports</td>
-                                <td>2021</td>
-                                <td><button id="performAction" class="btn btn-primary ml-3" onclick="redirectToCreatePage()">Edit</button></td>
-                            </tr>
-                            <tr>
-                                <td><input type="checkbox" class="user-select" data-username="user2"></td>
-                                <td>Redwood Peak China – Portfolio Summary – July 2024 </td>
-                                <td>Managed Account Reports</td>
-                                <td>2021</td>
-                                <td><button id="performAction" class="btn btn-primary ml-3" onclick="redirectToCreatePage()">Edit</button></td>
-                            </tr>
-                           
-                           
-                            <tr>
-                                <td colspan="7">No user data available yet.</td>
-                            </tr>
-                        </tbody>
-                    </table>       
+                    <form >
+                        @csrf
+                        <div class="form-group">
+                            <label for="title">Post Title</label>
+                            <input type="text" class="form-control" id="title" name="title" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="postCategories">Choose PostCategories</label>
+                            <select id="postCategories" class="form-control">
+                                <option value="">All Categories</option>
+                                <option value="article">Article</option>
+                                <option value="enews">Enews</option>
+                                <option value="latestNews">Latest News</option>
+                                <option value="news">News</option>
+                                <option value="uncategorized">Uncategorized</option>
+                                <option value="visit">Visit</option>
+                            </select>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="content">Post Content</label>
+                            <textarea class="form-control" id="content" name="content" rows="10" required></textarea>
+                        </div>
+
+                        <button type="submit" class="btn btn-primary">Create Post</button>
+                    </form>
+
+                   
                 </div>
 
               
@@ -225,10 +210,8 @@
     <script src="https://kit.fontawesome.com/a076d05399.js"></script>
 
     <script>
-        function redirectToCreatePage() {
-            window.location.href = "{{ route('uploadDocument') }}";
-        }
-    </script>
+                    CKEDITOR.replace('content');
+                </script>
             
     <!-- Header Script -->
         <script>

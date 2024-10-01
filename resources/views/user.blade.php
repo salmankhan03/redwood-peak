@@ -25,13 +25,15 @@
             padding: 15px;
             position: fixed;
             top: 0;
-            left: -250px; /* Initially hide the sidebar */
+            left: -250px;
+            /* Initially hide the sidebar */
             z-index: 1000;
             transition: all 0.3s ease;
         }
 
         .sidebar.show {
-            left: 0; /* Slide the sidebar in on mobile devices */
+            left: 0;
+            /* Slide the sidebar in on mobile devices */
         }
 
         .sidebar .nav-item a {
@@ -54,7 +56,8 @@
 
         /* Adjust main content margin when sidebar is shown */
         .main-content.shifted {
-            margin-left: 250px; /* Space for sidebar on larger screens */
+            margin-left: 250px;
+            /* Space for sidebar on larger screens */
         }
 
         /* Navbar Styles */
@@ -73,18 +76,21 @@
         /* Show Sidebar and Shift Content on Larger Screens */
         @media (min-width: 769px) {
             .sidebar {
-                left: 0; /* Show sidebar by default */
+                left: 0;
+                /* Show sidebar by default */
             }
 
             .main-content {
-                margin-left: 250px; /* Adjust main content space */
+                margin-left: 250px;
+                /* Adjust main content space */
             }
         }
 
         /* Hide Content Shift on Mobile */
         @media (max-width: 768px) {
             .main-content.shifted {
-                margin-left: 0; /* Remove margin shift on mobile */
+                margin-left: 0;
+                /* Remove margin shift on mobile */
             }
         }
 
@@ -105,7 +111,7 @@
         }
 
         .warning {
-            color:red;
+            color: red;
         }
 
         .table a {
@@ -115,30 +121,43 @@
         .table td {
             padding: 10px;
             vertical-align: middle;
-            border-top:none !important;
+            border-top: none !important;
         }
+
         .table-striped tbody tr:nth-of-type(odd) {
             background-color: #FFF;
         }
+
         /* Cards */
-        .clear { clear: both; }
-        #users-list-container { display: none; }
+        .clear {
+            clear: both;
+        }
+
+        #users-list-container {
+            display: none;
+        }
 
         /* Modal */
         /* Sticky header */
-            .modal-header {
-                position: sticky;
-                top: 0;
-                z-index: 1030; /* Bootstrap's z-index for modals */
-                background-color: white; /* Ensure it stands out */
-                border-bottom: 1px solid #dee2e6; /* Match Bootstrap's border style */
-            }
+        .modal-header {
+            position: sticky;
+            top: 0;
+            z-index: 1030;
+            /* Bootstrap's z-index for modals */
+            background-color: white;
+            /* Ensure it stands out */
+            border-bottom: 1px solid #dee2e6;
+            /* Match Bootstrap's border style */
+        }
 
-            /* Set modal body height */
-            .modal-body {
-                max-height: 400px; /* Set desired height */
-                overflow-y: auto; /* Enable scrolling */
-            }
+        /* Set modal body height */
+        .modal-body {
+            max-height: 400px;
+            /* Set desired height */
+            overflow-y: auto;
+            /* Enable scrolling */
+        }
+
         /* Modal */
     </style>
 </head>
@@ -156,6 +175,9 @@
             </li> -->
             <li class="nav-item">
                 <a class="nav-link" href="{{ route('media') }}">Media</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="{{ route('post') }}">Post</a>
             </li>
             <li class="nav-item">
                 <a class="nav-link" href="{{ route('pages') }}">Pages</a>
@@ -216,13 +238,13 @@
                             <tr>
                                 <td>
                                     <span>
-                                        <a class="count" href="#" data-status="all">500</a>
+                                        <a class="count filter-link" href="#" data-status="all">500</a>
                                         <a href="#" class="filter-link" data-status="all">Users</a>
                                     </span>
                                 </td>
                                 <td>
                                     <span>
-                                        <a class="count" href="#" data-status="pending">100</a>
+                                        <a class="count filter-link" href="#" data-status="pending">100</a>
                                         <a href="#" class="filter-link" data-status="pending">Pending Review</a>
                                     </span>
                                 </td>
@@ -230,13 +252,13 @@
                             <tr>
                                 <td>
                                     <span>
-                                        <a class="count" href="#" data-status="approved">200</a>
+                                        <a class="count filter-link" href="#" data-status="approved">200</a>
                                         <a href="#" class="filter-link" data-status="approved">Approved</a>
                                     </span>
                                 </td>
                                 <td>
                                     <span>
-                                        <a class="count" href="#" data-status="awaiting_email_confirmation">50</a>
+                                        <a class="count filter-link" href="#" data-status="awaiting_email_confirmation">50</a>
                                         <a href="#" class="filter-link" data-status="awaiting_email_confirmation">Awaiting Email Confirmation</a>
                                     </span>
                                 </td>
@@ -244,13 +266,13 @@
                             <tr>
                                 <td>
                                     <span>
-                                        <a class="count" href="#" data-status="rejected">50</a>
+                                        <a class="count filter-link" href="#" data-status="rejected">50</a>
                                         <a href="#" class="filter-link" data-status="rejected">Rejected</a>
                                     </span>
                                 </td>
                                 <td>
                                     <span>
-                                        <a class="count" href="#" data-status="inactive">10</a>
+                                        <a class="count filter-link" href="#" data-status="inactive">10</a>
                                         <a href="#" class="filter-link" data-status="inactive">Inactive</a>
                                     </span>
                                 </td>
@@ -340,8 +362,8 @@
                         </tbody>
                     </table>
 
-                     <!-- Pagination Controls -->
-                     <nav aria-label="User Pagination">
+                    <!-- Pagination Controls -->
+                    <nav aria-label="User Pagination">
                         <ul class="pagination justify-content-center"></ul>
                     </nav>
                     <!-- Pagination Controls -->
@@ -349,63 +371,63 @@
             </div>
 
             <!-- Add User Modal -->
-                <div class="modal fade" id="addUserModal" tabindex="-1" aria-labelledby="addUserModalLabel" aria-hidden="true">
-                    <div class="modal-dialog">
-                        <div class="modal-content">
-                            <div class="modal-header">
-                                <h5 class="modal-title" id="addUserModalLabel">Add User</h5>
-                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                    <span>&times;</span>
-                                </button>
-                            </div>
-                            <div class="modal-body">
-                                <form id="addUserForm">
-                                    <div class="mb-3">
-                                        <label for="username" class="form-label">Username</label>
-                                        <input type="text" class="form-control" id="username" required>
-                                    </div>
-                                    <div class="mb-3">
-                                        <label for="email" class="form-label">Email</label>
-                                        <input type="email" class="form-control" id="email" required>
-                                    </div>
-                                    <div class="mb-3">
-                                        <label for="name" class="form-label">Name</label>
-                                        <input type="text" class="form-control" id="name" required>
-                                    </div>
-                                    <div class="mb-3">
-                                        <label for="role" class="form-label">Role</label>
-                                        <select id="role" class="form-control" required>
-                                            <option value="Administrator">Administrator</option>
-                                            <option value="Editor">Editor</option>
-                                            <option value="Author">Author</option>
-                                            <option value="Contributor">Contributor</option>
-                                            <option value="Subscriber">Subscriber</option>
-                                            <option value="redwoodStaff">Redwood Staff</option>
-                                            <option value="redwoodAdmin">Redwood Admin</option>
-                                            <option value="Investor">Investor</option>
-                                        </select>
-                                    </div>
-                                    <div class="mb-3">
-                                        <label for="password" class="form-label">Password</label>
-                                        <input type="password" class="form-control" id="password" required>
-                                    </div>
-                                    <div class="mb-3">
-                                        <label for="confirmPassword" class="form-label">Confirm Password</label>
-                                        <input type="password" class="form-control" id="confirmPassword" required>
-                                    </div>
-                                    <div class="mb-3 form-check">
-                                        <input type="checkbox" class="form-check-input" id="sendEmail">
-                                        <label class="form-check-label" for="sendEmail">Send User Notification</label>
-                                    </div>
-                                </form>
-                            </div>
-                            <div class="modal-footer">
-                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                                <button type="button" id="submitAddUser" class="btn btn-primary">Add User</button>
-                            </div>
+            <div class="modal fade" id="addUserModal" tabindex="-1" aria-labelledby="addUserModalLabel" aria-hidden="true">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="addUserModalLabel">Add User</h5>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span>&times;</span>
+                            </button>
+                        </div>
+                        <div class="modal-body">
+                            <form id="addUserForm">
+                                <div class="mb-3">
+                                    <label for="username" class="form-label">Username</label>
+                                    <input type="text" class="form-control" id="username" required>
+                                </div>
+                                <div class="mb-3">
+                                    <label for="email" class="form-label">Email</label>
+                                    <input type="email" class="form-control" id="email" required>
+                                </div>
+                                <div class="mb-3">
+                                    <label for="name" class="form-label">Name</label>
+                                    <input type="text" class="form-control" id="name" required>
+                                </div>
+                                <div class="mb-3">
+                                    <label for="role" class="form-label">Role</label>
+                                    <select id="role" class="form-control" required>
+                                        <option value="Administrator">Administrator</option>
+                                        <option value="Editor">Editor</option>
+                                        <option value="Author">Author</option>
+                                        <option value="Contributor">Contributor</option>
+                                        <option value="Subscriber">Subscriber</option>
+                                        <option value="redwoodStaff">Redwood Staff</option>
+                                        <option value="redwoodAdmin">Redwood Admin</option>
+                                        <option value="Investor">Investor</option>
+                                    </select>
+                                </div>
+                                <div class="mb-3">
+                                    <label for="password" class="form-label">Password</label>
+                                    <input type="password" class="form-control" id="password" required>
+                                </div>
+                                <div class="mb-3">
+                                    <label for="confirmPassword" class="form-label">Confirm Password</label>
+                                    <input type="password" class="form-control" id="confirmPassword" required>
+                                </div>
+                                <div class="mb-3 form-check">
+                                    <input type="checkbox" class="form-check-input" id="sendEmail">
+                                    <label class="form-check-label" for="sendEmail">Send User Notification</label>
+                                </div>
+                            </form>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                            <button type="button" id="submitAddUser" class="btn btn-primary">Add User</button>
                         </div>
                     </div>
                 </div>
+            </div>
             <!-- Add User Modal -->
 
 
@@ -419,204 +441,309 @@
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@1.16.1/dist/umd/popper.min.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
     <!-- Header Script -->
-        <script>
-            // Toggle Sidebar Functionality for Mobile
-            document.querySelector('.navbar-toggler').addEventListener('click', function () {
-                const sidebar = document.querySelector('#sidebar');
-                sidebar.classList.toggle('show');
-            });
+    <script>
+        // Toggle Sidebar Functionality for Mobile
+        document.querySelector('.navbar-toggler').addEventListener('click', function() {
+            const sidebar = document.querySelector('#sidebar');
+            sidebar.classList.toggle('show');
+        });
 
-            // Close sidebar when clicking outside (for mobile)
-            document.addEventListener('click', function (event) {
-                const sidebar = document.querySelector('#sidebar');
-                const isClickInsideSidebar = sidebar.contains(event.target);
-                const isClickInsideToggler = document.querySelector('.navbar-toggler').contains(event.target);
+        // Close sidebar when clicking outside (for mobile)
+        document.addEventListener('click', function(event) {
+            const sidebar = document.querySelector('#sidebar');
+            const isClickInsideSidebar = sidebar.contains(event.target);
+            const isClickInsideToggler = document.querySelector('.navbar-toggler').contains(event.target);
 
-                if (!isClickInsideSidebar && !isClickInsideToggler) {
-                    sidebar.classList.remove('show');
-                }
-            });
-        </script>
+            if (!isClickInsideSidebar && !isClickInsideToggler) {
+                sidebar.classList.remove('show');
+            }
+        });
+    </script>
     <!-- Header Script -->
     <!-- Tables Script -->
-        <script>
-            const userData = {
-                all: [
-                    { username: 'u1', name: 'User1', email: 'test@gmail.com', role: 'Administrator', posts: 0, status: 'approved' },
-                    { username: 'u2', name: 'User2', email: 'user2@example.com', role: 'Editor', posts: 2, status: 'pending' },
-                    { username: 'u3', name: 'User3', email: 'user3@example.com', role: 'Contributor', posts: 5, status: 'approved' },
-                    { username: 'u4', name: 'User4', email: 'user4@example.com', role: 'Subscriber', posts: 1, status: 'rejected' },
-                    { username: 'u5', name: 'User5', email: 'user5@example.com', role: 'Subscriber', posts: 0, status: 'awaiting_email_confirmation' },
-                    { username: 'u6', name: 'User6', email: 'user6@example.com', role: 'Editor', posts: 3, status: 'inactive' },
-                ],
-                pending: [
-                    { username: 'u2', name: 'User2', email: 'user2@example.com', role: 'Editor', posts: 2, status: 'pending' },
-                    { username: 'u7', name: 'User7', email: 'user7@example.com', role: 'Subscriber', posts: 1, status: 'pending' }
-                ],
-                approved: [
-                    { username: 'u1', name: 'User1', email: 'test@gmail.com', role: 'Administrator', posts: 0, status: 'approved' },
-                    { username: 'u3', name: 'User3', email: 'user3@example.com', role: 'Contributor', posts: 5, status: 'approved' },
-                    { username: 'u8', name: 'User8', email: 'user8@example.com', role: 'Editor', posts: 4, status: 'approved' }
-                ],
-                awaiting_email_confirmation: [
-                    { username: 'u5', name: 'User5', email: 'user5@example.com', role: 'Subscriber', posts: 0, status: 'awaiting_email_confirmation' }
-                ],
-                rejected: [
-                    { username: 'u4', name: 'User4', email: 'user4@example.com', role: 'Subscriber', posts: 1, status: 'rejected' },
-                    { username: 'u9', name: 'User9', email: 'user9@example.com', role: 'Contributor', posts: 2, status: 'rejected' }
-                ],
-                inactive: [
-                    { username: 'u6', name: 'User6', email: 'user6@example.com', role: 'Editor', posts: 3, status: 'inactive' },
-                    { username: 'u10', name: 'User10', email: 'user10@example.com', role: 'Subscriber', posts: 0, status: 'inactive' }
-                ]
-            };
+    <script>
+        const userData = {
+            all: [{
+                    username: 'u1',
+                    name: 'User1',
+                    email: 'test@gmail.com',
+                    role: 'Administrator',
+                    posts: 0,
+                    status: 'approved'
+                },
+                {
+                    username: 'u2',
+                    name: 'User2',
+                    email: 'user2@example.com',
+                    role: 'Editor',
+                    posts: 2,
+                    status: 'pending'
+                },
+                {
+                    username: 'u3',
+                    name: 'User3',
+                    email: 'user3@example.com',
+                    role: 'Contributor',
+                    posts: 5,
+                    status: 'approved'
+                },
+                {
+                    username: 'u4',
+                    name: 'User4',
+                    email: 'user4@example.com',
+                    role: 'Subscriber',
+                    posts: 1,
+                    status: 'rejected'
+                },
+                {
+                    username: 'u5',
+                    name: 'User5',
+                    email: 'user5@example.com',
+                    role: 'Subscriber',
+                    posts: 0,
+                    status: 'awaiting_email_confirmation'
+                },
+                {
+                    username: 'u6',
+                    name: 'User6',
+                    email: 'user6@example.com',
+                    role: 'Editor',
+                    posts: 3,
+                    status: 'inactive'
+                },
+            ],
+            pending: [{
+                    username: 'u2',
+                    name: 'User2',
+                    email: 'user2@example.com',
+                    role: 'Editor',
+                    posts: 2,
+                    status: 'pending'
+                },
+                {
+                    username: 'u7',
+                    name: 'User7',
+                    email: 'user7@example.com',
+                    role: 'Subscriber',
+                    posts: 1,
+                    status: 'pending'
+                }
+            ],
+            approved: [{
+                    username: 'u1',
+                    name: 'User1',
+                    email: 'test@gmail.com',
+                    role: 'Administrator',
+                    posts: 0,
+                    status: 'approved'
+                },
+                {
+                    username: 'u3',
+                    name: 'User3',
+                    email: 'user3@example.com',
+                    role: 'Contributor',
+                    posts: 5,
+                    status: 'approved'
+                },
+                {
+                    username: 'u8',
+                    name: 'User8',
+                    email: 'user8@example.com',
+                    role: 'Editor',
+                    posts: 4,
+                    status: 'approved'
+                }
+            ],
+            awaiting_email_confirmation: [{
+                username: 'u5',
+                name: 'User5',
+                email: 'user5@example.com',
+                role: 'Subscriber',
+                posts: 0,
+                status: 'awaiting_email_confirmation'
+            }],
+            rejected: [{
+                    username: 'u4',
+                    name: 'User4',
+                    email: 'user4@example.com',
+                    role: 'Subscriber',
+                    posts: 1,
+                    status: 'rejected'
+                },
+                {
+                    username: 'u9',
+                    name: 'User9',
+                    email: 'user9@example.com',
+                    role: 'Contributor',
+                    posts: 2,
+                    status: 'rejected'
+                }
+            ],
+            inactive: [{
+                    username: 'u6',
+                    name: 'User6',
+                    email: 'user6@example.com',
+                    role: 'Editor',
+                    posts: 3,
+                    status: 'inactive'
+                },
+                {
+                    username: 'u10',
+                    name: 'User10',
+                    email: 'user10@example.com',
+                    role: 'Subscriber',
+                    posts: 0,
+                    status: 'inactive'
+                }
+            ]
+        };
 
-            const usersPerPage = 3; // Number of users per page
-            let currentPage = 1;
-            let currentStatus = 'all'; // Default status
+        const usersPerPage = 3; // Number of users per page
+        let currentPage = 1;
+        let currentStatus = 'all'; // Default status
 
-            document.querySelectorAll('.count').forEach(countLink => {
-                countLink.addEventListener('click', function(event) {
-                    event.preventDefault();
-                    document.getElementById('users-overview-card').style.display = 'none';
-                    document.getElementById('users-list-container').style.display = 'block';
+        document.querySelectorAll('.filter-link').forEach(countLink => {
+            countLink.addEventListener('click', function(event) {
+                event.preventDefault();
+                document.getElementById('users-overview-card').style.display = 'none';
+                document.getElementById('users-list-container').style.display = 'block';
 
-                    currentStatus = this.getAttribute('data-status'); // Set the current status
-                    currentPage = 1; // Reset to the first page
+                currentStatus = this.getAttribute('data-status'); // Set the current status
+                currentPage = 1; // Reset to the first page
+                loadUserData(currentStatus);
+            });
+        });
+
+        document.getElementById('close-users-list').addEventListener('click', function() {
+            document.getElementById('users-list-container').style.display = 'none';
+            document.getElementById('users-overview-card').style.display = 'block';
+        });
+
+        function loadUserData(status) {
+            const userDataTableBody = document.querySelector('#user-data-table tbody');
+            userDataTableBody.innerHTML = '';
+
+            const users = userData[status] || [];
+            const totalPages = Math.ceil(users.length / usersPerPage);
+
+            // Render current page users
+            const startIndex = (currentPage - 1) * usersPerPage;
+            const endIndex = Math.min(startIndex + usersPerPage, users.length);
+
+            for (let i = startIndex; i < endIndex; i++) {
+                const user = users[i];
+                const row = document.createElement('tr');
+
+                const selectCell = document.createElement('td');
+                const checkbox = document.createElement('input');
+                checkbox.type = 'checkbox';
+                checkbox.classList.add('user-select');
+                checkbox.setAttribute('data-username', user.username);
+                selectCell.appendChild(checkbox);
+
+                const usernameCell = document.createElement('td');
+                const nameCell = document.createElement('td');
+                const emailCell = document.createElement('td');
+                const roleCell = document.createElement('td');
+                const postsCell = document.createElement('td');
+                const statusCell = document.createElement('td');
+
+                usernameCell.textContent = user.username;
+                nameCell.textContent = user.name;
+                emailCell.textContent = user.email;
+                roleCell.textContent = user.role;
+                postsCell.textContent = user.posts;
+                statusCell.textContent = user.status;
+
+                row.appendChild(selectCell);
+                row.appendChild(usernameCell);
+                row.appendChild(nameCell);
+                row.appendChild(emailCell);
+                row.appendChild(roleCell);
+                row.appendChild(postsCell);
+                row.appendChild(statusCell);
+                userDataTableBody.appendChild(row);
+            }
+
+            // Update pagination
+            updatePagination(totalPages);
+
+            // Select all checkbox functionality
+            document.getElementById('select-all').addEventListener('change', function() {
+                const checkboxes = document.querySelectorAll('.user-select');
+                checkboxes.forEach(checkbox => {
+                    checkbox.checked = this.checked; // Check or uncheck all checkboxes
+                });
+            });
+        }
+
+        function updatePagination(totalPages) {
+            const paginationElement = document.querySelector('.pagination');
+            paginationElement.innerHTML = '';
+
+            // Previous button
+            const prevButton = document.createElement('li');
+            prevButton.className = 'page-item' + (currentPage === 1 ? ' disabled' : '');
+            prevButton.innerHTML = `<a class="page-link" href="#" aria-label="Previous">&laquo;</a>`;
+            prevButton.addEventListener('click', function(e) {
+                e.preventDefault();
+                if (currentPage > 1) {
+                    currentPage--;
+                    loadUserData(currentStatus);
+                }
+            });
+            paginationElement.appendChild(prevButton);
+
+            // Page number buttons
+            for (let i = 1; i <= totalPages; i++) {
+                const pageItem = document.createElement('li');
+                pageItem.className = `page-item ${i === currentPage ? 'active' : ''}`;
+                pageItem.innerHTML = `<a class="page-link" href="#">${i}</a>`;
+                pageItem.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    currentPage = i;
                     loadUserData(currentStatus);
                 });
-            });
-
-            document.getElementById('close-users-list').addEventListener('click', function() {
-                document.getElementById('users-list-container').style.display = 'none';
-                document.getElementById('users-overview-card').style.display = 'block';
-            });
-
-            function loadUserData(status) {
-                const userDataTableBody = document.querySelector('#user-data-table tbody');
-                userDataTableBody.innerHTML = '';
-
-                const users = userData[status] || [];
-                const totalPages = Math.ceil(users.length / usersPerPage);
-
-                // Render current page users
-                const startIndex = (currentPage - 1) * usersPerPage;
-                const endIndex = Math.min(startIndex + usersPerPage, users.length);
-                
-                for (let i = startIndex; i < endIndex; i++) {
-                    const user = users[i];
-                    const row = document.createElement('tr');
-
-                    const selectCell = document.createElement('td');
-                    const checkbox = document.createElement('input');
-                    checkbox.type = 'checkbox';
-                    checkbox.classList.add('user-select');
-                    checkbox.setAttribute('data-username', user.username);
-                    selectCell.appendChild(checkbox);
-
-                    const usernameCell = document.createElement('td');
-                    const nameCell = document.createElement('td');
-                    const emailCell = document.createElement('td');
-                    const roleCell = document.createElement('td');
-                    const postsCell = document.createElement('td');
-                    const statusCell = document.createElement('td');
-
-                    usernameCell.textContent = user.username;
-                    nameCell.textContent = user.name;
-                    emailCell.textContent = user.email;
-                    roleCell.textContent = user.role;
-                    postsCell.textContent = user.posts;
-                    statusCell.textContent = user.status;
-
-                    row.appendChild(selectCell);
-                    row.appendChild(usernameCell);
-                    row.appendChild(nameCell);
-                    row.appendChild(emailCell);
-                    row.appendChild(roleCell);
-                    row.appendChild(postsCell);
-                    row.appendChild(statusCell);
-                    userDataTableBody.appendChild(row);
-                }
-
-                // Update pagination
-                updatePagination(totalPages);
-                
-                // Select all checkbox functionality
-                document.getElementById('select-all').addEventListener('change', function() {
-                    const checkboxes = document.querySelectorAll('.user-select');
-                    checkboxes.forEach(checkbox => {
-                        checkbox.checked = this.checked; // Check or uncheck all checkboxes
-                    });
-                });
+                paginationElement.appendChild(pageItem);
             }
 
-            function updatePagination(totalPages) {
-                const paginationElement = document.querySelector('.pagination');
-                paginationElement.innerHTML = '';
-
-                // Previous button
-                const prevButton = document.createElement('li');
-                prevButton.className = 'page-item' + (currentPage === 1 ? ' disabled' : '');
-                prevButton.innerHTML = `<a class="page-link" href="#" aria-label="Previous">&laquo;</a>`;
-                prevButton.addEventListener('click', function(e) {
-                    e.preventDefault();
-                    if (currentPage > 1) {
-                        currentPage--;
-                        loadUserData(currentStatus);
-                    }
-                });
-                paginationElement.appendChild(prevButton);
-
-                // Page number buttons
-                for (let i = 1; i <= totalPages; i++) {
-                    const pageItem = document.createElement('li');
-                    pageItem.className = `page-item ${i === currentPage ? 'active' : ''}`;
-                    pageItem.innerHTML = `<a class="page-link" href="#">${i}</a>`;
-                    pageItem.addEventListener('click', function(e) {
-                        e.preventDefault();
-                        currentPage = i;
-                        loadUserData(currentStatus);
-                    });
-                    paginationElement.appendChild(pageItem);
-                }
-
-                // Next button
-                const nextButton = document.createElement('li');
-                nextButton.className = 'page-item' + (currentPage === totalPages ? ' disabled' : '');
-                nextButton.innerHTML = `<a class="page-link" href="#" aria-label="Next">&raquo;</a>`;
-                nextButton.addEventListener('click', function(e) {
-                    e.preventDefault();
-                    if (currentPage < totalPages) {
-                        currentPage++;
-                        loadUserData(currentStatus);
-                    }
-                });
-                paginationElement.appendChild(nextButton);
-            }
-
-            document.getElementById('performAction').addEventListener('click', function() {
-                const selectedAction = document.getElementById('userAction').value;
-                const selectedRole = document.getElementById('userRoleFilter').value;
-
-                const selectedUsers = [];
-                document.querySelectorAll('.user-select:checked').forEach(checkbox => {
-                    const username = checkbox.getAttribute('data-username');
-                    selectedUsers.push(username);
-                });
-
-                if (selectedUsers.length === 0) {
-                    alert('Please select at least one user.');
-                    return;
-                }
-
-                if (selectedAction) {
-                    console.log(`Performing action: ${selectedAction} for users: ${selectedUsers.join(', ')} with role: ${selectedRole}`);
-                    alert(`Action '${selectedAction}' performed for users: ${selectedUsers.join(', ')} with role '${selectedRole}'`);
-                } else {
-                    alert('Please select an action.');
+            // Next button
+            const nextButton = document.createElement('li');
+            nextButton.className = 'page-item' + (currentPage === totalPages ? ' disabled' : '');
+            nextButton.innerHTML = `<a class="page-link" href="#" aria-label="Next">&raquo;</a>`;
+            nextButton.addEventListener('click', function(e) {
+                e.preventDefault();
+                if (currentPage < totalPages) {
+                    currentPage++;
+                    loadUserData(currentStatus);
                 }
             });
-        </script>
+            paginationElement.appendChild(nextButton);
+        }
+
+        document.getElementById('performAction').addEventListener('click', function() {
+            const selectedAction = document.getElementById('userAction').value;
+            const selectedRole = document.getElementById('userRoleFilter').value;
+
+            const selectedUsers = [];
+            document.querySelectorAll('.user-select:checked').forEach(checkbox => {
+                const username = checkbox.getAttribute('data-username');
+                selectedUsers.push(username);
+            });
+
+            if (selectedUsers.length === 0) {
+                alert('Please select at least one user.');
+                return;
+            }
+
+            if (selectedAction) {
+                console.log(`Performing action: ${selectedAction} for users: ${selectedUsers.join(', ')} with role: ${selectedRole}`);
+                alert(`Action '${selectedAction}' performed for users: ${selectedUsers.join(', ')} with role '${selectedRole}'`);
+            } else {
+                alert('Please select an action.');
+            }
+        });
+    </script>
     <!-- Tables Script -->
     <!-- Add User Script -->
     <script>

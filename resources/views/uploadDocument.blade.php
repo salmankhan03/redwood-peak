@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Pages – Redwood Peak Limited</title>
+    <title>UploadDocument – Redwood Peak Limited</title>
     <link rel="icon" type="image/x-icon" href="{{ asset('assets/images/redwood_favicon_32x32.png') }}">
 
     <!-- Bootstrap 4.5.2 CSS -->
@@ -89,8 +89,31 @@
                 margin-left: 0; /* Remove margin shift on mobile */
             }
         }
+
+    /* Upload Documnets */
+        .upload-box {
+            border: 2px dashed #007bff;
+            padding: 20px;
+            text-align: center;
+            border-radius: 5px;
+            margin-bottom: 20px;
+            transition: background-color 0.3s;
+        }
+        .upload-box:hover {
+            background-color: #f8f9fa;
+        }
+        .upload-box input[type="file"] {
+            display: none;
+        }
+        .upload-button {
+            margin-top: 10px;
+        }
+    /* Upload */
     
 
+    </style>
+     <style>
+        
     </style>
 </head>
 
@@ -156,65 +179,60 @@
 
         <!-- Dashboard Content -->
                 <div class="container-fluid">
-                    <div class="row mt-5">
-                        <!-- <h3>Pages</h3> -->
-                        <button id="performAction" class="btn btn-primary ml-3" onclick="redirectToCreatePage()">Upload New Document </button>
-                    </div>
+                    <!-- <div class="row mt-5">
+                        <h3>Pages</h3>
+                        <button id="performAction" class="btn btn-primary ml-3">Add New Pages</button>
+                    </div> -->
 
-                    <div class="mb-3 mt-5 row d-flex justify-content-between">
-                        <div class="p-1">
-                            <select id="tableActions" class="form-control">
-                                <option value="">Table Action...</option>
-                                <option value="Delete">Delete</option>
-                            </select>    
-                        </div>                    
-                        <div>
-                            <input type="text" id="searchPages" class="form-control form-control-sm" placeholder="Search pages...">
+                    <h2 class="mt-5 mb-3">Upload Documents</h2>
+
+                    @if(session('success'))
+                        <div class="alert alert-success">
+                            {{ session('success') }}
                         </div>
-                    </div>
-                    <table class="table table-striped" id="user-data-table" style="border:1px solid #ccc">
-                        <thead>
-                            <tr>
-                                <th><input type="checkbox" id="select-all" /></th>
-                                <th>Documents Title</th>
-                                <th>Documents Types</th>
-                                <th>Years</th>
-                                <th>Actions</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr>
-                                <td><input type="checkbox" class="user-select" data-username="user1"></td>
-                                <td>Redwood Peak – China Outlook Q1 2023</td>
-                                <td>Publications</td>
-                                <td>2018</td>
-                                <td><button id="performAction" class="btn btn-primary ml-3" onclick="redirectToCreatePage()">Edit</button></td>
+                    @endif
 
-                            </tr>
-                            <tr>
-                                <td><input type="checkbox" class="user-select" data-username="user2"></td>
-                                <td>Redwood Peak Opportunities Master Fund – Portfolio Summary June 2024</td>
-                                <td>Hedge Fund Reports</td>
-                                <td>2021</td>
-                                <td><button id="performAction" class="btn btn-primary ml-3" onclick="redirectToCreatePage()">Edit</button></td>
-                            </tr>
-                            <tr>
-                                <td><input type="checkbox" class="user-select" data-username="user2"></td>
-                                <td>Redwood Peak China – Portfolio Summary – July 2024 </td>
-                                <td>Managed Account Reports</td>
-                                <td>2021</td>
-                                <td><button id="performAction" class="btn btn-primary ml-3" onclick="redirectToCreatePage()">Edit</button></td>
-                            </tr>
-                           
-                           
-                            <tr>
-                                <td colspan="7">No user data available yet.</td>
-                            </tr>
-                        </tbody>
-                    </table>       
-                </div>
-
-              
+                    <form class="mt-5 mb-5">
+                        @csrf
+                        <div class="form-group row">
+                        <div class="col-md-4">
+                            <label for="postType" class="col-form-label">Documents Type</label>
+                            
+                                <select id="postType" class="form-control">
+                                    <option value="publications">Publications</option>
+                                    <option value="hedgeFundReports">Hedge Fund Reports</option>
+                                    <option value="managedAccountReports">Managed Account Reports</option>
+                                </select>
+                            </div>
+                            <div class="col-md-4">
+                            <label for="postingYears" class="col-form-label">Posting Years</label>
+                                <select id="postingYears" class="form-control">
+                                    <option value="2015">2015</option>
+                                    <option value="2016">2016</option>
+                                    <option value="2017">2017</option>
+                                    <option value="2018">2018</option>
+                                    <option value="2019">2019</option>
+                                    <option value="2020">2020</option>
+                                    <option value="2021">2021</option>
+                                    <option value="2022">2022</option>
+                                    <option value="2023">2023</option>
+                                    <option value="2024">2024</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="upload-box mt-5 mb-5">
+                            <label for="documentUpload" class="upload-label">
+                                <h4>Drag and drop your PDF here or click to upload</h4>
+                            </label>
+                            <input type="file" id="documentUpload" class="form-control" accept="application/pdf">
+                            <div class="upload-button">
+                                <button class="btn btn-primary" onclick="document.getElementById('documentUpload').click();">Select PDF</button>
+                            </div>
+                            <small class="form-text text-muted">Only PDF files are allowed.</small>
+                        </div>
+                        <button type="submit" class="btn btn-success">Upload</button>
+                    </form>                
+                </div>    
     </div>
 
     <!-- Bootstrap 4.5.2 JS and dependencies -->
@@ -223,13 +241,6 @@
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@1.16.1/dist/umd/popper.min.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
     <script src="https://kit.fontawesome.com/a076d05399.js"></script>
-
-    <script>
-        function redirectToCreatePage() {
-            window.location.href = "{{ route('uploadDocument') }}";
-        }
-    </script>
-            
     <!-- Header Script -->
         <script>
             // Toggle Sidebar Functionality for Mobile
@@ -250,7 +261,30 @@
             });
         </script>
     <!-- Header Script -->
+    <script>
+        // Optional: Add drag-and-drop functionality
+        const uploadBox = document.querySelector('.upload-box');
+        const fileInput = document.getElementById('documentUpload');
 
+        uploadBox.addEventListener('dragover', (event) => {
+            event.preventDefault();
+            uploadBox.classList.add('drag-over');
+        });
+
+        uploadBox.addEventListener('dragleave', () => {
+            uploadBox.classList.remove('drag-over');
+        });
+
+        uploadBox.addEventListener('drop', (event) => {
+            event.preventDefault();
+            const files = event.dataTransfer.files;
+            if (files.length) {
+                fileInput.files = files; // Set the input's files
+                uploadBox.querySelector('h4').textContent = files[0].name; // Display file name
+            }
+            uploadBox.classList.remove('drag-over');
+        });
+    </script>
 
 </body>
 

@@ -58,13 +58,19 @@ class PageController extends Controller
     {
         return view('media');
     }
-    public function pages()
+    public function post()
     {
+        return view('post');
+    }
+    public function postCreate()
+    {
+        return view('create-post');
+    }
+    public function pages(){
         return view('pages');
     }
-    public function pageCreate()
-    {
-        return view('create-page');
+    public function uploadDocument(){
+        return view('uploadDocument');
     }
 
     

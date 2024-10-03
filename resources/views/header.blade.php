@@ -104,8 +104,8 @@
                         Investor Resources
                     </a>
                     <div class="dropdown-menu" aria-labelledby="investorResourcesDropdown">
-                        <a class="dropdown-item" href="#">Hedge Fund Reports</a>
-                        <a class="dropdown-item" href="#">Managed Account Reports</a>
+                        <a class="dropdown-item" href="{{ route('hedgeFundReports') }}">Hedge Fund Reports</a>
+                        <a class="dropdown-item" href="{{ route('managedAccountReports') }}">Managed Account Reports</a>
                     </div>
                 </li>
                 <li class="nav-item {{ Request::is('contact-us') ? 'active' : '' }}">

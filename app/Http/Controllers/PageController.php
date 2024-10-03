@@ -33,7 +33,15 @@ class PageController extends Controller
     public function publications()
     {
         return view('publications');
-    }    
+    }
+    public function hedgeFundReports()
+    {
+        return view('hedgeFundReports');
+    }  
+    public function managedAccountReports()
+    {
+        return view('managedAccountReports');
+    }      
     public function register()
     {
         return view('register');

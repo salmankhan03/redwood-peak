@@ -4,7 +4,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <title>Publications – Redwood Peak Limited</title>
+    <title>Hedge Fund Reports – Redwood Peak Limited</title>
     <link rel="icon" type="image/x-icon" href="{{ asset('assets/images/redwood_favicon_32x32.png') }}">
     <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@200;600&display=swap" rel="stylesheet">
     <link href="{{ asset('css/style.css') }}" rel="stylesheet">
@@ -28,11 +28,11 @@
         @include('header')
     </div>
             <div>
-                <img src="{{ asset('assets/images/banner_publications.jpg') }}" class="bannerHeight" alt="Image 1">
+                <img src="{{ asset('assets/images/banner_investor_resources.jpg') }}" class="bannerHeight" alt="Image 1">
             </div>
             <div class="container">
                 <div class="container-custom mt-1 mb-5 p-4">
-                    <h1 class="header-post-title-class" style="top:0px">Publications</h1>
+                    <h1 class="header-post-title-class" style="top:0px">Hedge Fund Reports</h1>
                     <div>
                         <!-- Year 2023 -->
                         <div id="year-2023">

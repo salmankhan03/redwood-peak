@@ -16,6 +16,8 @@ Route::get('/hedge-fund', [PageController::class, 'hedgeFund'])->name('hedgeFund
 Route::get('/managed-account', [PageController::class, 'managedAccount'])->name('managedAccount');
 Route::get('/our-approach', [PageController::class, 'ourApproach'])->name('ourApproach');
 Route::get('/publications', [PageController::class, 'publications'])->name('publications');
+Route::get('/hedge-fund-reports', [PageController::class, 'hedgeFundReports'])->name('hedgeFundReports');
+Route::get('/managed-account-reports', [PageController::class, 'managedAccountReports'])->name('managedAccountReports');
 Route::get('/register', [RegisterController::class, 'showRegistrationForm'])->name('register');
 Route::post('/register', [RegisterController::class, 'register']);
 Route::get('/login', [PageController::class, 'login'])->name('login');

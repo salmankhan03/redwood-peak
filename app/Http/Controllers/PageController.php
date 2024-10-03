@@ -45,7 +45,11 @@ class PageController extends Controller
     public function news()
     {
         return view('news');
-    }      
+    }
+    public function visits()
+    {
+        return view('visits');
+    }    
     public function register()
     {
         return view('register');

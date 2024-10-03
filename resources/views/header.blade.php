@@ -96,7 +96,7 @@
                     <div class="dropdown-menu" aria-labelledby="publicationUpdatesDropdown">
                         <a class="dropdown-item" href="{{ route('publications') }}">Publications</a>
                         <a class="dropdown-item" href="{{ route('news') }}">News</a>
-                        <a class="dropdown-item" href="#">Visits</a>
+                        <a class="dropdown-item" href="{{ route('visits') }}">Visits</a>
                     </div>
                 </li>
                 <li class="nav-item dropdown {{ Request::is('investorResources') ? 'active' : '' }}">

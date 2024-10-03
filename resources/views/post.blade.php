@@ -171,11 +171,11 @@
                         <div class="col-md-4 p-1">
                             <select id="postCategories" class="form-control">
                                 <option value="">All Categories</option>
-                                <option value="article">Article</option>
+                                <!-- <option value="article">Article</option>
                                 <option value="enews">Enews</option>
-                                <option value="latestNews">Latest News</option>
+                                <option value="latestNews">Latest News</option> -->
                                 <option value="news">News</option>
-                                <option value="uncategorized">Uncategorized</option>
+                                <!-- <option value="uncategorized">Uncategorized</option> -->
                                 <option value="visit">Visit</option>
                             </select>
                         </div>                 
@@ -187,6 +187,7 @@
                         <thead>
                             <tr>
                                 <th><input type="checkbox" id="select-all" /></th>
+                                <th>Post Image</th>
                                 <th>Title</th>
                                 <th>Categorized</th>
                                 <th>Actions</th>
@@ -195,6 +196,7 @@
                         <tbody>
                             <tr>
                                 <td><input type="checkbox" class="user-select" data-username="user1"></td>
+                                <td><img src="http://localhost/redwood/wp-content/uploads/2019/08/Picture2-1-150x150.png"  style="width:50px" class="bannerHeight" alt="News Banner"></td>
                                 <td>Sunshine Action for elderly people</td>
                                 <td>Latest News</td>
                                 <td><button id="performAction" class="btn btn-primary ml-3" onclick="redirectToCreatePage()">Edit</button></td>
@@ -202,6 +204,7 @@
                             </tr>
                             <tr>
                                 <td><input type="checkbox" class="user-select" data-username="user2"></td>
+                                <td><img src="http://localhost/redwood/wp-content/uploads/2017/06/Mastercard-e1498551571139-150x150.jpg"  style="width:50px" class="bannerHeight" alt="News Banner"></td>
                                 <td>Sunshine Action for hundred of homeless people</td>
                                 <td>Visit</td>
                                 <td><button id="performAction" class="btn btn-primary ml-3" onclick="redirectToCreatePage()">Edit</button></td>

@@ -90,6 +90,25 @@
             }
         }
     
+         /* Upload Documnets */
+         .upload-box {
+            border: 2px dashed #007bff;
+            padding: 20px;
+            text-align: center;
+            border-radius: 5px;
+            margin-bottom: 20px;
+            transition: background-color 0.3s;
+        }
+        .upload-box:hover {
+            background-color: #f8f9fa;
+        }
+        .upload-box input[type="file"] {
+            display: none;
+        }
+        .upload-button {
+            margin-top: 10px;
+        }
+    /* Upload */
 
     </style>
 </head>
@@ -161,7 +180,7 @@
                         <button id="performAction" class="btn btn-primary ml-3">Add New Pages</button>
                     </div> -->
 
-                    <h2 class="mt-5 mb-4">Create New Page</h2>
+                    <h2 class="mt-5 mb-4">Create New Post</h2>
 
                     @if(session('success'))
                         <div class="alert alert-success">
@@ -179,21 +198,33 @@
                             <label for="postCategories">Choose PostCategories</label>
                             <select id="postCategories" class="form-control">
                                 <option value="">All Categories</option>
-                                <option value="article">Article</option>
+                                <!-- <option value="article">Article</option>
                                 <option value="enews">Enews</option>
-                                <option value="latestNews">Latest News</option>
+                                <option value="latestNews">Latest News</option> -->
                                 <option value="news">News</option>
-                                <option value="uncategorized">Uncategorized</option>
+                                <!-- <option value="uncategorized">Uncategorized</option> -->
                                 <option value="visit">Visit</option>
                             </select>
                         </div>
-
+                        <div class="form-group">
+                            <label for="title">Select Post Thumbnail</label>
+                            <div class="upload-box ">
+                                <label for="documentUpload" class="upload-label">
+                                    <h4>Drag and drop your Post Thumbnail Image here or click to upload</h4>
+                                </label>
+                                <input type="file" id="documentUpload" class="form-control" accept="image/jpeg, image/png">
+                                <div class="upload-button">
+                                    <button class="btn btn-primary" onclick="document.getElementById('documentUpload').click();">Select Image</button>
+                                </div>
+                                <small class="form-text text-muted">Only JPEG/JPG and PNG are allowed.</small>
+                            </div>
+                        </div>
                         <div class="form-group">
                             <label for="content">Post Content</label>
                             <textarea class="form-control" id="content" name="content" rows="10" required></textarea>
                         </div>
 
-                        <button type="submit" class="btn btn-primary">Create Post</button>
+                            <button type="submit" class="btn btn-primary">Create Post</button>
                     </form>
 
                    
@@ -203,15 +234,44 @@
     </div>
 
     <!-- Bootstrap 4.5.2 JS and dependencies -->
-    <script src="https://cdn.ckeditor.com/4.16.1/standard/ckeditor.js"></script>
+    <script src="https://cdn.ckeditor.com/4.25.0-lts/ckeditor.js"></script>
     <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@1.16.1/dist/umd/popper.min.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
     <script src="https://kit.fontawesome.com/a076d05399.js"></script>
 
     <script>
-                    CKEDITOR.replace('content');
-                </script>
+        // Initialize CKEditor
+        CKEDITOR.replace('content', {
+            toolbar: [
+                { name: 'clipboard', items: ['Cut', 'Copy', 'Paste', 'Undo', 'Redo'] },
+                { name: 'editing', items: ['Find', 'Replace', '-', 'SelectAll'] },
+                { name: 'insert', items: ['Image', 'Table', 'HorizontalRule', 'SpecialChar'] },
+                { name: 'styles', items: ['Styles', 'Format'] },
+                { name: 'basicstyles', items: ['Bold', 'Italic', 'Underline', 'Strike', 'Subscript', 'Superscript', 'RemoveFormat'] },
+                { name: 'paragraph', items: ['NumberedList', 'BulletedList', '-', 'Outdent', 'Indent', '-', 'Blockquote', 'CreateDiv', 'JustifyLeft', 'JustifyCenter', 'JustifyRight', 'JustifyBlock'] },
+                { name: 'colors', items: ['TextColor', 'BGColor'] }
+            ],
+            height: 300
+        });
+
+        // Handle the button click
+        document.getElementById('createPostButton').addEventListener('click', function(event) {
+            event.preventDefault(); // Prevent the form from submitting
+
+            // Get the CKEditor data
+            const postContent = CKEDITOR.instances.content.getData();
+            
+            // Log the content to the console
+            console.log(postContent);
+
+            // Optionally, store the content in local storage
+            localStorage.setItem('postContent', postContent);
+            
+            // Redirect to another screen (optional)
+            window.location.href = 'anotherPage.html'; // Change to your target page
+        });
+    </script>
             
     <!-- Header Script -->
         <script>
@@ -233,6 +293,22 @@
             });
         </script>
     <!-- Header Script -->
+
+    <script>
+        document.getElementById('documentUpload').addEventListener('change', function() {
+            const file = this.files[0];
+            
+            if (file) {
+                const fileType = file.type;
+                const validTypes = ['image/jpeg', 'image/png'];
+
+                if (!validTypes.includes(fileType)) {
+                    alert('Invalid file type. Please upload a JPEG or PNG image.');
+                    this.value = ''; // Clear the input
+                }
+            }
+        });
+    </script>
 
 
 </body>

@@ -41,6 +41,10 @@ class PageController extends Controller
     public function managedAccountReports()
     {
         return view('managedAccountReports');
+    } 
+    public function news()
+    {
+        return view('news');
     }      
     public function register()
     {

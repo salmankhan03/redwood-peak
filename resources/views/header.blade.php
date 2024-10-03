@@ -95,7 +95,7 @@
                     </a>
                     <div class="dropdown-menu" aria-labelledby="publicationUpdatesDropdown">
                         <a class="dropdown-item" href="{{ route('publications') }}">Publications</a>
-                        <a class="dropdown-item" href="#">News</a>
+                        <a class="dropdown-item" href="{{ route('news') }}">News</a>
                         <a class="dropdown-item" href="#">Visits</a>
                     </div>
                 </li>

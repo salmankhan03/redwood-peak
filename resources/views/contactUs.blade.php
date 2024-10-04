@@ -23,7 +23,7 @@
             <img src="{{ asset('assets/images/contact-slider.jpg') }}" class="w-100 bannerHeight" alt="Image 1">
         </div>
         <div class="container">
-            <div class="container-custom mt-1 mb-5 p-4">
+            <div class="container-custom mt-1 mb-5 p-lg-4">
                 <h1 class="header-post-title-class">Contact Us</h1>
                 <div class="mt-3 row m-4">
                     <div class="col-md-8">
@@ -42,7 +42,7 @@
                     <div class="col-md-4">
                         <form method="POST" action="{{ route('login') }}">
                             @csrf
-                            <div class="row">
+                            <div class="row pt-5">
                                 <div class="col-md-12 ">
                                     <label for="name">{{ __('Your Name') }}</label>
                                     <input id="name" type="text" class="form-control @error('name') is-invalid @enderror" name="name" value="{{ old('name') }}" required autocomplete="name" autofocus>
@@ -87,7 +87,7 @@
                                     </button>
                                 </div>
                             </div>
-                        </form> 
+                        </form>
                     </div>
                 </div>
             </div>

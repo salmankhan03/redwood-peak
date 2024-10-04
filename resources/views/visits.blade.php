@@ -15,7 +15,7 @@
         @include('header')
     </div>
         <div>
-            <img src="{{ asset('assets/images/banner_news.png') }}" class="bannerHeight" alt="News Banner">
+            <img src="{{ asset('assets/images/banner_news.png') }}" class="customnBannerHeight" alt="News Banner">
         </div>
         <div class="container">
             <div class="container-custom mt-1 mb-5 p-4">

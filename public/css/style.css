@@ -158,6 +158,11 @@ li>a {
     height: 45vh;
     object-fit: cover;
 }
+.customnBannerHeight{
+    height: 45vh;
+    object-fit: fill;
+    width: 100%;
+}
 
 
 .row-padding {
@@ -300,9 +305,15 @@ footer {
 .d-none{
     display: block;
 
-};
+}
 
+@media (max-width: 500px) {
+    /*Modal*/
+    .modal-dialog {
+        max-width: 100%;
+    }
 
+}
 
 @media (max-width: 767px) {
 
@@ -327,8 +338,12 @@ footer {
         justify-content: center !important;
         padding: 1rem !important;
     }
+    .customnBannerHeight {
+        height: 25vh !important;
+
+    }
 }
-    
+
 
 @media (min-width: 768px) and (max-width: 1024px) {
     .cards-titles {
@@ -343,7 +358,7 @@ footer {
         line-height: 1.2em;
     }
     .d-none{
-        display: block !important; 
+        display: block !important;
 
     }
 }

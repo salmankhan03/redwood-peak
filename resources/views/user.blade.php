@@ -381,7 +381,7 @@
                             </button>
                         </div>
                         <div class="modal-body">
-                            <form id="addUserForm">
+                            <form id="addUserForm" route="{{ route('adminPanelUserRegistration') }}">
                                 <div class="mb-3">
                                     <label for="username" class="form-label">Username</label>
                                     <input type="text" class="form-control" id="username" required>
@@ -423,7 +423,7 @@
                         </div>
                         <div class="modal-footer">
                             <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                            <button type="button" id="submitAddUser" class="btn btn-primary">Add User</button>
+                            <button type="button" id="submitAddUser" class="btn btn-primary" type="submit">Add User</button>
                         </div>
                     </div>
                 </div>
@@ -753,23 +753,7 @@
                 $('#addUserModal').modal('show'); // Show the modal
             });
 
-            $('#submitAddUser').on('click', function() {
-                const username = $('#username').val();
-                const email = $('#email').val();
-                const name = $('#name').val();
-                const role = $('#role').val();
-                const password = $('#password').val();
-                const confirmPassword = $('#confirmPassword').val();
-                const sendEmail = $('#sendEmail').is(':checked');
-
-                if (password !== confirmPassword) {
-                    alert('Passwords do not match.');
-                    return;
-                }
-
-                alert(`User ${username} added with role ${role}. Send email: ${sendEmail ? 'Yes' : 'No'}`);
-                $('#addUserModal').modal('hide'); // Hide modal
-            });
+    
         });
     </script>
 </body>

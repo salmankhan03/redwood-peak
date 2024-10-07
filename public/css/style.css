@@ -1,15 +1,25 @@
 /* Global Styles */
-@import url('https://fonts.googleapis.com/css2?family=Barlow:wght@400;500;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Open Sans:wght@400;500;700&display=swap');
 
+@font-face {
+   
+    /*---------- Open Sans ----------*/
+    font-family: 'Open Sans';
+    src: url('../assets/fonts/openSans.woff2') format('woff2');
+  }
+  
 body {
     /* background-color: #380000; */
     color: #666666;
-    font: 15px 'Barlow', sans-serif;
+    font: 15px 'Open Sans', sans-serif;
     line-height: 20px;
     word-wrap: break-word;
 }
 .primaryColor{
     color: #511515 !important;
+}
+p{
+        font-family: 'Open Sans', sans-serif;    
 }
 p {
     line-height: 24px !important;

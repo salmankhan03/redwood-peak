@@ -71,14 +71,14 @@ class AdminController extends Controller
                 $data = $request->only([
                     'email',
                     'password',
-                    'confirm_password',
+                    'confirmPassword',
                     'username',
                     'name',
                     'role',
                     
                 ]);
     
-                if ($data['password'] != $data['confirm_password']){
+                if ($data['password'] != $data['confirmPassword']){
     
                     Session::flash('error','Password And Confirm Password Not Match');
                     return redirect()->route('register');
@@ -103,7 +103,7 @@ class AdminController extends Controller
                 $user->orignal_password = $orignal_password;
     
                 Session::flash('success','Signup Success');
-                return redirect()->route('homePage');
+                return redirect()->route('adminDashboard');
     
             } catch (JWTException $e) {
                 return response()->json(['message' => $e->getMessage()]);

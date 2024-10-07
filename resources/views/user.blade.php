@@ -223,6 +223,14 @@
             </div>
         </nav>
 
+        @if(Session::has('success'))
+            <p class="alert alert-success">{{ Session::get('success') }}</p>
+        @endif
+
+        @if(Session::has('error'))
+            <p class="alert alert-danger">{{ Session::get('error') }}</p>
+        @endif
+
         <!-- Dashboard Content -->
         <div class="mt-5">
             <div class="card mb-4" id="users-overview-card">
@@ -380,23 +388,25 @@
                                 <span>&times;</span>
                             </button>
                         </div>
-                        <div class="modal-body">
-                            <form id="addUserForm" route="{{ route('adminPanelUserRegistration') }}">
+                        <form id="addUserForm" action="{{ route('adminPanelUserRegistration') }}" method="POST">
+                            @csrf 
+
+                            <div class="modal-body">
                                 <div class="mb-3">
                                     <label for="username" class="form-label">Username</label>
-                                    <input type="text" class="form-control" id="username" required>
+                                    <input type="text" class="form-control" id="username" name="username" required>
                                 </div>
                                 <div class="mb-3">
                                     <label for="email" class="form-label">Email</label>
-                                    <input type="email" class="form-control" id="email" required>
+                                    <input type="email" class="form-control" id="email" name="email" required>
                                 </div>
                                 <div class="mb-3">
                                     <label for="name" class="form-label">Name</label>
-                                    <input type="text" class="form-control" id="name" required>
+                                    <input type="text" class="form-control" id="name" name="name" required>
                                 </div>
                                 <div class="mb-3">
                                     <label for="role" class="form-label">Role</label>
-                                    <select id="role" class="form-control" required>
+                                    <select id="role" class="form-control" name="role" required>
                                         <option value="Administrator">Administrator</option>
                                         <option value="Editor">Editor</option>
                                         <option value="Author">Author</option>
@@ -409,22 +419,22 @@
                                 </div>
                                 <div class="mb-3">
                                     <label for="password" class="form-label">Password</label>
-                                    <input type="password" class="form-control" id="password" required>
+                                    <input type="password" class="form-control" id="password" name="password" required>
                                 </div>
                                 <div class="mb-3">
                                     <label for="confirmPassword" class="form-label">Confirm Password</label>
-                                    <input type="password" class="form-control" id="confirmPassword" required>
+                                    <input type="password" class="form-control" id="confirmPassword" name="confirmPassword" required>
                                 </div>
                                 <div class="mb-3 form-check">
                                     <input type="checkbox" class="form-check-input" id="sendEmail">
                                     <label class="form-check-label" for="sendEmail">Send User Notification</label>
                                 </div>
-                            </form>
-                        </div>
-                        <div class="modal-footer">
-                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                            <button type="button" id="submitAddUser" class="btn btn-primary" type="submit">Add User</button>
-                        </div>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                <button type="submit" id="submitAddUser" class="btn btn-primary">Add User</button>
+                            </div>
+                        </form>
                     </div>
                 </div>
             </div>

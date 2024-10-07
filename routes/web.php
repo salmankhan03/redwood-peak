@@ -1,5 +1,6 @@
 <?php
 
+use App\Api\Controllers\AdminController;
 use App\Api\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\PageController;
@@ -33,5 +34,5 @@ Route::get('/uploadDocument', [PageController::class, 'uploadDocument'])->name('
 Route::get('/post', [PageController::class, 'post'])->name('post');
 Route::get('/post/create', [PageController::class, 'postCreate'])->name('postCreate');
 
-Route::post('/admin/user/register', [RegisterController::class, 'register'])->name('adminPanelUserRegistration');
+Route::post('/admin/user/register', [AdminController::class, 'create'])->name('adminPanelUserRegistration');
 

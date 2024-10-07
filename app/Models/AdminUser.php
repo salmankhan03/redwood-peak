@@ -24,6 +24,15 @@ class AdminUser extends Authenticatable implements JWTSubject
         'remember_token',
     ];
 
+    protected $fillable = [
+        'username',
+        'email',
+        'name',
+        'role',
+        'role_id',
+        'password',
+    ];
+
     protected $table = 'admin_panel_users';
 
     /**

@@ -63,6 +63,55 @@ class AdminController extends Controller
         }
     }
 
+    public function create(Request $request){
+
+        {
+            try {
+    
+                $data = $request->only([
+                    'email',
+                    'password',
+                    'confirm_password',
+                    'username',
+                    'name',
+                    'role',
+                    
+                ]);
+    
+                if ($data['password'] != $data['confirm_password']){
+    
+                    Session::flash('error','Password And Confirm Password Not Match');
+                    return redirect()->route('register');
+    
+                }
+    
+                $alreadyExistUser = User::where('email', $data['email'])->get();
+    
+                if ($alreadyExistUser->count()) {
+    
+                    Session::flash('error','User With this Email Already Exist');
+                    return redirect()->route('register');
+    
+                }
+    
+                $orignal_password = $data['password'];
+                $data['password'] = Hash::make($data['password']);
+            
+    
+                $user = User::create($data);
+    
+                $user->orignal_password = $orignal_password;
+    
+                Session::flash('success','Signup Success');
+                return redirect()->route('homePage');
+    
+            } catch (JWTException $e) {
+                return response()->json(['message' => $e->getMessage()]);
+            }
+        }
+
+    }
+
 
 
 }

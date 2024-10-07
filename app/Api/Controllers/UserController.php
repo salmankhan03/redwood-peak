@@ -67,6 +67,8 @@ class UserController extends Controller
                 'contact_no',
                 'company_name',
                 'position',
+                'username',
+                'role',
             ]);
 
             if ($data['password'] != $data['confirm_password']){
@@ -96,7 +98,7 @@ class UserController extends Controller
 
             $token            = \JWTAuth::fromUser($user);
 
-            $request->session()->put('customerAccessToken', $token);
+            // $request->session()->put('customerAccessToken', $token);
 
             Session::flash('success','Signup Success');
             return redirect()->route('homePage');

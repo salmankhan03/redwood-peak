@@ -629,7 +629,7 @@
         document.getElementById('close-users-list').addEventListener('click', function() {
             document.getElementById('users-list-container').style.display = 'none';
             document.getElementById('users-overview-card').style.display = 'block';
-            const defaultUrl = `http://127.0.0.1:8000/admin/user/list`;
+            const defaultUrl = `http://127.0.0.1:8000/admin/user`;
             window.history.pushState({ path: defaultUrl }, '', defaultUrl);
         });
 

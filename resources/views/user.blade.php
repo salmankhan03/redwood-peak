@@ -620,6 +620,8 @@
 
                 currentStatus = this.getAttribute('data-status'); // Set the current status
                 currentPage = 1; // Reset to the first page
+                const newUrl = `http://127.0.0.1:8000/admin/user/list?status=${currentStatus}`;
+                window.history.pushState({ path: newUrl }, '', newUrl);
                 loadUserData(currentStatus);
             });
         });
@@ -627,6 +629,25 @@
         document.getElementById('close-users-list').addEventListener('click', function() {
             document.getElementById('users-list-container').style.display = 'none';
             document.getElementById('users-overview-card').style.display = 'block';
+            const defaultUrl = `http://127.0.0.1:8000/admin/user/list`;
+            window.history.pushState({ path: defaultUrl }, '', defaultUrl);
+        });
+
+        window.addEventListener('popstate', function(event) {
+            const urlParams = new URLSearchParams(window.location.search);
+            const status = urlParams.get('status');
+
+            if (status) {
+                // If there is a status, show the user list and load the filtered data
+                currentStatus = status;
+                document.getElementById('users-overview-card').style.display = 'none';
+                document.getElementById('users-list-container').style.display = 'block';
+                loadUserData(currentStatus);
+            } else {
+                // No status in the URL, show the overview card
+                document.getElementById('users-list-container').style.display = 'none';
+                document.getElementById('users-overview-card').style.display = 'block';
+            }
         });
 
         function loadUserData(status) {

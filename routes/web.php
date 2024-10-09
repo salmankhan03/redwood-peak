@@ -36,5 +36,8 @@ Route::get('/post/create', [PageController::class, 'postCreate'])->name('postCre
 Route::post('/admin/user/register', [AdminController::class, 'create'])->name('adminPanelUserRegistration');
 Route::get('/admin/user', [PageController::class, 'showUserOverview'])->name('admin.user.overview');
 Route::get('/admin/user/list', [PageController::class, 'adminUserList'])->name('adminUserList');
+Route::get('/user/edit/{username}', [PageController::class, 'edit'])->name('user.edit');
+Route::put('/user/update/{username}', [UserController::class, 'update'])->name('user.update');
+Route::delete('/user/delete/{username}', [PageController::class, 'destroy'])->name('user.delete');
 
 

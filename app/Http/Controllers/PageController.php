@@ -72,8 +72,28 @@ class PageController extends Controller
     } 
     public function showUserOverview()
     {
-        return view('userOverview');
+        
+        $userCounts = [
+            'all' => 500,
+            'pending' => 100,
+            'approved' => 200,
+            'awaiting_email_confirmation' => 50,
+            'rejected' => 50,
+            'inactive' => 10
+        ];
+
+        return view('userOverview', compact('userCounts'));
     }
+    public function destroy($username)
+    {
+        // Logic to find and delete the user
+        $user = PageController::where('username', $username)->firstOrFail(); // Find user by username
+        $user->delete(); // Delete the user
+
+        return redirect()->route('adminUserList')->with('success', 'User deleted successfully.'); // Redirect with success message
+    }
+
+
     public function adminUserList(Request $request)
     {
         $status = $request->query('status', 'all'); // Default to 'all' if no status is passed

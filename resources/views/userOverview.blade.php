@@ -241,52 +241,52 @@
                     </span>
                 </div>
                 <div class="card-body">
-                <table id="um-users-overview-table" class="table table-striped">
-                    <tbody>
-                        <tr>
-                            <td>
-                                <span>
-                                    <a class="count filter-link" href="{{ route('adminUserList', ['status' => 'all']) }}">500</a>
-                                    <a href="{{ route('adminUserList', ['status' => 'all']) }}" class="filter-link">Users</a>
-                                </span>
-                            </td>
-                            <td>
-                                <span>
-                                    <a class="count filter-link" href="{{ route('adminUserList', ['status' => 'pending']) }}">100</a>
-                                    <a href="{{ route('adminUserList', ['status' => 'pending']) }}" class="filter-link">Pending Review</a>
-                                </span>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>
-                                <span>
-                                    <a class="count filter-link" href="{{ route('adminUserList', ['status' => 'approved']) }}">200</a>
-                                    <a href="{{ route('adminUserList', ['status' => 'approved']) }}" class="filter-link">Approved</a>
-                                </span>
-                            </td>
-                            <td>
-                                <span>
-                                    <a class="count filter-link" href="{{ route('adminUserList', ['status' => 'awaiting_email_confirmation']) }}">50</a>
-                                    <a href="{{ route('adminUserList', ['status' => 'awaiting_email_confirmation']) }}" class="filter-link">Awaiting Email Confirmation</a>
-                                </span>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>
-                                <span>
-                                    <a class="count filter-link" href="{{ route('adminUserList', ['status' => 'rejected']) }}">50</a>
-                                    <a href="{{ route('adminUserList', ['status' => 'rejected']) }}" class="filter-link">Rejected</a>
-                                </span>
-                            </td>
-                            <td>
-                                <span>
-                                    <a class="count filter-link" href="{{ route('adminUserList', ['status' => 'inactive']) }}">10</a>
-                                    <a href="{{ route('adminUserList', ['status' => 'inactive']) }}" class="filter-link">Inactive</a>
-                                </span>
-                            </td>
-                        </tr>
-                    </tbody>
-                </table>
+                    <table id="um-users-overview-table" class="table table-striped">
+                        <tbody>
+                            <tr>
+                                <td>
+                                    <span>
+                                        <a class="count filter-link" href="{{ route('adminUserList', ['status' => 'all']) }}">{{ $userCounts['all'] }}</a>
+                                        <a href="{{ route('adminUserList', ['status' => 'all']) }}" class="filter-link">Users</a>
+                                    </span>
+                                </td>
+                                <td>
+                                    <span>
+                                        <a class="count filter-link" href="{{ route('adminUserList', ['status' => 'pending']) }}">{{ $userCounts['pending'] }}</a>
+                                        <a href="{{ route('adminUserList', ['status' => 'pending']) }}" class="filter-link">Pending Review</a>
+                                    </span>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <span>
+                                        <a class="count filter-link" href="{{ route('adminUserList', ['status' => 'approved']) }}">{{ $userCounts['approved'] }}</a>
+                                        <a href="{{ route('adminUserList', ['status' => 'approved']) }}" class="filter-link">Approved</a>
+                                    </span>
+                                </td>
+                                <td>
+                                    <span>
+                                        <a class="count filter-link" href="{{ route('adminUserList', ['status' => 'awaiting_email_confirmation']) }}">{{ $userCounts['awaiting_email_confirmation'] }}</a>
+                                        <a href="{{ route('adminUserList', ['status' => 'awaiting_email_confirmation']) }}" class="filter-link">Awaiting Email Confirmation</a>
+                                    </span>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <span>
+                                        <a class="count filter-link" href="{{ route('adminUserList', ['status' => 'rejected']) }}">{{ $userCounts['rejected'] }}</a>
+                                        <a href="{{ route('adminUserList', ['status' => 'rejected']) }}" class="filter-link">Rejected</a>
+                                    </span>
+                                </td>
+                                <td>
+                                    <span>
+                                        <a class="count filter-link" href="{{ route('adminUserList', ['status' => 'inactive']) }}">{{ $userCounts['inactive'] }}</a>
+                                        <a href="{{ route('adminUserList', ['status' => 'inactive']) }}" class="filter-link">Inactive</a>
+                                    </span>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
                 </div>
             </div>
 
@@ -346,6 +346,7 @@
                 </div>
             </div>
         </div>
+
 
     </div>
 

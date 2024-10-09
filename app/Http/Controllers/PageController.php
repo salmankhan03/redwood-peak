@@ -70,10 +70,34 @@ class PageController extends Controller
     {
         return view('adminDashboard');
     } 
-    public function user()
+    public function showUserOverview()
     {
-        return view('user');
+        return view('userOverview');
     }
+    public function adminUserList(Request $request)
+    {
+        $status = $request->query('status', 'all'); // Default to 'all' if no status is passed
+    
+        // Define user data (or fetch from database in a real application)
+        $userData = [
+            'all' => [
+                ['username' => 'u1', 'name' => 'User1', 'email' => 'test@gmail.com', 'role' => 'Administrator', 'posts' => 0, 'status' => 'approved'],
+                ['username' => 'u2', 'name' => 'User2', 'email' => 'user2@example.com', 'role' => 'Editor', 'posts' => 2, 'status' => 'pending'],
+                // Other users...
+            ],
+            'pending' => [
+                ['username' => 'u2', 'name' => 'User2', 'email' => 'user2@example.com', 'role' => 'Editor', 'posts' => 2, 'status' => 'pending'],
+                // Other pending users...
+            ],
+            // More status groups: approved, rejected, etc.
+        ];
+    
+        // Filter users based on the selected status
+        $users = $userData[$status] ?? $userData['all']; 
+    
+        return view('adminUserList', compact('users', 'status'));
+    }
+    
     public function media()
     {
         return view('media');

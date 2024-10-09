@@ -27,7 +27,6 @@ Route::get('/login', [PageController::class, 'login'])->name('login');
 Route::get('/contact-us', [PageController::class, 'contactUs'])->name('contactUs');
 Route::get('/admin-login', [PageController::class, 'adminLogin'])->name('adminLogin');
 Route::get('/admin/dashboard', [PageController::class, 'adminDashboard'])->name('adminDashboard');
-Route::get('/admin/user', [PageController::class, 'user'])->name('user');
 Route::get('/media', [PageController::class, 'media'])->name('media');
 Route::get('/pages', [PageController::class, 'pages'])->name('pages');
 Route::get('/uploadDocument', [PageController::class, 'uploadDocument'])->name('uploadDocument');
@@ -35,4 +34,7 @@ Route::get('/post', [PageController::class, 'post'])->name('post');
 Route::get('/post/create', [PageController::class, 'postCreate'])->name('postCreate');
 
 Route::post('/admin/user/register', [AdminController::class, 'create'])->name('adminPanelUserRegistration');
+Route::get('/admin/user', [PageController::class, 'showUserOverview'])->name('admin.user.overview');
+Route::get('/admin/user/list', [PageController::class, 'adminUserList'])->name('adminUserList');
+
 

@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Dashboard – Redwood Peak Limited</title>
+    <title>UserOverView – Redwood Peak Limited</title>
     <link rel="icon" type="image/x-icon" href="{{ asset('assets/images/redwood_favicon_32x32.png') }}">
 
     <!-- Bootstrap 4.5.2 CSS -->
@@ -192,7 +192,7 @@
                 <a class="nav-link" href="#">Plugins</a>
             </li> -->
             <li class="nav-item">
-                <a class="nav-link" href="{{ route('user') }}">Users</a>
+                <a class="nav-link" href="{{ route('admin.user.overview') }}">Users</a>
             </li>
             <!-- <li class="nav-item">
                 <a class="nav-link" href="#">Tools</a>
@@ -241,140 +241,52 @@
                     </span>
                 </div>
                 <div class="card-body">
-                    <table id="um-users-overview-table" class="table table-striped">
-                        <tbody>
-                            <tr>
-                                <td>
-                                    <span>
-                                        <a class="count filter-link" href="#" data-status="all">500</a>
-                                        <a href="#" class="filter-link" data-status="all">Users</a>
-                                    </span>
-                                </td>
-                                <td>
-                                    <span>
-                                        <a class="count filter-link" href="#" data-status="pending">100</a>
-                                        <a href="#" class="filter-link" data-status="pending">Pending Review</a>
-                                    </span>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>
-                                    <span>
-                                        <a class="count filter-link" href="#" data-status="approved">200</a>
-                                        <a href="#" class="filter-link" data-status="approved">Approved</a>
-                                    </span>
-                                </td>
-                                <td>
-                                    <span>
-                                        <a class="count filter-link" href="#" data-status="awaiting_email_confirmation">50</a>
-                                        <a href="#" class="filter-link" data-status="awaiting_email_confirmation">Awaiting Email Confirmation</a>
-                                    </span>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>
-                                    <span>
-                                        <a class="count filter-link" href="#" data-status="rejected">50</a>
-                                        <a href="#" class="filter-link" data-status="rejected">Rejected</a>
-                                    </span>
-                                </td>
-                                <td>
-                                    <span>
-                                        <a class="count filter-link" href="#" data-status="inactive">10</a>
-                                        <a href="#" class="filter-link" data-status="inactive">Inactive</a>
-                                    </span>
-                                </td>
-                            </tr>
-                        </tbody>
-                    </table>
-                    <div class="clear"></div>
-                </div>
-            </div>
-
-            <div id="users-list-container">
-                <div id="user-list-content">
-                    <!-- <h3>User List</h3> -->
-                    <div class="mb-3 row align-items-center">
-                        <div class="col-md-4">
-                            <select id="userRoleFilter" class="form-control">
-                                <option value="">Change role to...</option>
-                                <option value="Administrator">Administrator</option>
-                                <option value="Editor">Editor</option>
-                                <option value="Author">Author</option>
-                                <option value="Contributor">Contributor</option>
-                                <option value="Subscriber">Subscriber</option>
-                                <option value="redwoodStaff">Redwood Staff</option>
-                                <option value="redwoodAdmin">Redwood Admin</option>
-                                <option value="Investor">Investor</option>
-                            </select>
-                        </div>
-                        <div class="col-md-4">
-                            <select id="userAction" class="form-control">
-                                <option value="">User Action</option>
-                                <option value="approve">Approve Membership</option>
-                                <option value="reject">Reject Membership</option>
-                                <option value="pending">Put as Pending Review</option>
-                                <option value="resend">Resend Activation Email</option>
-                                <option value="deactivate">Deactivate</option>
-                                <option value="reactivate">Reactivate</option>
-                            </select>
-                        </div>
-                        <div class="col-md-4 d-flex justify-content-between">
-                            <button id="performAction" class="btn btn-primary me-1">Perform Action</button>
-                            <button id="close-users-list" class="btn btn-secondary">X</button>
-                        </div>
-                    </div>
-                    <table class="table table-striped" id="user-data-table" style="border:1px solid #ccc">
-                        <thead>
-                            <tr>
-                                <th><input type="checkbox" id="select-all" /></th>
-                                <th>Username</th>
-                                <th>Name</th>
-                                <th>Email</th>
-                                <th>Role</th>
-                                <th>Posts</th>
-                                <th>Status</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr>
-                                <td><input type="checkbox" class="user-select" data-username="user1"></td>
-                                <td>user1</td>
-                                <td>User One</td>
-                                <td>user1@example.com</td>
-                                <td>Administrator</td>
-                                <td>10</td>
-                                <td>Approved</td>
-                            </tr>
-                            <tr>
-                                <td><input type="checkbox" class="user-select" data-username="user2"></td>
-                                <td>user2</td>
-                                <td>User Two</td>
-                                <td>user2@example.com</td>
-                                <td>Editor</td>
-                                <td>5</td>
-                                <td>Pending</td>
-                            </tr>
-                            <tr>
-                                <td><input type="checkbox" class="user-select" data-username="user3"></td>
-                                <td>user3</td>
-                                <td>User Three</td>
-                                <td>user3@example.com</td>
-                                <td>Subscriber</td>
-                                <td>2</td>
-                                <td>Rejected</td>
-                            </tr>
-                            <tr>
-                                <td colspan="7">No user data available yet.</td>
-                            </tr>
-                        </tbody>
-                    </table>
-
-                    <!-- Pagination Controls -->
-                    <nav aria-label="User Pagination">
-                        <ul class="pagination justify-content-center"></ul>
-                    </nav>
-                    <!-- Pagination Controls -->
+                <table id="um-users-overview-table" class="table table-striped">
+                    <tbody>
+                        <tr>
+                            <td>
+                                <span>
+                                    <a class="count filter-link" href="{{ route('adminUserList', ['status' => 'all']) }}">500</a>
+                                    <a href="{{ route('adminUserList', ['status' => 'all']) }}" class="filter-link">Users</a>
+                                </span>
+                            </td>
+                            <td>
+                                <span>
+                                    <a class="count filter-link" href="{{ route('adminUserList', ['status' => 'pending']) }}">100</a>
+                                    <a href="{{ route('adminUserList', ['status' => 'pending']) }}" class="filter-link">Pending Review</a>
+                                </span>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <span>
+                                    <a class="count filter-link" href="{{ route('adminUserList', ['status' => 'approved']) }}">200</a>
+                                    <a href="{{ route('adminUserList', ['status' => 'approved']) }}" class="filter-link">Approved</a>
+                                </span>
+                            </td>
+                            <td>
+                                <span>
+                                    <a class="count filter-link" href="{{ route('adminUserList', ['status' => 'awaiting_email_confirmation']) }}">50</a>
+                                    <a href="{{ route('adminUserList', ['status' => 'awaiting_email_confirmation']) }}" class="filter-link">Awaiting Email Confirmation</a>
+                                </span>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <span>
+                                    <a class="count filter-link" href="{{ route('adminUserList', ['status' => 'rejected']) }}">50</a>
+                                    <a href="{{ route('adminUserList', ['status' => 'rejected']) }}" class="filter-link">Rejected</a>
+                                </span>
+                            </td>
+                            <td>
+                                <span>
+                                    <a class="count filter-link" href="{{ route('adminUserList', ['status' => 'inactive']) }}">10</a>
+                                    <a href="{{ route('adminUserList', ['status' => 'inactive']) }}" class="filter-link">Inactive</a>
+                                </span>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
                 </div>
             </div>
 
@@ -389,9 +301,9 @@
                             </button>
                         </div>
                         <form id="addUserForm" action="{{ route('adminPanelUserRegistration') }}" method="POST">
-                            @csrf 
-
+                            @csrf
                             <div class="modal-body">
+                                <!-- Username, Email, Name, Role, Password inputs -->
                                 <div class="mb-3">
                                     <label for="username" class="form-label">Username</label>
                                     <input type="text" class="form-control" id="username" name="username" required>
@@ -409,12 +321,7 @@
                                     <select id="role" class="form-control" name="role" required>
                                         <option value="Administrator">Administrator</option>
                                         <option value="Editor">Editor</option>
-                                        <option value="Author">Author</option>
-                                        <option value="Contributor">Contributor</option>
-                                        <option value="Subscriber">Subscriber</option>
-                                        <option value="redwoodStaff">Redwood Staff</option>
-                                        <option value="redwoodAdmin">Redwood Admin</option>
-                                        <option value="Investor">Investor</option>
+                                        <!-- Other roles -->
                                     </select>
                                 </div>
                                 <div class="mb-3">
@@ -438,12 +345,8 @@
                     </div>
                 </div>
             </div>
-            <!-- Add User Modal -->
-
-
-
-            <!-- Add User Modal -->
         </div>
+
     </div>
 
     <!-- Bootstrap 4.5.2 JS and dependencies -->
@@ -608,172 +511,6 @@
             ]
         };
 
-        const usersPerPage = 3; // Number of users per page
-        let currentPage = 1;
-        let currentStatus = 'all'; // Default status
-
-        document.querySelectorAll('.filter-link').forEach(countLink => {
-            countLink.addEventListener('click', function(event) {
-                event.preventDefault();
-                document.getElementById('users-overview-card').style.display = 'none';
-                document.getElementById('users-list-container').style.display = 'block';
-
-                currentStatus = this.getAttribute('data-status'); // Set the current status
-                currentPage = 1; // Reset to the first page
-                const newUrl = `http://127.0.0.1:8000/admin/user/list?status=${currentStatus}`;
-                window.history.pushState({ path: newUrl }, '', newUrl);
-                loadUserData(currentStatus);
-            });
-        });
-
-        document.getElementById('close-users-list').addEventListener('click', function() {
-            document.getElementById('users-list-container').style.display = 'none';
-            document.getElementById('users-overview-card').style.display = 'block';
-            const defaultUrl = `http://127.0.0.1:8000/admin/user`;
-            window.history.pushState({ path: defaultUrl }, '', defaultUrl);
-        });
-
-        window.addEventListener('popstate', function(event) {
-            const urlParams = new URLSearchParams(window.location.search);
-            const status = urlParams.get('status');
-
-            if (status) {
-                // If there is a status, show the user list and load the filtered data
-                currentStatus = status;
-                document.getElementById('users-overview-card').style.display = 'none';
-                document.getElementById('users-list-container').style.display = 'block';
-                loadUserData(currentStatus);
-            } else {
-                // No status in the URL, show the overview card
-                document.getElementById('users-list-container').style.display = 'none';
-                document.getElementById('users-overview-card').style.display = 'block';
-            }
-        });
-
-        function loadUserData(status) {
-            const userDataTableBody = document.querySelector('#user-data-table tbody');
-            userDataTableBody.innerHTML = '';
-
-            const users = userData[status] || [];
-            const totalPages = Math.ceil(users.length / usersPerPage);
-
-            // Render current page users
-            const startIndex = (currentPage - 1) * usersPerPage;
-            const endIndex = Math.min(startIndex + usersPerPage, users.length);
-
-            for (let i = startIndex; i < endIndex; i++) {
-                const user = users[i];
-                const row = document.createElement('tr');
-
-                const selectCell = document.createElement('td');
-                const checkbox = document.createElement('input');
-                checkbox.type = 'checkbox';
-                checkbox.classList.add('user-select');
-                checkbox.setAttribute('data-username', user.username);
-                selectCell.appendChild(checkbox);
-
-                const usernameCell = document.createElement('td');
-                const nameCell = document.createElement('td');
-                const emailCell = document.createElement('td');
-                const roleCell = document.createElement('td');
-                const postsCell = document.createElement('td');
-                const statusCell = document.createElement('td');
-
-                usernameCell.textContent = user.username;
-                nameCell.textContent = user.name;
-                emailCell.textContent = user.email;
-                roleCell.textContent = user.role;
-                postsCell.textContent = user.posts;
-                statusCell.textContent = user.status;
-
-                row.appendChild(selectCell);
-                row.appendChild(usernameCell);
-                row.appendChild(nameCell);
-                row.appendChild(emailCell);
-                row.appendChild(roleCell);
-                row.appendChild(postsCell);
-                row.appendChild(statusCell);
-                userDataTableBody.appendChild(row);
-            }
-
-            // Update pagination
-            updatePagination(totalPages);
-
-            // Select all checkbox functionality
-            document.getElementById('select-all').addEventListener('change', function() {
-                const checkboxes = document.querySelectorAll('.user-select');
-                checkboxes.forEach(checkbox => {
-                    checkbox.checked = this.checked; // Check or uncheck all checkboxes
-                });
-            });
-        }
-
-        function updatePagination(totalPages) {
-            const paginationElement = document.querySelector('.pagination');
-            paginationElement.innerHTML = '';
-
-            // Previous button
-            const prevButton = document.createElement('li');
-            prevButton.className = 'page-item' + (currentPage === 1 ? ' disabled' : '');
-            prevButton.innerHTML = `<a class="page-link" href="#" aria-label="Previous">&laquo;</a>`;
-            prevButton.addEventListener('click', function(e) {
-                e.preventDefault();
-                if (currentPage > 1) {
-                    currentPage--;
-                    loadUserData(currentStatus);
-                }
-            });
-            paginationElement.appendChild(prevButton);
-
-            // Page number buttons
-            for (let i = 1; i <= totalPages; i++) {
-                const pageItem = document.createElement('li');
-                pageItem.className = `page-item ${i === currentPage ? 'active' : ''}`;
-                pageItem.innerHTML = `<a class="page-link" href="#">${i}</a>`;
-                pageItem.addEventListener('click', function(e) {
-                    e.preventDefault();
-                    currentPage = i;
-                    loadUserData(currentStatus);
-                });
-                paginationElement.appendChild(pageItem);
-            }
-
-            // Next button
-            const nextButton = document.createElement('li');
-            nextButton.className = 'page-item' + (currentPage === totalPages ? ' disabled' : '');
-            nextButton.innerHTML = `<a class="page-link" href="#" aria-label="Next">&raquo;</a>`;
-            nextButton.addEventListener('click', function(e) {
-                e.preventDefault();
-                if (currentPage < totalPages) {
-                    currentPage++;
-                    loadUserData(currentStatus);
-                }
-            });
-            paginationElement.appendChild(nextButton);
-        }
-
-        document.getElementById('performAction').addEventListener('click', function() {
-            const selectedAction = document.getElementById('userAction').value;
-            const selectedRole = document.getElementById('userRoleFilter').value;
-
-            const selectedUsers = [];
-            document.querySelectorAll('.user-select:checked').forEach(checkbox => {
-                const username = checkbox.getAttribute('data-username');
-                selectedUsers.push(username);
-            });
-
-            if (selectedUsers.length === 0) {
-                alert('Please select at least one user.');
-                return;
-            }
-
-            if (selectedAction) {
-                console.log(`Performing action: ${selectedAction} for users: ${selectedUsers.join(', ')} with role: ${selectedRole}`);
-                alert(`Action '${selectedAction}' performed for users: ${selectedUsers.join(', ')} with role '${selectedRole}'`);
-            } else {
-                alert('Please select an action.');
-            }
-        });
     </script>
     <!-- Tables Script -->
     <!-- Add User Script -->

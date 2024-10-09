@@ -120,7 +120,7 @@
                 <a class="nav-link" href="#">Plugins</a>
             </li> -->
             <li class="nav-item">
-                <a class="nav-link" href="{{ route('user') }}">Users</a>
+                <a class="nav-link" href="{{ route('admin.user.overview') }}">Users</a>
             </li>
             <!-- <li class="nav-item">
                 <a class="nav-link" href="#">Tools</a>

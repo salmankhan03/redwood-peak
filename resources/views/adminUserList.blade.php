@@ -10,6 +10,15 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
     <!-- Bootstrap 4.5.2 CSS -->
     <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+
+        <!-- jQuery (required for Bootstrap 4 JavaScript plugins) -->
+        <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+
+        <!-- Popper.js (required for Bootstrap tooltips and popovers) -->
+        <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
+
+        <!-- Bootstrap JS -->
+        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
     <style>
         body {
             min-height: 100vh;
@@ -241,14 +250,13 @@
                     <div class="col-md-4">
                         <select id="userRoleFilter" class="form-control">
                             <option value="">Change role to...</option>
+                            <!-- Add roles dynamically if needed -->
                             <option value="Administrator">Administrator</option>
                             <option value="Editor">Editor</option>
                             <option value="Author">Author</option>
                             <option value="Contributor">Contributor</option>
                             <option value="Subscriber">Subscriber</option>
-                            <option value="redwoodStaff">Redwood Staff</option>
-                            <option value="redwoodAdmin">Redwood Admin</option>
-                            <option value="Investor">Investor</option>
+                            <!-- Add other roles as necessary -->
                         </select>
                     </div>
                     <div class="col-md-4">
@@ -282,7 +290,7 @@
                 <tbody>
                     @foreach ($users as $user)
                         <tr>
-                            <td><input type="checkbox" class="user-select" data-username="{{ $user['username'] }}" id="selectUser{{ $user['username'] }}" name="selectedUsers[]" value="{{ $user['username'] }}"></td>
+                            <td><input type="checkbox" class="user-select" data-username="{{ $user['username'] }}" name="selectedUsers[]" value="{{ $user['username'] }}"></td>
                             <td>{{ $user['username'] }}</td>
                             <td>{{ $user['name'] }}</td>
                             <td>{{ $user['email'] }}</td>
@@ -290,7 +298,7 @@
                             <td>{{ $user['status'] }}</td>
                             <td>
                                 <!-- Edit Icon triggers the modal -->
-                                <button class="btn btn-sm btn-primary" data-bs-toggle="modal" data-bs-target="#editUserModal{{ $user['username'] }}">
+                                <button class="btn btn-sm btn-primary" data-toggle="modal" data-target="#editUserModal{{ $user['username'] }}">
                                     <i class="fas fa-edit"></i>
                                 </button>
 
@@ -306,67 +314,76 @@
                         </tr>
 
                         <!-- Edit User Modal -->
-                        <div class="modal fade" id="editUserModal{{ $user['username'] }}" tabindex="-1" aria-labelledby="editUserModalLabel" aria-hidden="true">
-                            <div class="modal-dialog">
+                        <!-- Edit User Modal -->
+                        <div class="modal fade" id="editUserModal{{ $user['username'] }}" tabindex="-1" role="dialog" aria-labelledby="editUserModalLabel{{ $user['username'] }}" aria-hidden="true">
+                            <div class="modal-dialog" role="document">
                                 <div class="modal-content">
                                     <div class="modal-header">
-                                        <h5 class="modal-title" id="editUserModalLabel">Edit User: {{ $user['name'] }}</h5>
-                                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                        <h5 class="modal-title" id="editUserModalLabel{{ $user['username'] }}">Edit User: {{ $user['name'] }}</h5>
+                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                            <span aria-hidden="true">&times;</span>
+                                        </button>
                                     </div>
                                     <form action="{{ route('user.update', ['username' => $user['username']]) }}" method="POST">
                                         @csrf
                                         @method('PUT') <!-- Use PUT for updating -->
                                         <div class="modal-body">
                                             <!-- Username (read-only) -->
-                                            <div class="mb-3">
-                                                <label for="username" class="form-label">Username</label>
+                                            <div class="form-group">
+                                                <label for="username">Username</label>
                                                 <input type="text" class="form-control" id="username" name="username" value="{{ $user['username'] }}" readonly>
                                             </div>
+
                                             <!-- Name -->
-                                            <div class="mb-3">
-                                                <label for="name" class="form-label">Name</label>
+                                            <div class="form-group">
+                                                <label for="name">Name</label>
                                                 <input type="text" class="form-control" id="name" name="name" value="{{ $user['name'] }}" required>
                                             </div>
+
                                             <!-- Email -->
-                                            <div class="mb-3">
-                                                <label for="email" class="form-label">Email</label>
+                                            <div class="form-group">
+                                                <label for="email">Email</label>
                                                 <input type="email" class="form-control" id="email" name="email" value="{{ $user['email'] }}" required>
                                             </div>
+
                                             <!-- Role -->
-                                            <div class="mb-3">
-                                                <label for="role" class="form-label">Role</label>
+                                            <div class="form-group">
+                                                <label for="role">Role</label>
                                                 <select id="role" class="form-control" name="role" required>
                                                     <option value="Administrator" {{ $user['role'] == 'Administrator' ? 'selected' : '' }}>Administrator</option>
                                                     <option value="Editor" {{ $user['role'] == 'Editor' ? 'selected' : '' }}>Editor</option>
                                                     <!-- Add more roles as needed -->
                                                 </select>
                                             </div>
+
                                             <!-- Status -->
-                                            <div class="mb-3">
-                                                <label for="status" class="form-label">Status</label>
+                                            <div class="form-group">
+                                                <label for="status">Status</label>
                                                 <select id="status" class="form-control" name="status" required>
                                                     <option value="approved" {{ $user['status'] == 'approved' ? 'selected' : '' }}>Approved</option>
                                                     <option value="pending" {{ $user['status'] == 'pending' ? 'selected' : '' }}>Pending</option>
                                                     <option value="rejected" {{ $user['status'] == 'rejected' ? 'selected' : '' }}>Rejected</option>
-                                                    <!-- Add more statuses as needed -->
                                                 </select>
                                             </div>
                                         </div>
                                         <div class="modal-footer">
-                                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
                                             <button type="submit" class="btn btn-primary">Save Changes</button>
                                         </div>
                                     </form>
                                 </div>
                             </div>
                         </div>
+
+
                     @endforeach
                 </tbody>
             </table>
             <nav aria-label="User Pagination">
-                        <ul class="pagination justify-content-center"></ul>
-                    </nav>
-
+                <ul class="pagination justify-content-center">
+                    <!-- Pagination logic if needed -->
+                </ul>
+            </nav>
         </div>
     </div>
 
@@ -396,7 +413,7 @@
     <!-- Header Script -->
     <script>
         document.getElementById('back-to-overview').addEventListener('click', function() {
-            window.location.href = "{{ route('admin.user.overview') }}"; // Redirect back to the overview page
+            window.location.href = "{{ route('admin.user.overview') }}";
         });
     </script>
     <script>

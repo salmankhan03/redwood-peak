@@ -117,6 +117,29 @@ class PageController extends Controller
     
         return view('adminUserList', compact('users', 'status'));
     }
+    public function updateUser(Request $request, $username)
+    {
+        // Find the user by username or handle it appropriately
+        $user = User::where('username', $username)->first();
+
+        // Validate incoming data
+        $request->validate([
+            'name' => 'required|string|max:255',
+            'email' => 'required|email|max:255',
+            'role' => 'required|string',
+            'status' => 'required|string',
+        ]);
+
+        // Update user details
+        $user->name = $request->input('name');
+        $user->email = $request->input('email');
+        $user->role = $request->input('role');
+        $user->status = $request->input('status');
+        $user->save();
+
+        // Redirect back with success message
+        return redirect()->back()->with('success', 'User updated successfully.');
+    }
     
     public function media()
     {

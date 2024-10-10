@@ -174,57 +174,22 @@
                     <button class="btn btn-outline-secondary btn-sm filter-btn" data-filter="documents">Documents</button>
                     <button id="resetFilters" class="btn btn-outline-danger btn-sm mt-2 mt-md-0" disabled>Reset All Filters</button>
                 </div>
-                <div>
+                <!-- <div>
                     <input type="text" id="searchMedia" class="form-control form-control-sm" placeholder="Search media...">
+                </div> -->
+                <div>
+                    <div class="input-group input-group-sm">
+                        <input type="text" id="searchMedia" class="form-control" placeholder="Search media...">
+                        <div class="input-group-append">
+                            <button id="searchButton" class="btn btn-primary" type="button">Search</button>
+                        </div>
+                    </div>
                 </div>
+
             </div>
             <!-- Static media items Display Start-->
             <div class="container">
                 <div class="row p-2" id="mediaItems" style="background-color:#fff; border:1px solid #ccc; height: 400px; overflow-y: auto;">
-
-                    <div class="col-md-3 media-item" data-type="images">
-                        <div class="card mb-4">
-                            <img src="{{ asset('assets/dummy_Assetes/img1.jpg') }}" class="card-img-top" alt="Image 1">
-                            <div class="card-body">
-                                <h5 class="card-title">Image dsadsa 1</h5>
-                                <button class="btn btn-danger btn-sm">View</button>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="col-md-3 media-item" data-type="images">
-                        <div class="card mb-4">
-                            <img src="{{ asset('assets/dummy_Assetes/img2.jpg') }}" class="card-img-top" alt="Image 2">
-                            <div class="card-body">
-                                <h5 class="card-title">Image 2</h5>
-                                <button class="btn btn-danger btn-sm">View</button>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-md-3 media-item" data-type="videos">
-                        <div class="card mb-4">
-
-                            <video class="card-img-top" controls>
-                                <source src="{{ asset('assets/dummy_Assetes/video.mp4') }}" type="video/mp4">
-                                Your browser does not support the video tag.
-                            </video>
-                            <div class="card-body">
-                                <h5 class="card-title">Video 1</h5>
-                                <button class="btn btn-danger btn-sm">View</button>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-md-3 media-item" data-type="documents">
-                        <div class="card mb-4">
-                            <a href="http://127.0.0.1:8000/assets/dummy_Assetes/test.pdf" target="_blank" class="card-img-top">
-                                <img src="{{ asset('assets/dummy_Assetes/pdf.jpg') }}" alt="PDF" style="width: 100%;">
-                            </a>
-                            <div class="card-body">
-                                <h5 class="card-title">Document 1</h5>
-                                <button class="btn btn-danger btn-sm">View</button>
-                            </div>
-                        </div>
-                    </div>
                     <div class="col-md-3 media-item" data-type="images">
                         <div class="card mb-4">
                             <img src="{{ asset('assets/dummy_Assetes/service_img1.jpg') }}" class="card-img-top" alt="Image 1">
@@ -335,7 +300,7 @@
         <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@1.16.1/dist/umd/popper.min.js"></script>
         <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
         <!-- <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.bundle.min.js"></script> -->
+         <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.bundle.min.js"></script> -->
         <script src="https://kit.fontawesome.com/a076d05399.js"></script>
         <!-- Header Script -->
         <script>
@@ -357,7 +322,7 @@
             });
         </script>
         <!-- Header Script -->
-        <script>
+        <!-- <script>
             document.addEventListener('DOMContentLoaded', function() {
                 const resetButton = document.getElementById('resetFilters');
                 const filterButtons = document.querySelectorAll('.filter-btn');
@@ -414,8 +379,8 @@
                     $('#uploadModal').modal('hide');
                 });
             });
-        </script>
-        <script>
+        </script> -->
+        <!-- <script>
             $('.media-item').on('click', function() {
                 const title = $(this).find('.card-title').text();
                 const type = $(this).data('type');
@@ -452,7 +417,107 @@
                 // Show the modal
                 $('#attachmentModal').modal('show');
             });
+        </script> -->
+        <script>
+            document.addEventListener('DOMContentLoaded', function() {
+                const resetButton = document.getElementById('resetFilters');
+                const filterButtons = document.querySelectorAll('.filter-btn');
+                const mediaItems = document.querySelectorAll('.media-item');
+                const searchMediaInput = document.getElementById('searchMedia');
+                const searchButton = document.getElementById('searchButton');
+
+                function searchMedia() {
+                    const query = searchMediaInput.value.toLowerCase();
+                    mediaItems.forEach(item => {
+                        const title = item.querySelector('.card-title').textContent.toLowerCase();
+                        if (title.includes(query)) {
+                            item.style.display = 'block';
+                        } else {
+                            item.style.display = 'none';
+                        }
+                    });
+                }
+
+                searchButton.addEventListener('click', function() {
+                    searchMedia();
+                });
+
+                function filterMedia(type) {
+                    console.log("types ==>",type)
+                    mediaItems.forEach(item => {
+                        if (type === 'all' || item.getAttribute('data-type') === type) {
+                            item.style.display = 'block';
+                        } else {
+                            item.style.display = 'none';
+                        }
+                    });
+
+                    const newUrl = type === 'all' ?`/list?mediaType=${type}` : `/list?mediaType=${type}`;
+                    history.pushState(null, '', newUrl); 
+                }
+
+                filterButtons.forEach(button => {
+                    button.addEventListener('click', function() {
+                        resetButton.disabled = false; 
+                        filterButtons.forEach(btn => btn.classList.remove('active')); 
+                        button.classList.add('active'); 
+                        const filter = button.getAttribute('data-filter');
+                        filterMedia(filter);
+                    });
+                });
+
+                resetButton.addEventListener('click', function() {
+                    resetButton.disabled = true; 
+                    filterButtons.forEach(btn => btn.classList.remove('active'));
+                    mediaItems.forEach(item => item.style.display = 'block'); 
+                    searchMediaInput.value = ''; 
+                    console.log("Default Url set")
+                    history.pushState(null, '', '/media');
+                });
+
+                document.getElementById('uploadButton').addEventListener('click', function() {
+                    const form = document.getElementById('uploadForm');
+                    const formData = new FormData(form);
+                    $('#uploadModal').modal('hide');
+                });
+            });
+
+            $('.media-item').on('click', function() {
+                const title = $(this).find('.card-title').text();
+                const type = $(this).data('type');
+
+                $('#attachmentModalLabel').text(title);
+
+                let fileUrl;
+
+                if (type === 'images') {
+                    const imgSrc = $(this).find('img').attr('src');
+                    $('#attachmentImage').attr('src', imgSrc).show();
+                    $('#attachmentVideo').hide();
+                    $('#attachmentLink').hide();
+                    fileUrl = imgSrc; 
+                } else if (type === 'videos') {
+                    const videoSrc = $(this).find('video source').attr('src');
+                    $('#attachmentSource').attr('src', videoSrc);
+                    $('#attachmentVideo').show();
+                    $('#attachmentImage').hide();
+                    $('#attachmentLink').hide();
+                    fileUrl = videoSrc; 
+                } else if (type === 'documents') {
+                    const docLink = $(this).find('a').attr('href');
+                    $('#attachmentLink').attr('href', docLink).show().text('Download Document');
+                    $('#attachmentImage').hide();
+                    $('#attachmentVideo').hide();
+                    fileUrl = docLink; 
+                }
+
+                $('#fileUrl').text(fileUrl);
+
+                $('#attachmentModal').modal('show');
+            });
         </script>
+
+
 
 </body>
 

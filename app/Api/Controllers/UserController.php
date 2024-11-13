@@ -42,7 +42,7 @@ class UserController extends Controller
 
                 return response()->json([
                     'status_code' => 200,
-                    'data'        => $currentUser,
+                    'user'        => $currentUser,
                     'token'       => $token,
                 ]);
                 
@@ -61,14 +61,14 @@ class UserController extends Controller
         try {
 
             $data = $request->only([
-                'email',
-                'password',
-                'confirm_password',
                 'first_name',
                 'last_name',
+                'password',
+                'confirm_password',
+                'email',
                 'country',
-                'contact_no',
                 'company_name',
+                'contact_no',
                 'position',
                 'username',
                 'role',
@@ -109,7 +109,7 @@ class UserController extends Controller
 
                 return response()->json([
                     'status_code' => 200,
-                    'data'        => $currentUser,
+                    'user'        => $currentUser,
                     'token'       => $token,
                 ]);
                 

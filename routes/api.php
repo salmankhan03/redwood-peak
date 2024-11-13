@@ -8,9 +8,10 @@ use Illuminate\Support\Facades\URL;
 use Illuminate\Support\Facades\Auth;
 
 Route::post('/customer/signup', [UserController::class, 'signUp'])->name('customerSignup');
-
 Route::post('/customer/login', [UserController::class, 'login'])->name('customerLogin');
+
 Route::post('/admin/login', [AdminController::class, 'login'])->name('adminLoginPost');
+Route::post('/admin/signup', [AdminController::class, 'create'])->name('adminUserCreate');
 
 
 // Route::group(['middleware' => 'auth.jwt'], function () {
@@ -18,4 +19,3 @@ Route::post('/admin/login', [AdminController::class, 'login'])->name('adminLogin
 
 // will add custom middleware for admin panel usage
     
-Route::post('/admin/user/create', [AdminController::class, 'create'])->name('adminUserCreate');

@@ -15,6 +15,7 @@ return new class extends Migration
 
             $table->string('role')->nullable();
             $table->string('username')->nullable();
+            $table->boolean('send_user_notification')->default(0);
             
         });
     }
@@ -28,9 +29,8 @@ return new class extends Migration
         Schema::table('admin_panel_users', function (Blueprint $table) {
 
             $table->dropColumn('username');
-            $table->dropColumn('name');
+            $table->dropColumn('send_user_notification');
             $table->dropColumn('role');
-            $table->dropColumn('password');
 
         });
     }

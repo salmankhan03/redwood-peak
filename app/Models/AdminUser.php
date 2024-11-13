@@ -31,6 +31,7 @@ class AdminUser extends Authenticatable implements JWTSubject
         'role',
         'role_id',
         'password',
+        'send_user_notification'
     ];
 
     protected $table = 'admin_panel_users';

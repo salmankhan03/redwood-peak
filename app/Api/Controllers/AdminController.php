@@ -75,6 +75,7 @@ class AdminController extends Controller
                     'username',
                     'name',
                     'role',
+                    'send_user_notification'
                     
                 ]);
     

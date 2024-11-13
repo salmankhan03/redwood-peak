@@ -108,7 +108,7 @@
                 <a class="nav-link" href="{{ route('post') }}">Post</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="{{ route('pages') }}">pages</a>
+                <a class="nav-link" href="{{ route('pages') }}">Pages</a>
             </li>
             <!-- <li class="nav-item">
                 <a class="nav-link" href="#">Comments</a>

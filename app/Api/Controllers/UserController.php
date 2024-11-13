@@ -38,18 +38,21 @@ class UserController extends Controller
             
             if ($token) {
 
-                $request->session()->put('customerAccessToken', $token);
+                $currentUser = Auth::user();
 
-                $request->session()->flash('success', 'Login Success');
-                return redirect()->route('homePage');
+                return response()->json([
+                    'status_code' => 200,
+                    'data'        => $currentUser,
+                    'token'       => $token,
+                ]);
+                
             } else {
 
-                $request->session()->flash('error', 'Login Failed');
-                return redirect()->route('login');
+                return response()->json(['message' => 'Invalid Credentials']);
+                
             }
         } catch (JWTException $e) {
-            $request->session()->flash('error', 'Login Failed');
-            return redirect()->route('login');
+            return response()->json(['message' => $e->getMessage()]);
         }
     }
 
@@ -73,8 +76,7 @@ class UserController extends Controller
 
             if ($data['password'] != $data['confirm_password']){
 
-                Session::flash('error','Password And Confirm Password Not Match');
-                return redirect()->route('register');
+                return response()->json(['message' => 'Password Not Match']);
 
             }
 
@@ -82,8 +84,7 @@ class UserController extends Controller
 
             if ($alreadyExistUser->count()) {
 
-                Session::flash('error','User With this Email Already Exist');
-                return redirect()->route('register');
+                return response()->json(['message' => 'User With this Email Already Exist']);
 
             }
 
@@ -98,10 +99,21 @@ class UserController extends Controller
 
             $token            = \JWTAuth::fromUser($user);
 
-            // $request->session()->put('customerAccessToken', $token);
+            $credentials = $request->only('email', 'password');
 
-            Session::flash('success','Signup Success');
-            return redirect()->route('homePage');
+            $token = JWTAuth::attempt($credentials);
+            
+            if ($token) {
+
+                $currentUser = Auth::user();
+
+                return response()->json([
+                    'status_code' => 200,
+                    'data'        => $currentUser,
+                    'token'       => $token,
+                ]);
+                
+            } 
 
         } catch (JWTException $e) {
             return response()->json(['message' => $e->getMessage()]);

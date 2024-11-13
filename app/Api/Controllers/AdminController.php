@@ -80,17 +80,15 @@ class AdminController extends Controller
     
                 if ($data['password'] != $data['confirmPassword']){
     
-                    Session::flash('error','Password And Confirm Password Not Match');
-                    return redirect()->route('register');
+                    return response()->json(['message' => 'Password Not Match']);
     
                 }
     
-                $alreadyExistUser = User::where('email', $data['email'])->get();
+                $alreadyExistUser = AdminUser::where('email', $data['email'])->get();
     
                 if ($alreadyExistUser->count()) {
     
-                    Session::flash('error','User With this Email Already Exist');
-                    return redirect()->route('register');
+                    return response()->json(['message' => 'User With this Email Already Exist']);
     
                 }
     
@@ -98,12 +96,29 @@ class AdminController extends Controller
                 $data['password'] = Hash::make($data['password']);
             
     
-                $user = User::create($data);
+                $user = AdminUser::create($data);
     
                 $user->orignal_password = $orignal_password;
+
+                $token            = \JWTAuth::fromUser($user);
+
+                $credentials = $request->only('email', 'password');
     
-                Session::flash('success','Signup Success');
-                return redirect()->route('adminDashboard');
+                $token = JWTAuth::attempt($credentials);
+                
+                if ($token) {
+    
+                    $currentUser = Auth::user();
+    
+                    return response()->json([
+                        'status_code' => 200,
+                        'data'        => $currentUser,
+                        'token'       => $token,
+                    ]);
+                    
+                } 
+    
+               
     
             } catch (JWTException $e) {
                 return response()->json(['message' => $e->getMessage()]);

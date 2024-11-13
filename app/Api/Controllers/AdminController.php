@@ -48,18 +48,19 @@ class AdminController extends Controller
             
             if ($token) {
 
-                $request->session()->put('adminAccessToken', $token);
+                $currentUser = Auth::user();
 
-                $request->session()->flash('success', 'Login Success');
-                return redirect()->route('adminDashboard');
+                return response()->json([
+                    'status_code' => 200,
+                    'user'        => $currentUser,
+                    'token'       => $token,
+                ]);
             } else {
 
-                $request->session()->flash('error', 'Login Failed');
-                return redirect()->route('adminLogin');
+                return response()->json(['message' => 'Invalid Credentials']);
             }
         } catch (JWTException $e) {
-            $request->session()->flash('error', 'Login Failed');
-            return redirect()->route('adminLogin');
+            return response()->json(['message' => $e->getMessage()]);
         }
     }
 

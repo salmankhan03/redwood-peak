@@ -3,6 +3,7 @@
 namespace App\Api\Controllers;
 
 use App\Http\Controllers\Controller;
+use App\Models\Media;
 use App\Models\User;
 use Exception;
 use Illuminate\Http\Request;
@@ -16,20 +17,42 @@ use Session;
 
 class MediaController extends Controller
 {
-    public function uploadMedia(Request $request){
+    public function upload(Request $request){
+        
+        try{
 
-        $files = $_FILES;
+            $files = $_FILES;
     
-        $imageData = [];
+            $imageData = [];
+    
+            foreach ($files as  $fileName => $file) {
+    
+                $image = $request->file($fileName);
+    
+                $imageData['name'] = $image->getClientOriginalName();
+                $imageData['category'] = $image->getClientOriginalExtension();
+                $imageData['path'] = $image;
+                $imageData['size_in_kb'] = $image->getSize();
+                $imageData['extension'] = $image->getClientOriginalExtension();
+                $imageData['created_by'] = 1;
+    
+                Media::create($imageData);
+    
+            }
+    
+            return response()->json([
+                'status_code' => 200,
+                'message' => "Successfully Uploaded"
+            ]);
 
-        foreach ($files as  $fileName => $file) {
-
-            $image = $request->file($fileName);
-
-            $imageData['image'] = $image;
-            $imageData['original_name'] = $image->getClientOriginalName();
         }
-
+        catch (\Exception $e){
+            return response()->json([
+                'status_code' => 500,
+                'message' => $e->getMessage()
+            ]);
+        }
+       
 
     }
 }

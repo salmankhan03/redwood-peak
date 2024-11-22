@@ -1,6 +1,7 @@
 <?php
 
 use App\Api\Controllers\AdminController;
+use App\Api\Controllers\MediaController;
 use App\Api\Controllers\UserController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
@@ -18,4 +19,9 @@ Route::post('/admin/signup', [AdminController::class, 'create'])->name('adminUse
 // });
 
 // will add custom middleware for admin panel usage
-    
+
+Route::prefix('/media')->group(function () {
+
+    Route::post('/upload', [MediaController::class, 'upload']);
+   
+});

@@ -78,7 +78,7 @@ class MediaController extends Controller
             
 
             if (!empty($query['type'])){
-                $criteria[] = ['type', '=',  $query['type']];
+                $criteria[] = ['category', '=',  $query['type']];
             }
 
             if (!empty($query['text'])){

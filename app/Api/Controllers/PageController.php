@@ -32,12 +32,25 @@ class PageController extends Controller
             ]);
     
             foreach ($files as  $fileName => $file) {
+
+                $type = explode("/",$file->getType());
+
+                if ($type[0] != 'application'){
+
+                    return response()->json([
+                        'status_code' => 500,
+                        'message' => "Only Document Is Allowed"
+                    ]);
+
+                    break;
+                }
     
                 $document = $request->file($fileName);
 
 
                 $pageData['type'] = $data['type'];
                 $pageData['year'] = $data['year'];
+                
                 $pageData['file_name'] = $document->getClientOriginalName();
                 $pageData['file_path'] = $document;
                 $pageData['size_in_kb'] = $document->getSize();

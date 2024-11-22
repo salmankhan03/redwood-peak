@@ -65,9 +65,29 @@ class MediaController extends Controller
 
         $pageSize = !empty($request->get('pageSize')) ? $request->get('pageSize') : 10;
         
+        $query = $request->only([
+            'type',
+            'text',
+        ]);
+
+        $criteria = [];
+
         try{
             
-            $list = Media::where('is_enabled' , 1)->paginate($pageSize);
+            $qb = Media::where('is_enabled' , 1);
+            
+
+            if (!empty($query['type'])){
+                $criteria[] = ['type', '=',  $query['type']];
+            }
+
+            if (!empty($query['text'])){
+                $criteria[] = ['name', 'like', '%' . $query['text'] . "%"];
+            }
+
+            $qb->where($criteria);
+
+            $list = $qb->paginate($pageSize);
 
             return response()->json([
                 'status_code' => 200,

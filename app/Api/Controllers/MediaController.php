@@ -59,13 +59,15 @@ class MediaController extends Controller
 
     }
 
-    public function list(){
+    public function list(Request $request){
 
         // need to add category and filter
+
+        $pageSize = !empty($request->get('pageSize')) ? $request->get('pageSize') : 10;
         
         try{
             
-            $list = Media::where('is_enabled' , 1)->get();
+            $list = Media::where('is_enabled' , 1)->paginate($pageSize);
 
             return response()->json([
                 'status_code' => 200,

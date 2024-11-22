@@ -48,6 +48,7 @@ class MediaController extends Controller
             ]);
 
         }
+
         catch (\Exception $e){
             return response()->json([
                 'status_code' => 500,
@@ -55,6 +56,31 @@ class MediaController extends Controller
             ]);
         }
        
+
+    }
+
+    public function list(){
+
+        // need to add category and filter
+        
+        try{
+            
+            $list = Media::where('is_enabled' , 1)->get();
+
+            return response()->json([
+                'status_code' => 200,
+                'list' => $list
+            ]);
+
+        }
+
+        catch (\Exception $e){
+            return response()->json([
+                'status_code' => 500,
+                'message' => $e->getMessage()
+            ]);
+        }
+
 
     }
 }

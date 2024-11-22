@@ -23,5 +23,6 @@ Route::post('/admin/signup', [AdminController::class, 'create'])->name('adminUse
 Route::prefix('/media')->group(function () {
 
     Route::post('/upload', [MediaController::class, 'upload']);
+    Route::post('/list', [MediaController::class, 'list']);
    
 });

@@ -18,7 +18,7 @@ use Session;
 class MediaController extends Controller
 {
     public function upload(Request $request){
-        
+
         try{
 
             $files = $_FILES;
@@ -28,9 +28,11 @@ class MediaController extends Controller
             foreach ($files as  $fileName => $file) {
     
                 $image = $request->file($fileName);
-    
+                
+                $category = explode("/",$image->getType());
+
                 $imageData['name'] = $image->getClientOriginalName();
-                $imageData['category'] = $image->getClientOriginalExtension();
+                $imageData['category'] = $category[0];
                 $imageData['path'] = $image;
                 $imageData['size_in_kb'] = $image->getSize();
                 $imageData['extension'] = $image->getClientOriginalExtension();

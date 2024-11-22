@@ -3,6 +3,7 @@
 use App\Api\Controllers\AdminController;
 use App\Api\Controllers\MediaController;
 use App\Api\Controllers\UserController;
+use App\Api\Controllers\PageController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\URL;
@@ -25,5 +26,13 @@ Route::prefix('/media')->group(function () {
     Route::post('/upload', [MediaController::class, 'upload']);
     Route::post('/list', [MediaController::class, 'list']);
     Route::get('/{id}/delete', [MediaController::class, 'delete']);
+   
+});
+
+Route::prefix('/page')->group(function () {
+
+    Route::post('/upload', [PageController::class, 'upload']);
+    Route::post('/list', [PageController::class, 'list']);
+    Route::get('/{id}/delete', [PageController::class, 'delete']);
    
 });

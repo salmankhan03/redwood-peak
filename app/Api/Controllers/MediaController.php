@@ -29,7 +29,7 @@ class MediaController extends Controller
     
                 $image = $request->file($fileName);
                 
-                $category = explode("/",$image->getType());
+                $category = explode("/",$image->getMimeType());
 
                 $imageData['name'] = $image->getClientOriginalName();
                 $imageData['category'] = $category[0];

@@ -24,5 +24,6 @@ Route::prefix('/media')->group(function () {
 
     Route::post('/upload', [MediaController::class, 'upload']);
     Route::post('/list', [MediaController::class, 'list']);
+    Route::post('/{id}/delete', [MediaController::class, 'delete']);
    
 });

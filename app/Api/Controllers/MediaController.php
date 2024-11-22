@@ -83,6 +83,25 @@ class MediaController extends Controller
             ]);
         }
 
+    }
 
+    public function delete($id){
+        try{
+
+            Media::where('id', $$id)->update(['is_enabled' => 0]);
+
+            return response()->json([
+                'status_code' => 200,
+                'list' => 'Deleted Successfully'
+            ]);
+
+        }
+
+        catch (\Exception $e){
+            return response()->json([
+                'status_code' => 500,
+                'message' => $e->getMessage()
+            ]);
+        }
     }
 }

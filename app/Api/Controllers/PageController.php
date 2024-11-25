@@ -83,10 +83,22 @@ class PageController extends Controller
         // need to add category and filter
 
         $pageSize = !empty($request->get('pageSize')) ? $request->get('pageSize') : 10;
+
+        $searchParam = $request->only([
+            'type'
+        ]);
+
         
+
         try{
             
-            $list = Page::where('is_enabled' , 1)->paginate($pageSize);
+            $qb = Page::where('is_enabled' , 1);
+
+            if (!empty($searchParam['type'])){
+                $qb->where(['type' , $searchParam['type']]);
+            }
+
+            $list = $qb->paginate($pageSize);
 
             return response()->json([
                 'status_code' => 200,

@@ -88,14 +88,12 @@ class PageController extends Controller
             'type'
         ]);
 
-        
-
         try{
             
             $qb = Page::where('is_enabled' , 1);
 
             if (!empty($searchParam['type'])){
-                $qb->where(['type' , $searchParam['type']]);
+                $qb->where('type' , $searchParam['type']);
             }
 
             $list = $qb->paginate($pageSize);

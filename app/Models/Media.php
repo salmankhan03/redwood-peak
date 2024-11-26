@@ -31,7 +31,6 @@ class Media extends Model
         $this->saveFile($value, 'path', "media/" . date('Y/m'));
     }
 
-
     public function getPathAttribute()
     {
         if (empty($this->attributes['path'])) {

@@ -33,7 +33,7 @@ class AdminPanelUserController extends Controller
                 'id','name', 'username','email','role','password','status','send_user_notification','role_id'
             ]);
 
-            $data = Hash::make($data['password']);
+            $data['password'] = Hash::make($data['password']);
 
             AdminPanelUser::updateOrCreate(['id' => $data['id']], $data);
 

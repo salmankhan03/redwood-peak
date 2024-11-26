@@ -89,12 +89,26 @@ class PageController extends Controller
         ]);
 
         try{
+
+            $criteria = [];
             
             $qb = Page::where('is_enabled' , 1);
 
             if (!empty($searchParam['type'])){
-                $qb->where('type' , $searchParam['type']);
+                $criteria[] = ['type', '=',  $searchParam['type']];
             }
+
+            if (!empty($searchParam['year'])){
+
+                $criteria[] = ['year', '=',  $searchParam['year']];
+            }
+
+            if (!empty($searchParam['text'])){
+
+                $criteria[] = ['name', 'like', '%' . $searchParam['text'] . "%"];
+            }
+
+            $qb->where($criteria);
 
             $list = $qb->paginate($pageSize);
 
@@ -127,6 +141,25 @@ class PageController extends Controller
         }
 
         catch (\Exception $e){
+            return response()->json([
+                'status_code' => 500,
+                'message' => $e->getMessage()
+            ]);
+        }
+    }
+
+    public function multipleDelete(Request $request)
+    {
+        try {
+            $ids = explode(",",  $request->only('ids')['ids']);
+
+            Page::whereIn('id', $ids)->delete();
+
+            return response()->json([
+                'status_code' => 200,
+                'message' => 'Multiple Pages Deleted Successfully'
+            ]);
+        } catch (\Exception $e) {
             return response()->json([
                 'status_code' => 500,
                 'message' => $e->getMessage()

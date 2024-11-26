@@ -33,6 +33,8 @@ class AdminPanelUserController extends Controller
                 'id','name', 'username','email','role','password','status','send_user_notification','role_id'
             ]);
 
+            $data = Hash::make($data['password']);
+
             AdminPanelUser::updateOrCreate(['id' => $data['id']], $data);
 
             return response()->json([
@@ -104,6 +106,25 @@ class AdminPanelUserController extends Controller
         }
     }
 
+    public function multipleDelete(Request $request)
+    {
+        try {
+            $ids = explode(",",  $request->only('ids')['ids']);
+
+            AdminPanelUser::whereIn('id', $ids)->delete();
+
+            return response()->json([
+                'status_code' => 200,
+                'message' => 'Multiple Records Deleted Successfully'
+            ]);
+        } catch (\Exception $e) {
+            return response()->json([
+                'status_code' => 500,
+                'message' => $e->getMessage()
+            ]);
+        }
+    }
+
     public function delete($id){
 
         try {
@@ -159,7 +180,7 @@ class AdminPanelUserController extends Controller
                 'message' => $e->getMessage()
             ]);
         }
-        
+
     }
 
 }

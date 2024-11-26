@@ -1,6 +1,7 @@
 <?php
 
 use App\Api\Controllers\AdminController;
+use App\Api\Controllers\AdminPanelUserController;
 use App\Api\Controllers\MediaController;
 use App\Api\Controllers\UserController;
 use App\Api\Controllers\PageController;
@@ -34,5 +35,18 @@ Route::prefix('/page')->group(function () {
     Route::post('/upload', [PageController::class, 'upload']);
     Route::post('/list', [PageController::class, 'list']);
     Route::get('/{id}/delete', [PageController::class, 'delete']);
+    Route::post('/multiple-delete', [PageController::class, 'multipleDelete']);
+   
+});
+
+Route::prefix('/admin-panel-user')->group(function () {
+
+    Route::post('/upsert', [AdminPanelUserController::class, 'upsert']);
+    Route::post('/list', [AdminPanelUserController::class, 'list']);
+    Route::get('/user-count-by-status' , [AdminPanelUserController::class, 'getUserCountByStatus']);
+    Route::get('/{id}/delete', [AdminPanelUserController::class, 'delete']);
+    Route::post('/multiple-delete', [AdminPanelUserController::class, 'multipleDelete']);
+    Route::get('/{id}/get-by-id', [AdminPanelUserController::class, 'getById']);
+
    
 });

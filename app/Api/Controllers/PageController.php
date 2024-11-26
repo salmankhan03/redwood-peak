@@ -102,12 +102,12 @@ class PageController extends Controller
 
             if (!empty($searchParam['year'])){
 
-                $criteria[] = ['year', '=',  (string)$searchParam['year']];
+                $criteria[] = ['year', '=', $searchParam['year']];
             }
 
             if (!empty($searchParam['text'])){
 
-                $criteria[] = ['name', 'like', '%' . $searchParam['text'] . "%"];
+                $criteria[] = ['file_name', 'like', '%' . $searchParam['text'] . "%"];
             }
 
             $qb->where($criteria);

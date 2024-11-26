@@ -33,7 +33,7 @@ class PageController extends Controller
     
             foreach ($files as  $fileName => $file) {
 
-                $type = explode("/",$file->getType());
+                $type = explode("/",$file['type']);
 
                 if ($type[0] != 'application'){
 

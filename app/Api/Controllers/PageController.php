@@ -100,7 +100,7 @@ class PageController extends Controller
 
             if (!empty($searchParam['year'])){
 
-                $criteria[] = ['year', '=',  $searchParam['year']];
+                $criteria[] = ['year', '=',  (string)$searchParam['year']];
             }
 
             if (!empty($searchParam['text'])){

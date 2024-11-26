@@ -10,7 +10,7 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 class AdminPanelUser extends Model
 {
 
-    use HasFactory, SoftDeletes;
+    use HasFactory;
 
     public $timestamps = true;
 

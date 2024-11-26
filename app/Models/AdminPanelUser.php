@@ -24,6 +24,7 @@ class AdminPanelUser extends Model
         'deleted_at',
         'updated_at',
         'created_at',
+        'password'
     ];
 
     

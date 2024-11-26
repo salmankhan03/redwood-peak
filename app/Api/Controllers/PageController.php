@@ -85,7 +85,9 @@ class PageController extends Controller
         $pageSize = !empty($request->get('pageSize')) ? $request->get('pageSize') : 10;
 
         $searchParam = $request->only([
-            'type'
+            'type',
+            'year',
+            'text'
         ]);
 
         try{

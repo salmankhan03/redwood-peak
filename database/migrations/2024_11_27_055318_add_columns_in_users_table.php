@@ -32,6 +32,9 @@ return new class extends Migration
             $table->dropColumn('send_user_notification');
             $table->dropColumn('status');
             $table->dropColumn('role_id');
+            
+            $table->dropSoftDeletes();
+
 
         });
     }

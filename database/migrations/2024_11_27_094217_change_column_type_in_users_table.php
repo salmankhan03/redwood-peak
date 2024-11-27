@@ -11,7 +11,7 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::table('pages', function (Blueprint $table) {
+        Schema::table('users', function (Blueprint $table) {
             $table->text('status')->nullable()->change();
             $table->bigInteger('role_id')->nullable()->change();
 
@@ -23,7 +23,7 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::table('pages', function (Blueprint $table) {
+        Schema::table('users', function (Blueprint $table) {
             $table->boolean('status')->nullable()->change();
             $table->boolean('role_id')->nullable()->change();
 

@@ -114,7 +114,7 @@ class PageController extends Controller
 
             if (!empty($searchParam['hedge_fund_report_type'])){
 
-                $criteria[] = ['hedge_fund_report_type', 'like', '%' . $searchParam['hedge_fund_report_type'] . "%"];
+                $criteria[] = ['hedge_fund_report_type', '=', $searchParam['hedge_fund_report_type'] ];
             }
 
             $qb->where($criteria);

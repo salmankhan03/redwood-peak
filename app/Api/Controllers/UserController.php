@@ -13,6 +13,7 @@ use Tymon\JWTAuth\Exceptions\JWTException;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\Config;
 use Session;
+use Illuminate\Support\Facades\DB;
 
 class UserController extends Controller
 {
@@ -72,17 +73,22 @@ class UserController extends Controller
                 'position',
                 'username',
                 'role',
+                'id',
+                'name',
+                'status',
+                'send_user_notification',
+                'role_id'
             ]);
 
-            if ($data['password'] != $data['confirm_password']){
+            // if ($data['password'] != $data['confirm_password']){
 
-                return response()->json(['message' => 'Password Not Match']);
+            //     return response()->json(['message' => 'Password Not Match']);
 
-            }
+            // }
 
             $alreadyExistUser = User::where('email', $data['email'])->get();
 
-            if ($alreadyExistUser->count()) {
+            if ($alreadyExistUser->count() && $alreadyExistUser->id != $data['id']) {
 
                 return response()->json(['message' => 'User With this Email Already Exist']);
 
@@ -120,6 +126,150 @@ class UserController extends Controller
         }
     }
 
-}
+    public function getById($id){
 
-// commented line just for check
+        try {
+
+            $data = User::find($id);
+
+            if ($data){
+
+                return response()->json([
+                    'status_code' => 200,
+                    'data' => $data
+                ]);
+
+            }
+
+            else{
+                return response()->json([
+                    'status_code' => 200,
+                    'message' => 'Not Found'
+                ]);
+            }
+            
+        }
+
+        catch (\Exception $e){
+            return response()->json([
+                'status_code' => 500,
+                'message' => $e->getMessage()
+            ]);
+        }
+
+    }
+
+    public function list(Request $request){
+
+        try {
+
+            $pageSize = !empty($request->get('pageSize')) ? $request->get('pageSize') : 10;
+
+            $query = $request->only([
+                'status',
+                'pageSize'
+            ]);
+
+            $qb = User::whereRaw('1 = 1');
+            
+            if (!empty($query['status'])){
+                $criteria[] = ['status', '=',  $query['status']];
+            }
+
+            $qb->where($criteria);
+
+            $list = $qb->paginate($pageSize);
+
+            return response()->json([
+                'status_code' => 200,
+                'list' => $list
+            ]);
+
+        }
+
+        catch (\Exception $e){
+            return response()->json([
+                'status_code' => 500,
+                'message' => $e->getMessage()
+            ]);
+        }
+    }
+
+    public function multipleDelete(Request $request)
+    {
+        try {
+            $ids = explode(",",  $request->only('ids')['ids']);
+
+            User::whereIn('id', $ids)->delete();
+
+            return response()->json([
+                'status_code' => 200,
+                'message' => 'Multiple Records Deleted Successfully'
+            ]);
+        } catch (\Exception $e) {
+            return response()->json([
+                'status_code' => 500,
+                'message' => $e->getMessage()
+            ]);
+        }
+    }
+
+    public function delete($id){
+
+        try {
+
+            $obj = User::find($id);
+
+            if ($obj) {
+
+                $obj->delete();
+
+                return response()->json([
+                    'status_code' => 200,
+                    'message' => 'Deleted Successfully'
+                ], 200);
+
+            } else {
+                return response()->json([
+                    'status_code' => 500,
+                    'message' => 'Not Found'
+                ], 500);
+            }
+
+        }
+
+        catch (\Exception $e){
+            return response()->json([
+                'status_code' => 500,
+                'message' => $e->getMessage()
+            ]);
+        }
+
+    }
+
+    public function getUserCountByStatus(){
+
+        try{
+
+            $list = DB::table('users')
+                 ->select('status', DB::raw('count(*) as total'))
+                 ->groupBy('status')
+                 ->get();
+
+            return response()->json([
+                'status_code' => 200,
+                'list' => $list
+            ]);   
+
+        }
+        
+        catch (\Exception $e){
+            return response()->json([
+                'status_code' => 500,
+                'message' => $e->getMessage()
+            ]);
+        }
+
+    }
+
+}

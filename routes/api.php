@@ -39,14 +39,14 @@ Route::prefix('/page')->group(function () {
    
 });
 
-Route::prefix('/admin-panel-user')->group(function () {
+Route::prefix('/user')->group(function () {
 
-    Route::post('/upsert', [AdminPanelUserController::class, 'upsert']);
-    Route::post('/list', [AdminPanelUserController::class, 'list']);
-    Route::get('/user-count-by-status' , [AdminPanelUserController::class, 'getUserCountByStatus']);
-    Route::get('/{id}/delete', [AdminPanelUserController::class, 'delete']);
-    Route::post('/multiple-delete', [AdminPanelUserController::class, 'multipleDelete']);
-    Route::get('/{id}/get-by-id', [AdminPanelUserController::class, 'getById']);
+    // Route::post('/upsert', [UserController::class, 'upsert']);
+    Route::post('/list', [UserController::class, 'list']);
+    Route::get('/count-by-status' , [UserController::class, 'getUserCountByStatus']);
+    Route::get('/{id}/delete', [UserController::class, 'delete']);
+    Route::post('/multiple-delete', [UserController::class, 'multipleDelete']);
+    Route::get('/{id}/get-by-id', [UserController::class, 'getById']);
 
    
 });

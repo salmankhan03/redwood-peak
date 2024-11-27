@@ -15,6 +15,8 @@ class User extends Authenticatable implements JWTSubject
 
     public $timestamps = true;
 
+    const STATUS_PENDING = "Pending";
+
 
     /**
      * The attributes that are mass assignable.
@@ -30,7 +32,14 @@ class User extends Authenticatable implements JWTSubject
         'contact_no',
         'company_name',
         'position',
-        'name'
+        'name',
+        'send_user_notification',
+        'status',
+        'role_id'
+    ];
+
+    protected $attributes = [
+        'status' => self::STATUS_PENDING,
     ];
 
     /**

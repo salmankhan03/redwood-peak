@@ -87,10 +87,26 @@ class AdminPanelUserController extends Controller
 
     }
 
-    public function list(Request $reuqest){
+    public function list(Request $request){
+
         try {
 
-            $list = AdminPanelUser::all();
+            $pageSize = !empty($request->get('pageSize')) ? $request->get('pageSize') : 10;
+
+            $query = $request->only([
+                'status',
+                'pageSize'
+            ]);
+
+            $qb = AdminPanelUser::where('1' ,'=', '1');
+            
+            if (!empty($query['status'])){
+                $criteria[] = ['status', '=',  $query['status']];
+            }
+
+            $qb->where($criteria);
+
+            $list = $qb->paginate($pageSize);
 
             return response()->json([
                 'status_code' => 200,
@@ -98,6 +114,7 @@ class AdminPanelUserController extends Controller
             ]);
 
         }
+
         catch (\Exception $e){
             return response()->json([
                 'status_code' => 500,

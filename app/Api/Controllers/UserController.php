@@ -171,6 +171,8 @@ class UserController extends Controller
             ]);
 
             $qb = User::whereRaw('1 = 1');
+
+            $criteria = [];
             
             if (!empty($query['status'])){
                 $criteria[] = ['status', '=',  $query['status']];

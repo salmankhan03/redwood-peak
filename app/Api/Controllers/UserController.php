@@ -99,7 +99,7 @@ class UserController extends Controller
             
             $data['name'] = $data['first_name'] .' '. $data['last_name'];
 
-            $user = User::create($data);
+            $user = User::updateOrCreate(['id' => $data['id']], $data);
 
             $user->orignal_password = $orignal_password;
 

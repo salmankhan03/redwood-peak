@@ -51,6 +51,7 @@ class PageController extends Controller
 
                 $pageData['type'] = $data['type'];
                 $pageData['year'] = $data['year'];
+                $pageData['hedge_fund_report_type'] = $data['hedge_fund_report_type'];
                 
                 $pageData['file_name'] = $document->getClientOriginalName();
                 $pageData['file_path'] = $document;

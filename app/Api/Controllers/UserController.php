@@ -88,9 +88,15 @@ class UserController extends Controller
 
             $alreadyExistUser = User::where('email', $data['email'])->get();
 
-            if ($alreadyExistUser->count() && $alreadyExistUser->id != $data['id']) {
+            
 
-                return response()->json(['message' => 'User With this Email Already Exist']);
+            if ($alreadyExistUser->count() ) {
+                if (!empty($alreadyExistUser)){
+                    if ($alreadyExistUser[0]->id){
+
+                        return response()->json(['message' => 'User With this Email Already Exist']);
+                    }
+                }
 
             }
 

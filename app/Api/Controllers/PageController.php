@@ -28,7 +28,8 @@ class PageController extends Controller
 
             $data = $request->only([
                 'type',
-                'year'
+                'year',
+                'hedge_fund_report_type'
             ]);
     
             foreach ($files as  $fileName => $file) {
@@ -108,6 +109,11 @@ class PageController extends Controller
             if (!empty($searchParam['text'])){
 
                 $criteria[] = ['file_name', 'like', '%' . $searchParam['text'] . "%"];
+            }
+
+            if (!empty($searchParam['hedge_fund_report_type'])){
+
+                $criteria[] = ['hedge_fund_report_type', 'like', '%' . $searchParam['hedge_fund_report_type'] . "%"];
             }
 
             $qb->where($criteria);

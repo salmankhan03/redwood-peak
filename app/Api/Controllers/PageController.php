@@ -89,7 +89,8 @@ class PageController extends Controller
         $searchParam = $request->only([
             'type',
             'year',
-            'text'
+            'text',
+            'hedge_fund_report_type'
         ]);
 
         try{

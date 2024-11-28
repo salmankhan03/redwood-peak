@@ -36,6 +36,9 @@ class User extends Authenticatable implements JWTSubject
         'send_user_notification',
         'status',
         'role_id',
+        'is_disabled',
+        'role',
+        'username',
         'is_disabled'
     ];
 

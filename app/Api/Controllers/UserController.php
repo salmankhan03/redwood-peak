@@ -90,11 +90,11 @@ class UserController extends Controller
 
             
 
-            if ($alreadyExistUser->count() ) {
+            if ($alreadyExistUser->count() && !empty($data['id'])) {
                 if (!empty($alreadyExistUser)){
-                    if ($alreadyExistUser[0]->id){
+                    if ($alreadyExistUser[0]->id != $data['id']){
 
-                        return response()->json(['message' => 'User With this Email Already Exist']);
+                        return response()->json(['message' => 'User With this Email Already Exist' , 'status_code' => 500]);
                     }
                 }
 

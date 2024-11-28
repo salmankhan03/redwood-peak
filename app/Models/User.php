@@ -35,7 +35,8 @@ class User extends Authenticatable implements JWTSubject
         'name',
         'send_user_notification',
         'status',
-        'role_id'
+        'role_id',
+        'is_disabled'
     ];
 
     protected $attributes = [

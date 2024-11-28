@@ -77,7 +77,8 @@ class UserController extends Controller
                 'name',
                 'status',
                 'send_user_notification',
-                'role_id'
+                'role_id',
+                'is_disabled'
             ]);
 
             // if ($data['password'] != $data['confirm_password']){
@@ -278,6 +279,96 @@ class UserController extends Controller
             ]);
         }
 
+    }
+
+    public function bulkStatusChange(Request $request)
+    {
+        try {
+
+            $ids = explode(",",  $request->only('ids')['ids']);
+            $data = $request->only('status');
+
+            if (!empty($ids) && !empty($data['status']))
+            {
+                
+                User::whereIn('id', $ids)->update(['status' => $data['status']]);
+
+                return response()->json([
+                    'status_code' => 200,
+                    'message' => 'Multiple Records Updated Successfully'
+                ]);
+
+            }
+
+            else{
+                return response()->json([
+                    'status_code' => 500,
+                    'message' => 'Status Or ids not found'
+                ]);
+            }
+
+
+          
+        } catch (\Exception $e) {
+            return response()->json([
+                'status_code' => 500,
+                'message' => $e->getMessage()
+            ]);
+        }
+    }
+
+    public function bulkRoleChange(Request $request)
+    {
+        try {
+
+            $ids = explode(",",  $request->only('ids')['ids']);
+            $data = $request->only('role' , 'role_id');
+
+            $updateData = [];
+
+            if (!empty($data['role'])){
+
+                $updateData['role'] = $data['role'];
+
+            }
+
+            if (!empty($data['role_id'])){
+
+                $updateData['role_id'] = $data['role_id'];
+
+            }
+
+            if (!empty($ids))
+            {
+                
+                User::whereIn('id', $ids)->update($updateData);
+
+            }
+
+            if (!empty($ids) && (!empty($data['role_id']) || !empty($data['role'])))
+            {
+
+                return response()->json([
+                    'status_code' => 200,
+                    'message' => 'Multiple Records Updated Successfully'
+                ]);
+
+            }
+
+            if (empty($ids) && empty($data['role_id']) && empty($data['role'])) {
+                return response()->json([
+                    'status_code' => 500,
+                    'message' => 'Role Or ids not found'
+                ]);
+            }
+
+            
+        } catch (\Exception $e) {
+            return response()->json([
+                'status_code' => 500,
+                'message' => $e->getMessage()
+            ]);
+        }
     }
 
 }

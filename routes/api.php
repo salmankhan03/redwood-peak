@@ -48,5 +48,8 @@ Route::prefix('/user')->group(function () {
     Route::post('/multiple-delete', [UserController::class, 'multipleDelete']);
     Route::get('/{id}/get-by-id', [UserController::class, 'getById']);
 
+    Route::post('/bulk-role-change', [UserController::class, 'bulkRoleChange']);
+    Route::post('/bulk-status-change', [UserController::class, 'bulkStatusChange']);
+
    
 });

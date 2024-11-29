@@ -118,7 +118,7 @@ class PostController extends Controller
             $qb = Post::with('media' , 'thumbnail')->where('is_disabled' , 0);
 
             if (!empty($searchParam['category'])){
-                $criteria[] = ['type', '=',  $searchParam['category']];
+                $criteria[] = ['category', '=',  $searchParam['category']];
             }
 
             if (!empty($searchParam['year'])){

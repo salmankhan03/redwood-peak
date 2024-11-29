@@ -28,13 +28,13 @@ class Post extends Model
 
     public function media(){
 
-        $this->hasMany(PostMedia::class , "post_id" ,"id");
+        return $this->hasMany(PostMedia::class , "post_id" ,"id");
 
     }
 
     public function thumbnail(){
 
-        $this->hasOne(PostMedia::class , "post_id" ,"id")->where('is_thumbnail','=', 1)->latest();
+        return $this->hasOne(PostMedia::class , "post_id" ,"id")->where('is_thumbnail','=', 1)->latest();
 
     }
 }

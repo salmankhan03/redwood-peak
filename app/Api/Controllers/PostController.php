@@ -127,7 +127,7 @@ class PostController extends Controller
 
             if (!empty($searchParam['text'])){
 
-                $criteria[] = ['file_name', 'like', '%' . $searchParam['text'] . "%"];
+                $criteria[] = ['title', 'like', '%' . $searchParam['text'] . "%"];
             }
 
             $qb->where($criteria);

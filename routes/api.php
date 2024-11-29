@@ -47,7 +47,7 @@ Route::prefix('/post')->group(function () {
     Route::get('/{id}/delete', [PostController::class, 'delete']);
     Route::post('/multiple-delete', [PostController::class, 'multipleDelete']);
     Route::get('/{id}/get-by-id', [PostController::class, 'getById']);
-    Route::get('/edit', [PostController::class, 'edit']);
+    Route::post('/edit', [PostController::class, 'edit']);
 
    
 });

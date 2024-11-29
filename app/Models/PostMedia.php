@@ -17,7 +17,7 @@ class PostMedia extends Model
     protected $guarded = ['id'];
 
     protected $fillable = [
-        'post_id', 'name','size_in_kb','path','extension','created_by','is_thumbnail'
+        'post_id', 'name','size_in_kb','path','extension','created_by','is_thumbnail','caption'
     ];
 
     protected $hidden = [

@@ -34,7 +34,9 @@ class PostController extends Controller
                 'content',
                 'id',
                 'is_disabled',
-                'thumbnail_image'
+                'thumbnail_image',
+                'image_caption_data',
+                'year'
             ]);
 
             foreach ($files as $file) {
@@ -71,6 +73,7 @@ class PostController extends Controller
                 $postData['created_by'] = 1;
                 $postData['post_id'] = $post->id;
                 $postData['is_thumbnail'] = $data['thumbnail_image'] == $file->getClientOriginalName() ? 1 : 0;
+                $postData['caption'] = $data[$file->getClientOriginalName()];
     
                 PostMedia::create($postData);
     

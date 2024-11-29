@@ -146,11 +146,11 @@ class PostController extends Controller
         
         try{
             
-            $data = Post::with('media' , 'thumbnail')->where('is_disabled' , 0)->where('id' , $id);
+            $data = Post::with('media' , 'thumbnail')->where('is_disabled' , 0)->where('id' , $id)->get();
 
             return response()->json([
                 'status_code' => 200,
-                'list' => $data
+                'data' => $data
             ]);
 
         }

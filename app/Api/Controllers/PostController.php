@@ -39,6 +39,8 @@ class PostController extends Controller
                 'year'
             ]);
 
+            $image_caption_data = json_decode($data['image_caption_data'],true);
+
             foreach ($files as $file) {
 
                 $type = explode("/",$file->getMimeType());
@@ -73,7 +75,7 @@ class PostController extends Controller
                 $postData['created_by'] = 1;
                 $postData['post_id'] = $post->id;
                 $postData['is_thumbnail'] = $data['thumbnail_image'] == $file->getClientOriginalName() ? 1 : 0;
-                $postData['caption'] = !empty($data['image_caption_data'][$file->getClientOriginalName()]) ? $data['image_caption_data'][$file->getClientOriginalName()] : null;
+                $postData['caption'] = !empty($image_caption_data[$file->getClientOriginalName()]) ? $image_caption_data[$file->getClientOriginalName()] : null;
     
                 PostMedia::create($postData);
     

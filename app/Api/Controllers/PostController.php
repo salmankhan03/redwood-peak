@@ -107,6 +107,7 @@ class PostController extends Controller
         $searchParam = $request->only([
             'category',
             'text',
+            'year'
           
         ]);
 
@@ -118,6 +119,10 @@ class PostController extends Controller
 
             if (!empty($searchParam['category'])){
                 $criteria[] = ['type', '=',  $searchParam['category']];
+            }
+
+            if (!empty($searchParam['year'])){
+                $criteria[] = ['year', '=',  $searchParam['year']];
             }
 
             if (!empty($searchParam['text'])){

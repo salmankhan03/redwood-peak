@@ -5,6 +5,7 @@ use App\Api\Controllers\AdminPanelUserController;
 use App\Api\Controllers\MediaController;
 use App\Api\Controllers\UserController;
 use App\Api\Controllers\PageController;
+use App\Api\Controllers\PostController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\URL;
@@ -36,6 +37,17 @@ Route::prefix('/page')->group(function () {
     Route::post('/list', [PageController::class, 'list']);
     Route::get('/{id}/delete', [PageController::class, 'delete']);
     Route::post('/multiple-delete', [PageController::class, 'multipleDelete']);
+   
+});
+
+Route::prefix('/post')->group(function () {
+
+    Route::post('/upload', [PostController::class, 'upload']);
+    Route::post('/list', [PostController::class, 'list']);
+    Route::get('/{id}/delete', [PostController::class, 'delete']);
+    Route::post('/multiple-delete', [PostController::class, 'multipleDelete']);
+    Route::get('/{id}/get-by-id', [PostController::class, 'getById']);
+
    
 });
 

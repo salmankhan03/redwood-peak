@@ -1,0 +1,218 @@
+<?php
+
+namespace App\Api\Controllers;
+
+use App\Http\Controllers\Controller;
+use App\Models\Media;
+use App\Models\Page;
+use App\Models\Post;
+use App\Models\PostMedia;
+use App\Models\User;
+use Exception;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use JWTAuth;
+use Illuminate\Support\Facades\Hash;
+use Tymon\JWTAuth\Exceptions\JWTException;
+use Illuminate\Support\Facades\Validator;
+use Illuminate\Support\Facades\Config;
+use Session;
+
+class PostController extends Controller
+{
+    public function upload(Request $request){
+
+        try{
+
+            $files = $_FILES;
+    
+            $postData = [];
+
+            $data = $request->only([
+                'title',
+                'category',
+                'content',
+                'id',
+                'is_disabled',
+                'thumbnail_image'
+            ]);
+
+            foreach ($files as  $fileName => $file) {
+
+                $type = explode("/",$file['type']);
+
+                if ($type[0] != 'image'){
+
+                    return response()->json([
+                        'status_code' => 500,
+                        'message' => "Only Images are Allowed"
+                    ]);
+
+                    break;
+                }
+            }
+
+            $post = Post::updateOrCreate(['id' => $data['id']], $data);
+
+            if (!empty($data['id'])){
+
+                PostMedia::where('post_id', $data['id'])->delete();
+
+            }
+
+            foreach ($files as  $fileName => $file) {
+
+                $document = $request->file($fileName);
+                
+                $postData['path'] = $document;
+                $postData['name'] = $document->getClientOriginalName();
+                $postData['size_in_kb'] = $document->getSize();
+                $postData['extension'] = $document->getClientOriginalExtension();
+                $postData['created_by'] = 1;
+                $postData['post_id'] = $post->id;
+                $postData['is_thumbnail'] = $data['thumbnail_image'] == $postData['name'] ? 1 : 0;
+    
+                PostMedia::create($postData);
+    
+            }
+    
+            return response()->json([
+                'status_code' => 200,
+                'message' => "Upsert Successfully"
+            ]);
+
+        }
+
+        catch (\Exception $e){
+            return response()->json([
+                'status_code' => 500,
+                'message' => $e->getMessage()
+            ]);
+        }
+       
+
+    }
+
+    public function list(Request $request){
+
+        // need to add category and filter
+
+        $pageSize = !empty($request->get('pageSize')) ? $request->get('pageSize') : 10;
+
+        $searchParam = $request->only([
+            'category',
+            'text',
+          
+        ]);
+
+        try{
+
+            $criteria = [];
+            
+            $qb = Post::with('media' , 'thumbnail')->where('is_disabled' , 0);
+
+            if (!empty($searchParam['category'])){
+                $criteria[] = ['type', '=',  $searchParam['category']];
+            }
+
+            if (!empty($searchParam['text'])){
+
+                $criteria[] = ['file_name', 'like', '%' . $searchParam['text'] . "%"];
+            }
+
+            $qb->where($criteria);
+
+            $list = $qb->paginate($pageSize);
+
+            return response()->json([
+                'status_code' => 200,
+                'list' => $list
+            ]);
+
+        }
+
+        catch (\Exception $e){
+            return response()->json([
+                'status_code' => 500,
+                'message' => $e->getMessage()
+            ]);
+        }
+
+    }
+
+    public function getById($id){
+
+        // need to add category and filter
+        
+        try{
+            
+            $data = Post::with('media' , 'thumbnail')->where('is_disabled' , 0)->where('id' , $id);
+
+            return response()->json([
+                'status_code' => 200,
+                'list' => $data
+            ]);
+
+        }
+
+        catch (\Exception $e){
+            return response()->json([
+                'status_code' => 500,
+                'message' => $e->getMessage()
+            ]);
+        }
+
+    }
+
+
+    public function delete($id){
+        try{
+
+            Post::where('id', $id)->update(['is_disabled' => 1]);
+
+            return response()->json([
+                'status_code' => 200,
+                'message' => 'Deleted Successfully'
+            ]);
+
+        }
+
+        catch (\Exception $e){
+            return response()->json([
+                'status_code' => 500,
+                'message' => $e->getMessage()
+            ]);
+        }
+    }
+
+    public function multipleDelete(Request $request)
+    {
+        try {
+            $ids = explode(",",  $request->only('ids')['ids']);
+
+            if (!empty($ids)){
+
+                Post::whereIn('id', $ids)->update(['is_disabled' => 1]);
+
+                return response()->json([
+                    'status_code' => 200,
+                    'message' => 'Multiple Pages Deleted Successfully'
+                ]);
+            }
+            else{
+                return response()->json([
+                    'status_code' => 500,
+                    'message' => 'Ids Not Found'
+                ]);
+            }
+
+
+            
+        } catch (\Exception $e) {
+            return response()->json([
+                'status_code' => 500,
+                'message' => $e->getMessage()
+            ]);
+        }
+    }
+}

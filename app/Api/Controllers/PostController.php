@@ -169,6 +169,7 @@ class PostController extends Controller
         try{
 
             Post::where('id', $id)->update(['is_disabled' => 1]);
+            Post::where('id', $id)->delete();
 
             return response()->json([
                 'status_code' => 200,
@@ -193,6 +194,7 @@ class PostController extends Controller
             if (!empty($ids)){
 
                 Post::whereIn('id', $ids)->update(['is_disabled' => 1]);
+                Post::whereIn('id', $ids)->delete();
 
                 return response()->json([
                     'status_code' => 200,

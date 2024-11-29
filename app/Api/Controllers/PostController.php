@@ -32,7 +32,6 @@ class PostController extends Controller
                 'title',
                 'category',
                 'content',
-                'id',
                 'is_disabled',
                 'thumbnail_image',
                 'image_caption_data',
@@ -58,11 +57,11 @@ class PostController extends Controller
 
             $post = Post::updateOrCreate(['id' => $data['id']], $data);
 
-            if (!empty($data['id'])){
+            // if (!empty($data['id'])){
 
-                PostMedia::where('post_id', $data['id'])->delete();
+            //     PostMedia::where('post_id', $data['id'])->delete();
 
-            }
+            // }
 
             foreach ($files as   $file) {
 
@@ -221,6 +220,91 @@ class PostController extends Controller
 
             
         } catch (\Exception $e) {
+            return response()->json([
+                'status_code' => 500,
+                'message' => $e->getMessage()
+            ]);
+        }
+    }
+
+    public function edit(Request $request){
+        try{
+
+            $files = $request->file('files');
+    
+            $postData = [];
+
+            $data = $request->only([
+                'title',
+                'category',
+                'content',
+                'is_disabled',
+                'thumbnail_image',
+                'image_caption_data',
+                'year',
+                'id',
+                'delete_media'
+            ]);
+
+            if (empty($data['id'])){
+
+                return response()->json([
+                    'status_code' => 500,
+                    'message' => 'Id is missing'
+                ]);
+
+            }
+
+            $image_caption_data = json_decode($data['image_caption_data'],true);
+
+            foreach ($files as $file) {
+
+                $type = explode("/",$file->getMimeType());
+
+                if ($type[0] != 'image'){
+
+                    return response()->json([
+                        'status_code' => 500,
+                        'message' => "Only Images are Allowed"
+                    ]);
+
+                    break;
+                }
+            }
+
+            $post = Post::updateOrCreate(['id' => $data['id']], $data);
+
+            if (!empty($data['delete_media'])){
+
+                PostMedia::whereIn('id', explode("," , $data['delete_media']))->delete();
+
+            }
+
+            foreach ($files as   $file) {
+
+                // $document = $request->file($fileName);
+                
+                $postData['path'] = $file;
+                $postData['name'] = $file->getClientOriginalName();
+                $postData['size_in_kb'] = $file->getSize();
+                $postData['extension'] = $file->getClientOriginalExtension();
+                $postData['created_by'] = 1;
+                $postData['post_id'] = $post->id;
+                $postData['is_thumbnail'] = $data['thumbnail_image'] == $file->getClientOriginalName() ? 1 : 0;
+                $postData['caption'] = !empty($image_caption_data[$file->getClientOriginalName()]) ? $image_caption_data[$file->getClientOriginalName()] : null;
+    
+                PostMedia::create($postData);
+    
+            }
+    
+            return response()->json([
+                'status_code' => 200,
+                'message' => "Upsert Successfully"
+            ]);
+
+        }
+
+        catch (\Exception $e){
             return response()->json([
                 'status_code' => 500,
                 'message' => $e->getMessage()

@@ -24,7 +24,7 @@ class PostController extends Controller
 
         try{
 
-            $files = $_FILES;
+            $files = $request->file('files');
     
             $postData = [];
 
@@ -37,9 +37,9 @@ class PostController extends Controller
                 'thumbnail_image'
             ]);
 
-            foreach ($files as  $fileName => $file) {
+            foreach ($files as $file) {
 
-                $type = explode("/",$file['type']);
+                $type = explode("/",$file->getMimeType());
 
                 if ($type[0] != 'image'){
 
@@ -60,14 +60,14 @@ class PostController extends Controller
 
             }
 
-            foreach ($files as  $fileName => $file) {
+            foreach ($files as   $file) {
 
-                $document = $request->file($fileName);
+                // $document = $request->file($fileName);
                 
-                $postData['path'] = $document;
-                $postData['name'] = $document->getClientOriginalName();
-                $postData['size_in_kb'] = $document->getSize();
-                $postData['extension'] = $document->getClientOriginalExtension();
+                $postData['path'] = $file;
+                $postData['name'] = $file->getClientOriginalName();
+                $postData['size_in_kb'] = $file->getSize();
+                $postData['extension'] = $file->getClientOriginalExtension();
                 $postData['created_by'] = 1;
                 $postData['post_id'] = $post->id;
                 $postData['is_thumbnail'] = $data['thumbnail_image'] == $postData['name'] ? 1 : 0;

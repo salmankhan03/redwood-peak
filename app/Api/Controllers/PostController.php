@@ -70,7 +70,7 @@ class PostController extends Controller
                 $postData['extension'] = $file->getClientOriginalExtension();
                 $postData['created_by'] = 1;
                 $postData['post_id'] = $post->id;
-                $postData['is_thumbnail'] = $data['thumbnail_image'] == $postData['name'] ? 1 : 0;
+                $postData['is_thumbnail'] = $data['thumbnail_image'] == $file->getClientOriginalName() ? 1 : 0;
     
                 PostMedia::create($postData);
     

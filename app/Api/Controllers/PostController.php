@@ -73,7 +73,7 @@ class PostController extends Controller
                 $postData['created_by'] = 1;
                 $postData['post_id'] = $post->id;
                 $postData['is_thumbnail'] = $data['thumbnail_image'] == $file->getClientOriginalName() ? 1 : 0;
-                $postData['caption'] = !empty($data[$file->getClientOriginalName()]) ? $data[$file->getClientOriginalName()] : null;
+                $postData['caption'] = !empty($data['image_caption_data'][$file->getClientOriginalName()]) ? $data['image_caption_data'][$file->getClientOriginalName()] : null;
     
                 PostMedia::create($postData);
     

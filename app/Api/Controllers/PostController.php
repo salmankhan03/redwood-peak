@@ -55,7 +55,7 @@ class PostController extends Controller
                 }
             }
 
-            $post = Post::updateOrCreate(['id' => $data['id']], $data);
+            $post = Post::updateOrCreate(['id' => null], $data);
 
             // if (!empty($data['id'])){
 

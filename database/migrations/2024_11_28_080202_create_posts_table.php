@@ -19,6 +19,8 @@ return new class extends Migration
             $table->text('content')->nullable();
             $table->boolean('is_disabled')->default(0);
             $table->bigInteger('created_by')->nullable();
+            
+            $table->bigInteger('edited_by')->nullable();
 
             $table->timestamps();
             $table->softDeletes();

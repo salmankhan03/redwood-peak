@@ -108,6 +108,12 @@ class UserController extends Controller
 
             }
 
+            else{
+                unset($data['password']);
+                unset($data['confirm_password']);
+
+            }
+
             
             
             $data['name'] = $data['first_name'] .' '. $data['last_name'];
@@ -119,7 +125,7 @@ class UserController extends Controller
                 $user->orignal_password = $orignal_password;
 
             }
-            
+
             $token            = \JWTAuth::fromUser($user);
 
             $credentials = $request->only('email', 'password');

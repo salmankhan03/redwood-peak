@@ -105,7 +105,7 @@ class UserController extends Controller
             if (empty($data['id']) && !empty($data['password'])){
 
                 return response()->json([
-                    'status_code' => 200,
+                    'status_code' => 500,
                     'message' => 'Password Needed For User Creation'
                 ]);
 

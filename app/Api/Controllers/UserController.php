@@ -101,15 +101,25 @@ class UserController extends Controller
 
             }
 
-            $orignal_password = $data['password'];
-            $data['password'] = Hash::make($data['password']);
+            if (empty($data['id'])){
+
+                $orignal_password = $data['password'];
+                $data['password'] = Hash::make($data['password']);
+
+            }
+
+            
             
             $data['name'] = $data['first_name'] .' '. $data['last_name'];
 
             $user = User::updateOrCreate(['id' => $data['id']], $data);
 
-            $user->orignal_password = $orignal_password;
+            if (empty($data['id'])){
 
+                $user->orignal_password = $orignal_password;
+
+            }
+            
             $token            = \JWTAuth::fromUser($user);
 
             $credentials = $request->only('email', 'password');

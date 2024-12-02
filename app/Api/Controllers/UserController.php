@@ -149,7 +149,7 @@ class UserController extends Controller
 
                 return response()->json([
                     'status_code' => 200,
-                    'user'        => $currentUser,
+                    'user'        => $user,
                     'token'       => $token,
                 ]);
                 

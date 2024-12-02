@@ -386,19 +386,29 @@ class UserController extends Controller
 
             }
 
-            $user = User::where(['id' => $data['user_id'] , 'password' => Hash::make($data['old_password'])])->get();
+            $user = User::find($data['user_id']);
 
             if ($user->count()){
 
-                $newPassword = Hash::make($data['new_password']);
+                if (Hash::check($data['old_password'] , $user->password)){
 
-                User::where('id', $data['user_id'])->update(['password' => $newPassword]);
+                    $newPassword = Hash::make($data['new_password']);
 
-                return response()->json([
-                    'status_code' => 500,
-                    'message' => 'Password Updated Successfully'
-                ]);
+                    User::where('id', $data['user_id'])->update(['password' => $newPassword]);
+    
+                    return response()->json([
+                        'status_code' => 500,
+                        'message' => 'Password Updated Successfully'
+                    ]);
 
+                }
+
+                else{
+                    return response()->json([
+                        'status_code' => 500,
+                        'message' => 'Password Not Match'
+                    ]);
+                }
 
             }
             else{

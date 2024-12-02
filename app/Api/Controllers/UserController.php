@@ -102,7 +102,7 @@ class UserController extends Controller
             }
 
 
-            if (empty($data['id']) && !empty($data['password'])){
+            if (empty($data['id']) && empty($data['password'])){
 
                 return response()->json([
                     'status_code' => 500,

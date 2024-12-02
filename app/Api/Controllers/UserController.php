@@ -139,9 +139,9 @@ class UserController extends Controller
 
             $token            = \JWTAuth::fromUser($user);
 
-            $credentials = $request->only('email', 'password');
+            // $credentials = $request->only('email', 'password');
 
-            $token = JWTAuth::attempt($credentials);
+            // $token = JWTAuth::attempt($credentials);
             
             if ($token) {
 

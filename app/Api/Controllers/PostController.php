@@ -243,7 +243,8 @@ class PostController extends Controller
                 'image_caption_data',
                 'year',
                 'id',
-                'delete_media'
+                'delete_media',
+                'edited_caption_data'
             ]);
 
             if (empty($data['id'])){

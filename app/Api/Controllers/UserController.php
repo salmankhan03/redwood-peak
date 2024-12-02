@@ -406,7 +406,7 @@ class UserController extends Controller
                 else{
                     return response()->json([
                         'status_code' => 500,
-                        'message' => 'Password Not Match'
+                        'message' => "Your Current password is not match"
                     ]);
                 }
 

@@ -256,6 +256,7 @@ class PostController extends Controller
             }
 
             $image_caption_data = json_decode($data['image_caption_data'],true);
+            $edited_caption_data = json_decode($data['edited_caption_data'],true);
 
             if (!empty($files)){
 
@@ -304,6 +305,12 @@ class PostController extends Controller
                     PostMedia::create($postData);
         
                 }
+
+            }
+
+            foreach ($edited_caption_data as $editedData){
+
+                PostMedia::where('id' , $editedData['media_id'])->update(['caption' => $editedData['caption']]);
 
             }
     

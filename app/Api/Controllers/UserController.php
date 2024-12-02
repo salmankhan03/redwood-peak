@@ -101,6 +101,16 @@ class UserController extends Controller
 
             }
 
+
+            if (empty($data['id']) && !empty($data['password'])){
+
+                return response()->json([
+                    'status_code' => 200,
+                    'message' => 'Password Needed For User Creation'
+                ]);
+
+            }
+
             if (empty($data['id'])){
 
                 $orignal_password = $data['password'];
@@ -108,7 +118,8 @@ class UserController extends Controller
 
             }
 
-            else{
+            if (!empty($data['id'])){
+
                 unset($data['password']);
                 unset($data['confirm_password']);
 

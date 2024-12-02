@@ -371,4 +371,56 @@ class UserController extends Controller
         }
     }
 
+    public function updatePassword(Request $request){
+
+        try{
+
+            $data = $request->only('user_id' , 'old_password' , 'new_password' , 'confirm_password');
+
+            if (empty($data['new_password']) || empty($data['confirm_password'])  || ($data['new_password'] != $data['confirm_password'])){
+
+                return response()->json([
+                    'status_code' => 500,
+                    'message' => 'Password Not Match'
+                ]);
+
+            }
+
+            $user = User::where(['id' => $data['user_id'] , 'password' => Hash::make($data['old_password'])])->get();
+
+            if ($user->count()){
+
+                $newPassword = Hash::make($data['new_password']);
+
+                User::where('id', $data['user_id'])->update(['password' => $newPassword]);
+
+                return response()->json([
+                    'status_code' => 500,
+                    'message' => 'Password Updated Successfully'
+                ]);
+
+
+            }
+            else{
+                return response()->json([
+                    'status_code' => 500,
+                    'message' => 'User Not Found'
+                ]);
+            }
+        
+        } catch (\Exception $e) {
+
+            return response()->json([
+                'status_code' => 500,
+                'message' => $e->getMessage()
+            ]);
+
+        }
+
+
+
+
+
+    }
+
 }

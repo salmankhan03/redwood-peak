@@ -64,5 +64,7 @@ Route::prefix('/user')->group(function () {
     Route::post('/bulk-role-change', [UserController::class, 'bulkRoleChange']);
     Route::post('/bulk-status-change', [UserController::class, 'bulkStatusChange']);
 
+    Route::post('/update-password', [UserController::class, 'updatePassword']);
+
    
 });

@@ -257,20 +257,26 @@ class PostController extends Controller
 
             $image_caption_data = json_decode($data['image_caption_data'],true);
 
-            foreach ($files as $file) {
+            if (!empty($files)){
 
-                $type = explode("/",$file->getMimeType());
+                foreach ($files as $file) {
 
-                if ($type[0] != 'image'){
-
-                    return response()->json([
-                        'status_code' => 500,
-                        'message' => "Only Images are Allowed"
-                    ]);
-
-                    break;
+                    $type = explode("/",$file->getMimeType());
+    
+                    if ($type[0] != 'image'){
+    
+                        return response()->json([
+                            'status_code' => 500,
+                            'message' => "Only Images are Allowed"
+                        ]);
+    
+                        break;
+                    }
                 }
+
             }
+
+            
 
             $post = Post::updateOrCreate(['id' => $data['id']], $data);
 
@@ -280,21 +286,25 @@ class PostController extends Controller
 
             }
 
-            foreach ($files as   $file) {
+            if (!empty($files)){
 
-                // $document = $request->file($fileName);
-                
-                $postData['path'] = $file;
-                $postData['name'] = $file->getClientOriginalName();
-                $postData['size_in_kb'] = $file->getSize();
-                $postData['extension'] = $file->getClientOriginalExtension();
-                $postData['created_by'] = 1;
-                $postData['post_id'] = $post->id;
-                $postData['is_thumbnail'] = $data['thumbnail_image'] == $file->getClientOriginalName() ? 1 : 0;
-                $postData['caption'] = !empty($image_caption_data[$file->getClientOriginalName()]) ? $image_caption_data[$file->getClientOriginalName()] : null;
-    
-                PostMedia::create($postData);
-    
+                foreach ($files as   $file) {
+
+                    // $document = $request->file($fileName);
+                    
+                    $postData['path'] = $file;
+                    $postData['name'] = $file->getClientOriginalName();
+                    $postData['size_in_kb'] = $file->getSize();
+                    $postData['extension'] = $file->getClientOriginalExtension();
+                    $postData['created_by'] = 1;
+                    $postData['post_id'] = $post->id;
+                    $postData['is_thumbnail'] = $data['thumbnail_image'] == $file->getClientOriginalName() ? 1 : 0;
+                    $postData['caption'] = !empty($image_caption_data[$file->getClientOriginalName()]) ? $image_caption_data[$file->getClientOriginalName()] : null;
+        
+                    PostMedia::create($postData);
+        
+                }
+
             }
     
             return response()->json([

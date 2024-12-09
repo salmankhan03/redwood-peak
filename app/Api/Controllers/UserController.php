@@ -87,32 +87,48 @@ class UserController extends Controller
 
             // }
 
-            $alreadyExistUser = User::where('email', $data['email'])->get();
+            $alreadyExistUser = User::where('email', $data['email'])->get()->toArray();
 
-            
+            if (count($alreadyExistUser)){
 
-            if ($alreadyExistUser->count() && !empty($data['id'])) { // user edit
-                if (!empty($alreadyExistUser)){
-                    if ($alreadyExistUser[0]->id != $data['id']){
+                if (empty($data['id'])){
 
-                        return response()->json(['message' => 'User With this Email Already Exist' , 'status_code' => 500]);
+                    return response()->json(['message' => 'User With this Email Already Exist' , 'status_code' => 500]);
+
+                }
+
+                else{
+
+                    if ($data['id'] != $alreadyExistUser[0]['id']){
+                        
                     }
+
                 }
 
             }
 
-            if (empty($data['id'])){
+            // if ($alreadyExistUser->count() && !empty($data['id'])) { // user edit
+            //     if (!empty($alreadyExistUser)){
+            //         if ($alreadyExistUser[0]->id != $data['id']){
 
-                if ($alreadyExistUser->count()) { // user edit
-                    if (!empty($alreadyExistUser)){
-                        if (empty($alreadyExistUser[0]->id)){
+            //             return response()->json(['message' => 'User With this Email Already Exist' , 'status_code' => 500]);
+            //         }
+            //     }
+
+            // }
+
+            // if (empty($data['id'])){
+
+            //     if ($alreadyExistUser->count()) { // user edit
+            //         if (!empty($alreadyExistUser)){
+            //             if (empty($alreadyExistUser[0]->id)){
                             
-                            return response()->json(['message' => 'User With this Email Already Exist' , 'status_code' => 500]);
-                        }
-                    }
+            //                 return response()->json(['message' => 'User With this Email Already Exist' , 'status_code' => 500]);
+            //             }
+            //         }
                     
-                }
-            }
+            //     }
+            // }
 
 
             if (empty($data['id']) && empty($data['password'])){

@@ -91,7 +91,7 @@ class UserController extends Controller
 
             
 
-            if ($alreadyExistUser->count() && !empty($data['id'])) {
+            if ($alreadyExistUser->count() && !empty($data['id'])) { // user edit
                 if (!empty($alreadyExistUser)){
                     if ($alreadyExistUser[0]->id != $data['id']){
 
@@ -99,6 +99,19 @@ class UserController extends Controller
                     }
                 }
 
+            }
+
+            if (empty($data['id'])){
+
+                if ($alreadyExistUser->count()) { // user edit
+                    if (!empty($alreadyExistUser)){
+                        if (empty($alreadyExistUser[0]->id)){
+                            
+                            return response()->json(['message' => 'User With this Email Already Exist' , 'status_code' => 500]);
+                        }
+                    }
+                    
+                }
             }
 
 
@@ -453,10 +466,6 @@ class UserController extends Controller
             ]);
 
         }
-
-
-
-
 
     }
 

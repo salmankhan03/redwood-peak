@@ -92,7 +92,7 @@ class ForgetPasswordController extends Controller
             $updatePassword = PasswordResetToken::where([
                                 'email' => $data['email'], 
                                 'token' => $data['token']
-                              ])->first();
+                              ])->get();
             
             if(!$updatePassword){
 

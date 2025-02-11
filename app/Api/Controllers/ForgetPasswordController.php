@@ -31,6 +31,8 @@ class ForgetPasswordController extends Controller
         // record token creation
         // mail sending with url that contains token
 
+        set_time_limit(0);
+
         try{
 
             $token = Str::random(64);

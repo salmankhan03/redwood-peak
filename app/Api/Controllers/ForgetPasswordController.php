@@ -104,7 +104,10 @@ class ForgetPasswordController extends Controller
 
             User::where('email', $data['email'])->update(['password' => Hash::make($data['password'])]);
 
-            $updatePassword->delete();
+            PasswordResetToken::where([
+                'email' => $data['email'], 
+                'token' => $data['token']
+              ])->delete();
 
             return response()->json([
                 'status_code' => 200,

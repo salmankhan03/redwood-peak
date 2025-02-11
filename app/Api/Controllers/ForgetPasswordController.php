@@ -22,6 +22,10 @@ use Illuminate\Support\Facades\Mail;
 class ForgetPasswordController extends Controller
 {
 
+    public function __construct()
+    {
+        ini_set('max_execution_time', 0);
+    }
     
     public function sendForgetPasswordMail(Request $request){ 
         // record token creation
@@ -47,6 +51,11 @@ class ForgetPasswordController extends Controller
                 $message->subject('Reset Password');
   
             });
+
+            return response()->json([
+                'status_code' => 200,
+                'message' => 'Mail Send Successfully'
+            ]);
 
         }
 

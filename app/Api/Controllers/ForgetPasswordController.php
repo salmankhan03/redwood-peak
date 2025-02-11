@@ -34,7 +34,7 @@ class ForgetPasswordController extends Controller
         try{
 
             $token = Str::random(64);
-
+            echo "demo commit";die;
 
             PasswordResetToken::create([
                 'email' => $request->email, 

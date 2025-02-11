@@ -38,7 +38,7 @@ class ForgetPasswordController extends Controller
                 'created_at' => Carbon::now()
             ]);
 
-            $url = env('APP_URL') . "?token=" . $token;
+            $url = env('APP_FROENTEND_URL') . "?token=" . $token;
 
             Mail::send('email.forgetPassword', ['url' => $url], function($message) use($request){
 

@@ -18,6 +18,8 @@ use Carbon\Carbon;
 use Illuminate\Support\Str;
 use Hash;
 use Illuminate\Support\Facades\Mail;
+use Illuminate\Support\Facades\Hash;
+
 
 class ForgetPasswordController extends Controller
 {
@@ -70,10 +72,46 @@ class ForgetPasswordController extends Controller
     }
     
     public function submitForgetPasswordData(Request $request){
-        // check token , email , password and confirm password
-        // delete token record
 
         try{
+
+            $data = $request->only([
+                'token',
+                'email',
+                'password'
+            ]);
+
+            if (!isset($data['token']) ||!isset($data['email']) || !isset($data['password'])){
+
+                return response()->json([
+                    'status_code' => 500,
+                    'message' => 'Token not found'
+                ]);
+
+            }
+
+            $updatePassword = PasswordResetToken::table('password_resets')
+                              ->where([
+                                'email' => $data['email'], 
+                                'password' => $data['token']
+                              ])->first();
+            
+            if(!$updatePassword){
+
+                return response()->json([
+                    'status_code' => 500,
+                    'message' => 'Email not Found'
+                ]);
+            }
+
+            User::where('email', $data['email'])->update(['password' => Hash::make($data['password'])]);
+
+            $updatePassword->delete();
+
+            return response()->json([
+                'status_code' => 200,
+                'message' => 'Password Updated Successfully'
+            ]);
 
         }
 

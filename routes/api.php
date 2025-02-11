@@ -16,6 +16,7 @@ Route::post('/customer/signup', [UserController::class, 'signUp'])->name('custom
 Route::post('/customer/login', [UserController::class, 'login'])->name('customerLogin');
 
 Route::post('/forget-password', [ForgetPasswordController::class, 'sendForgetPasswordMail']); // send mail to 
+Route::post('/update-password-via-mail', [ForgetPasswordController::class, 'submitForgetPasswordData']);
 
 // Route::post('/admin/login', [AdminController::class, 'login'])->name('adminLoginPost');
 // Route::post('/admin/signup', [AdminController::class, 'create'])->name('adminUserCreate');

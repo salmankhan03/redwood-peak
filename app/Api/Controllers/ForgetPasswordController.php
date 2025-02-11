@@ -16,7 +16,6 @@ use Session;
 use Illuminate\Support\Facades\DB;
 use Carbon\Carbon; 
 use Illuminate\Support\Str;
-use Hash;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Hash;
 

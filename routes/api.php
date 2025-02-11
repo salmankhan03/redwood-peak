@@ -2,6 +2,7 @@
 
 use App\Api\Controllers\AdminController;
 use App\Api\Controllers\AdminPanelUserController;
+use App\Api\Controllers\ForgetPasswordController;
 use App\Api\Controllers\MediaController;
 use App\Api\Controllers\UserController;
 use App\Api\Controllers\PageController;
@@ -13,6 +14,8 @@ use Illuminate\Support\Facades\Auth;
 
 Route::post('/customer/signup', [UserController::class, 'signUp'])->name('customerSignup'); // user add , edit
 Route::post('/customer/login', [UserController::class, 'login'])->name('customerLogin');
+
+Route::post('/forget-password', [ForgetPasswordController::class, 'sendForgetPasswordMail']); // send mail to 
 
 // Route::post('/admin/login', [AdminController::class, 'login'])->name('adminLoginPost');
 // Route::post('/admin/signup', [AdminController::class, 'create'])->name('adminUserCreate');

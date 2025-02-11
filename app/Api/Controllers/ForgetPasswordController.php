@@ -89,8 +89,7 @@ class ForgetPasswordController extends Controller
 
             }
 
-            $updatePassword = PasswordResetToken::table('password_resets')
-                              ->where([
+            $updatePassword = PasswordResetToken::where([
                                 'email' => $data['email'], 
                                 'password' => $data['token']
                               ])->first();

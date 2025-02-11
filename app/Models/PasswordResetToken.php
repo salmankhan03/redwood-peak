@@ -12,6 +12,8 @@ class PasswordResetToken extends Model
 
     use HasFactory;
 
+    public $timestamps = false;
+
     protected $fillable = [
         'token', 'email','created_at'
     ];

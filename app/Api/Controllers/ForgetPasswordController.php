@@ -29,12 +29,18 @@ class ForgetPasswordController extends Controller
     }
     
     public function sendForgetPasswordMail(Request $request){ 
-        // record token creation
-        // mail sending with url that contains token
 
         set_time_limit(0);
 
         try{
+
+            $alreadyExistUser = User::where('email', $request->email)->get();
+    
+            if (!isset($alreadyExistUser->count())) {
+
+                return response()->json(['message' => 'User Not Found']);
+
+            }
 
             $token = Str::random(64);
 

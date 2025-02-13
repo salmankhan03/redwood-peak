@@ -241,7 +241,7 @@ class UserController extends Controller
                 $criteria[] = ['status', '=',  $query['status']];
             }
 
-            $qb->where($criteria);
+            $qb->where($criteria)->orderBy('id', 'DESC');
 
             $list = $qb->paginate($pageSize);
 

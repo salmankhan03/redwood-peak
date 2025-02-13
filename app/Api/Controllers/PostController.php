@@ -130,7 +130,7 @@ class PostController extends Controller
                 $criteria[] = ['title', 'like', '%' . $searchParam['text'] . "%"];
             }
 
-            $qb->where($criteria);
+            $qb->where($criteria)->orderBy('id', 'DESC');
 
             $list = $qb->paginate($pageSize);
 

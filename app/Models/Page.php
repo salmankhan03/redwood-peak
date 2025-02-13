@@ -18,7 +18,7 @@ class Page extends Model
 
 
     protected $fillable = [
-        'type', 'year','is_enabled','file_name','file_path','file_extension' , 'size_in_kb' , 'created_by','edited_by','hedge_fund_report_type'
+        'type', 'year','is_enabled','file_name','file_path','file_extension' , 'size_in_kb' , 'created_by','edited_by','hedge_fund_report_type','name'
     ];
 
     protected $hidden = [

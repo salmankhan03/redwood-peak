@@ -51,6 +51,7 @@ class PageController extends Controller
 
                 $pageData['type'] = $data['type'];
                 $pageData['year'] = $data['year'];
+                $pageData['name'] = isset($data['name']) ? $data['name'] : null;
                 $pageData['hedge_fund_report_type'] = $data['hedge_fund_report_type'];
                 
                 $pageData['file_name'] = $document->getClientOriginalName();
@@ -118,7 +119,7 @@ class PageController extends Controller
                 $criteria[] = ['hedge_fund_report_type', '=', $searchParam['hedge_fund_report_type'] ];
             }
 
-            $qb->where($criteria);
+            $qb->where($criteria)->orderBy('id', 'DESC');
 
             $list = $qb->paginate($pageSize);
 

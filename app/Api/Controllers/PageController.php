@@ -29,7 +29,8 @@ class PageController extends Controller
             $data = $request->only([
                 'type',
                 'year',
-                'hedge_fund_report_type'
+                'hedge_fund_report_type',
+                'name'
             ]);
     
             foreach ($files as  $fileName => $file) {

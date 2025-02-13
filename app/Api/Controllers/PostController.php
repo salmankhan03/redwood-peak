@@ -35,7 +35,8 @@ class PostController extends Controller
                 'is_disabled',
                 'thumbnail_image',
                 'image_caption_data',
-                'year'
+                'year',
+                'name'
             ]);
 
             $image_caption_data = json_decode($data['image_caption_data'],true);

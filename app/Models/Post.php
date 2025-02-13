@@ -17,7 +17,7 @@ class Post extends Model
     protected $guarded = ['id'];
 
     protected $fillable = [
-        'title', 'category','content','created_by','is_disabled','year'
+        'title', 'category','content','created_by','is_disabled','year','name'
     ];
 
     protected $hidden = [

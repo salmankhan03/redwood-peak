@@ -7,13 +7,14 @@ use App\Models\User;
 use Exception;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-use JWTAuth;
 use Illuminate\Support\Facades\Hash;
-use Tymon\JWTAuth\Exceptions\JWTException;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\Config;
 use Session;
 use Illuminate\Support\Facades\DB;
+use Tymon\JWTAuth\Facades\JWTAuth;
+use Tymon\JWTAuth\Exceptions\JWTException;
+
 
 class UserController extends Controller
 {
@@ -25,6 +26,22 @@ class UserController extends Controller
             'status_code' => 401,
             'message'     => 'unauthorized',
         ], 401);
+    }
+
+    public function getUser()
+    {
+        try {
+            if (! $user = JWTAuth::parseToken()->authenticate()) {
+                return response()->json(['error' => 'User not found'], 404);
+            }
+        } catch (JWTException $e) {
+            return response()->json(['error' => 'Invalid token'], 400);
+        }
+
+        return response()->json([
+            'status_code' => 200,
+            'message'     => 'unauthorized',
+        ], 200);
     }
 
     public function login(Request $request)

@@ -14,6 +14,7 @@ use Illuminate\Support\Facades\Auth;
 
 Route::post('/customer/signup', [UserController::class, 'signUp'])->name('customerSignup'); // user add , edit
 Route::post('/customer/login', [UserController::class, 'login'])->name('customerLogin');
+Route::post('/authenticate', [UserController::class, 'getUser']);
 
 Route::post('/forget-password', [ForgetPasswordController::class, 'sendForgetPasswordMail']); // send mail to 
 Route::post('/update-password-via-mail', [ForgetPasswordController::class, 'submitForgetPasswordData']);
@@ -22,10 +23,8 @@ Route::post('/update-password-via-mail', [ForgetPasswordController::class, 'subm
 // Route::post('/admin/signup', [AdminController::class, 'create'])->name('adminUserCreate');
 
 
-// Route::group(['middleware' => 'auth.jwt'], function () {
+// Route::middleware([JwtMiddleware::class])->group(function () {
 // });
-
-// will add custom middleware for admin panel usage
 
 Route::prefix('/media')->group(function () {
 

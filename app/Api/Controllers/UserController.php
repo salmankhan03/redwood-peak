@@ -40,7 +40,7 @@ class UserController extends Controller
 
         return response()->json([
             'status_code' => 200,
-            'message'     => 'unauthorized',
+            'message'     => $user
         ], 200);
     }
 

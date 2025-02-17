@@ -19,6 +19,9 @@ Route::post('/authenticate', [UserController::class, 'getUser']);
 Route::post('/forget-password', [ForgetPasswordController::class, 'sendForgetPasswordMail']); // send mail to 
 Route::post('/update-password-via-mail', [ForgetPasswordController::class, 'submitForgetPasswordData']);
 
+Route::post('/page/list', [PageController::class, 'list']);
+Route::post('/post/list', [PostController::class, 'list']);
+
 // Route::post('/admin/login', [AdminController::class, 'login'])->name('adminLoginPost');
 // Route::post('/admin/signup', [AdminController::class, 'create'])->name('adminUserCreate');
 
@@ -36,7 +39,6 @@ Route::middleware(['jwtMiddleware'])->group(function () {
     Route::prefix('/page')->group(function () {
 
         Route::post('/upload', [PageController::class, 'upload']);
-        Route::post('/list', [PageController::class, 'list']);
         Route::get('/{id}/delete', [PageController::class, 'delete']);
         Route::post('/multiple-delete', [PageController::class, 'multipleDelete']);
     
@@ -45,7 +47,6 @@ Route::middleware(['jwtMiddleware'])->group(function () {
     Route::prefix('/post')->group(function () {
 
         Route::post('/upload', [PostController::class, 'upload']);
-        Route::post('/list', [PostController::class, 'list']);
         Route::get('/{id}/delete', [PostController::class, 'delete']);
         Route::post('/multiple-delete', [PostController::class, 'multipleDelete']);
         Route::get('/{id}/get-by-id', [PostController::class, 'getById']);

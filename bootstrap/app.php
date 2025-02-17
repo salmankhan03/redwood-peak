@@ -18,9 +18,9 @@ return Application::configure(basePath: dirname(__DIR__))
     ->withMiddleware(function (Middleware $middleware) {
         $middleware->append(StartSession::class);
         $middleware->append(ShareErrorsFromSession::class);
-    //     $middleware->api(prepend:
-    //         [JwtMiddleware::class]
-    // );
+        $middleware->alias([
+            'jwtMiddleware' => JwtMiddleware::class
+        ]);
 
     })
     ->withExceptions(function (Exceptions $exceptions) {

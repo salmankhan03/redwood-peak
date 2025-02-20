@@ -23,7 +23,7 @@ class Post extends Model
     protected $hidden = [
         'deleted_at',
         'updated_at',
-        'created_at',
+        // 'created_at',
     ];
 
     public function media(){

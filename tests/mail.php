@@ -14,7 +14,8 @@ $mail = new PHPMailer(true);
 try {
 
     $mail->isSMTP();                                            //Send using SMTP
-    $mail->Host       = 'smtp-mail.outlook.com';                     //Set the SMTP server to send through
+    // $mail->Host       = 'smtp-mail.outlook.com';                     //Set the SMTP server to send through
+    $mail->Host = 'smtp.office365.com';
     $mail->SMTPAuth   = true;                                   //Enable SMTP authentication
     $mail->Username   = 'noreply-ir@redwoodpeak.com';                     //SMTP username
     $mail->Password   = 'T&499160830492oh';                               //SMTP password

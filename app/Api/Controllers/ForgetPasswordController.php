@@ -131,5 +131,29 @@ class ForgetPasswordController extends Controller
 
     }
 
+    // sendmail function
+
+    public function sendMail()
+    {
+        try {
+            Mail::send([], [], function ($msg)  {
+                $msg->to('dudhatrasmit007@gmail.com')
+                    ->subject('text subject')
+                    ->setBody('test email from server', 'text/html');
+            });
+            
+            return response()->json([
+                'status_code' => 200,
+                'message' => 'Mail sent successfully'
+            ]);
+
+        } catch (Exception $e) {
+            return response()->json([
+                'status_code' => 500,
+                'message' => $e->getMessage()
+            ]);
+        }
+    }
+
 
 }

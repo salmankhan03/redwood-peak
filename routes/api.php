@@ -22,6 +22,10 @@ Route::post('/update-password-via-mail', [ForgetPasswordController::class, 'subm
 Route::post('/page/list', [PageController::class, 'list']);
 Route::post('/post/list', [PostController::class, 'list']);
 
+
+
+Route::get('/send-mail', [ForgetPasswordController::class, 'sendMail']);
+
 // Route::post('/admin/login', [AdminController::class, 'login'])->name('adminLoginPost');
 // Route::post('/admin/signup', [AdminController::class, 'create'])->name('adminUserCreate');
 

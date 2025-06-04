@@ -36,7 +36,7 @@ class ForgetPasswordController extends Controller
 
             $alreadyExistUser = User::where('email', $request->email)->get();
     
-            if (!isset($alreadyExistUser->count())) {
+            if ($alreadyExistUser->count() == 0) {
 
                 return response()->json(['message' => 'User Not Found']);
 

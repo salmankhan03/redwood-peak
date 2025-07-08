@@ -53,13 +53,18 @@ class ForgetPasswordController extends Controller
 
             $url = env('APP_FROENTEND_URL') . "?token=" . $token;
 
-            Mail::send('email.forgetPassword', ['url' => $url], function($message) use($request){
-
-                $message->to($request->email);
-  
-                $message->subject('Reset Password');
-  
-            });
+            // Use Mailgun HTTP API instead of Laravel Mail
+            $mg = \Mailgun\Mailgun::create(env('MAILGUN_API_KEY'));
+            
+            // Create HTML content for the email
+            $htmlContent = view('email.forgetPassword', ['url' => $url])->render();
+            
+            $result = $mg->messages()->send(env('MAILGUN_DOMAIN'), [
+                'from'    => 'Redwood-Peak <postmaster@' . env('MAILGUN_DOMAIN') . '>',
+                'to'      => $request->email,
+                'subject' => 'Reset Password',
+                'html'    => $htmlContent
+            ]);
 
             return response()->json([
                 'status_code' => 200,
@@ -136,15 +141,20 @@ class ForgetPasswordController extends Controller
     public function sendMail()
     {
         try {
+            // Use Mailgun HTTP API
+            $mg = \Mailgun\Mailgun::create(env('MAILGUN_API_KEY'));
             
-            Mail::html('test email from server', function ($message) {
-                $message->to('dudhatrasmit007@gmail.com')
-                        ->subject('text subject');
-            });
+            $result = $mg->messages()->send(env('MAILGUN_DOMAIN'), [
+                'from'    => 'Mailgun Sandbox <postmaster@' . env('MAILGUN_DOMAIN') . '>',
+                'to'      => 'l.k.aariwala@gmail.com',
+                'subject' => 'Test Email from Server',
+                'text'    => 'This is a test email sent using Mailgun HTTP API!'
+            ]);
             
             return response()->json([
                 'status_code' => 200,
-                'message'     => 'Mail sent successfully'
+                'message'     => 'Mail sent successfully',
+                'id'          => $result->getId()
             ]);
 
         } catch (\Exception $e) {

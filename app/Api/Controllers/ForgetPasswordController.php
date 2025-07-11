@@ -60,9 +60,9 @@ class ForgetPasswordController extends Controller
             $htmlContent = view('email.forgetPassword', ['url' => $url])->render();
             
             $result = $mg->messages()->send(env('MAILGUN_DOMAIN'), [
-                'from'    => 'Redwood-Peak <postmaster@' . env('MAILGUN_DOMAIN') . '>',
+                'from'    => 'Redwood Peak <noreply@redwoodpeak.com>',
                 'to'      => $request->email,
-                'subject' => 'Reset Password',
+                'subject' => 'Reset Password - Redwood Peak',
                 'html'    => $htmlContent
             ]);
 
@@ -145,10 +145,10 @@ class ForgetPasswordController extends Controller
             $mg = \Mailgun\Mailgun::create(env('MAILGUN_API_KEY'));
             
             $result = $mg->messages()->send(env('MAILGUN_DOMAIN'), [
-                'from'    => 'Redwoodpeak.com <noreply-ir@' . env('MAILGUN_DOMAIN') . '>',
+                'from'    => 'redwoodpeak.com <noreply@redwoodpeak.com>',
                 'to'      => 'l.k.aariwala@gmail.com',
-                'subject' => 'Test Email from Server',
-                'text'    => 'This is a test email sent using Mailgun HTTP API!'
+                'subject' => 'Hello Intelli Developer',
+                'text' => 'Congratulations Intelli Developer, you just sent an email with Mailgun! You are truly awesome!'
             ]);
             
             return response()->json([

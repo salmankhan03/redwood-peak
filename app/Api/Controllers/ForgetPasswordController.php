@@ -145,7 +145,7 @@ class ForgetPasswordController extends Controller
             $mg = \Mailgun\Mailgun::create(env('MAILGUN_API_KEY'));
             
             $result = $mg->messages()->send(env('MAILGUN_DOMAIN'), [
-                'from'    => 'Mailgun Sandbox <postmaster@' . env('MAILGUN_DOMAIN') . '>',
+                'from'    => 'Redwoodpeak.com <noreply-ir@' . env('MAILGUN_DOMAIN') . '>',
                 'to'      => 'l.k.aariwala@gmail.com',
                 'subject' => 'Test Email from Server',
                 'text'    => 'This is a test email sent using Mailgun HTTP API!'

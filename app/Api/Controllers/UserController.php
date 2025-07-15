@@ -50,6 +50,16 @@ class UserController extends Controller
         //form-data and raw json body (use content-type) both can be parsed with same request
 
         try {
+            // Check if user exists and password is empty/null
+            $user = User::where('email', $request->email)->first();
+            
+            if ($user && (empty($user->password) || is_null($user->password))) {
+                return response()->json([
+                    'status_code' => 401,
+                    'message' => 'Reset Password'
+                ], 401);
+            }
+
             $credentials = $request->only('email', 'password');
 
             $token = JWTAuth::attempt($credentials);
@@ -66,7 +76,10 @@ class UserController extends Controller
                 
             } else {
 
-                return response()->json(['message' => 'Invalid Credentials']);
+                return response()->json([
+                    'status_code' => 401,
+                    'message' => 'Invalid Credentials'
+                ], 401);
                 
             }
         } catch (JWTException $e) {

@@ -44,13 +44,23 @@ class ForgetPasswordController extends Controller
 
             $token = Str::random(64);
 
-            PasswordResetToken::updateOrCreate(
-                ['email' => $request->email],
-                [
-                    'token' => $token, 
+            // Check if email already exists
+            $existingToken = PasswordResetToken::where('email', $request->email)->first();
+
+            if ($existingToken) {
+                // Update existing token
+                $existingToken->update([
+                    'token' => $token,
                     'created_at' => Carbon::now()
-                ]
-            );
+                ]);
+            } else {
+                // Create new token
+                PasswordResetToken::create([
+                    'email' => $request->email,
+                    'token' => $token,
+                    'created_at' => Carbon::now()
+                ]);
+            }
 
             $url = env('APP_FROENTEND_URL') . "?token=" . $token;
 

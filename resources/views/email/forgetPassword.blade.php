@@ -33,7 +33,7 @@
         }
         .reset-button {
             display: inline-block;
-            background-color: #007bff;
+            background-color: #511515;
             color: white;
             padding: 12px 30px;
             text-decoration: none;
@@ -42,12 +42,12 @@
             margin: 20px 0;
         }
         .reset-button:hover {
-            background-color: #0056b3;
+            background-color: #3d0f0f;
         }
         .security-info {
             background-color: #f8f9fa;
             padding: 15px;
-            border-left: 4px solid #007bff;
+            border-left: 4px solid #511515;
             margin: 20px 0;
             border-radius: 5px;
         }
@@ -66,8 +66,7 @@
 <body>
     <div class="container">
         <div class="header">
-            <h1 style="color: #007bff; margin-bottom: 10px;">Password Reset Request</h1>
-            <p style="color: #666;">Redwood Peak</p>
+            <h1 style="color: #511515; margin-bottom: 10px;">Password Reset Request</h1>
         </div>
 
         <div class="content">
@@ -84,9 +83,8 @@
         </div>
 
         <div class="security-info">
-            <h3 style="margin-top: 0; color: #007bff;">Security Information</h3>
+            <h3 style="margin-top: 0; color: #511515;">Security Information</h3>
             <ul style="margin-bottom: 0;">
-                <li>This link will expire in 60 minutes for security reasons</li>
                 <li>If you didn't request this password reset, please ignore this email</li>
                 <li>Your password won't be changed until you click the link above and create a new one</li>
             </ul>

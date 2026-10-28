@@ -8,6 +8,12 @@ trait FileUploadTrait
     protected $file_attribute_name       = "";
     protected $upload_disk;
 
+    // Extensions (detected from content) that may be stored
+    protected static $allowed_upload_extensions = [
+        'jpg', 'png', 'gif', 'webp', 'ico', 'mp4',
+        'pdf', 'doc', 'docx', 'xls', 'xlsx', 'ppt', 'pptx',
+    ];
+
     public function getFileUrl($file_path)
     {        
 
@@ -39,8 +45,17 @@ trait FileUploadTrait
 
         if (is_object($value)) {
 
-            $filename = str_slug(Config('app.name')) . "-" . md5($value . time());
-            $fileext  = '.' . $value->getClientOriginalExtension();
+            // Never trust the client's filename/extension: derive it from the file's real content
+            // and only accept an allow-list, so a script can't be stored under an executable name.
+            $detected = strtolower((string) $value->guessExtension());
+            $detected = $detected === 'jpeg' ? 'jpg' : $detected;
+
+            if (!in_array($detected, self::$allowed_upload_extensions, true)) {
+                throw new \InvalidArgumentException('This file type is not allowed');
+            }
+
+            $filename = str_slug(Config('app.name')) . "-" . bin2hex(random_bytes(16));
+            $fileext  = '.' . $detected;
             $this->storeFileInDisk($value, $destination_path . '/' . $filename . $fileext);
             $this->attributes[$this->file_attribute_name] = $destination_path . '/' . $filename . $fileext;
 

@@ -159,34 +159,5 @@ class ForgetPasswordController extends Controller
 
     }
 
-    // sendmail function
-
-    public function sendMail()
-    {
-        try {
-            // Use Mailgun HTTP API
-            $mg = \Mailgun\Mailgun::create(env('MAILGUN_API_KEY'));
-            
-            $result = $mg->messages()->send(env('MAILGUN_DOMAIN'), [
-                'from'    => 'redwoodpeak.com <noreply@redwoodpeak.com>',
-                'to'      => 'l.k.aariwala@gmail.com',
-                'subject' => 'Hello Intelli Developer',
-                'text' => 'Congratulations Intelli Developer, you just sent an email with Mailgun! You are truly awesome!'
-            ]);
-            
-            return response()->json([
-                'status_code' => 200,
-                'message'     => 'Mail sent successfully',
-                'id'          => $result->getId()
-            ]);
-
-        } catch (\Exception $e) {
-            return response()->json([
-                'status_code' => 500,
-                'message'     => $e->getMessage()
-            ]);
-        }
-    }
-
 
 }

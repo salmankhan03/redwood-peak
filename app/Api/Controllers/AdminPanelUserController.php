@@ -91,7 +91,7 @@ class AdminPanelUserController extends Controller
 
         try {
 
-            $pageSize = !empty($request->get('pageSize')) ? $request->get('pageSize') : 10;
+            $pageSize = min(max((int) $request->get('pageSize') ?: 10, 1), 500); // capped to protect the database
 
             $query = $request->only([
                 'status',

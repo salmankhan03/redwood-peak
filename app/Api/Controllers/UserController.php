@@ -309,7 +309,7 @@ class UserController extends Controller
 
         try {
 
-            $pageSize = !empty($request->get('pageSize')) ? $request->get('pageSize') : 10;
+            $pageSize = min(max((int) $request->get('pageSize') ?: 10, 1), 500); // capped to protect the database
 
             $query = $request->only([
                 'status',
@@ -522,6 +522,15 @@ class UserController extends Controller
                     'status_code' => 500,
                     'message' => 'Password Not Match'
                 ]);
+
+            }
+
+            if (!is_string($data['new_password']) || strlen($data['new_password']) < 8){
+
+                return response()->json([
+                    'status_code' => 422,
+                    'message' => 'Password must be at least 8 characters'
+                ], 422);
 
             }
 

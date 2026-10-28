@@ -19,6 +19,9 @@ use Tymon\JWTAuth\Exceptions\JWTException;
 class UserController extends Controller
 {
 
+    // Values of users.role (lower-cased) that count as administrators
+    const ADMIN_ROLES = ['siteadmin', 'administrator', 'admin'];
+
     public function unauthorized()
     {
 
@@ -117,21 +120,49 @@ class UserController extends Controller
 
             // }
 
-            $alreadyExistUser = User::where('email', $data['email'])->get()->toArray();
+            // Work out who is calling (the route is public so signup works without a token)
+            $actor = null;
+            try {
+                if ($request->bearerToken()) {
+                    $actor = JWTAuth::parseToken()->authenticate();
+                }
+            } catch (JWTException $e) {
+                return response()->json(['status_code' => 401, 'message' => 'Token not valid'], 401);
+            }
 
-            if (count($alreadyExistUser)){
+            $isAdmin = $actor && in_array(strtolower((string) $actor->role), self::ADMIN_ROLES, true);
 
-                if (empty($data['id'])){
+            // Fields only an administrator may set
+            $privileged = ['role', 'role_id', 'status', 'is_disabled'];
 
-                    return response()->json(['message' => 'User With this Email Already Exist' , 'status_code' => 500]);
+            if (!$isAdmin) {
+
+                if (!empty($data['id'])) {
+
+                    // Editing needs a login, and a non-admin may only edit their own record
+                    if (!$actor) {
+                        return response()->json(['status_code' => 401, 'message' => 'Unauthorized'], 401);
+                    }
+
+                    if ((int) $data['id'] !== (int) $actor->id) {
+                        return response()->json(['status_code' => 403, 'message' => 'Forbidden'], 403);
+                    }
 
                 }
 
-                else{
+                foreach ($privileged as $field) {
+                    unset($data[$field]);
+                }
 
-                    if ($data['id'] != $alreadyExistUser[0]['id']){
-                        
-                    }
+            }
+
+            $alreadyExistUser = User::where('email', $data['email'] ?? null)->get()->toArray();
+
+            if (count($alreadyExistUser)){
+
+                if (empty($data['id']) || $data['id'] != $alreadyExistUser[0]['id']){
+
+                    return response()->json(['message' => 'User With this Email Already Exist' , 'status_code' => 500]);
 
                 }
 
@@ -170,6 +201,24 @@ class UserController extends Controller
 
             }
 
+            if (empty($data['id']) && (!is_string($data['password']) || strlen($data['password']) < 8)){
+
+                return response()->json([
+                    'status_code' => 422,
+                    'message' => 'Password must be at least 8 characters'
+                ], 422);
+
+            }
+
+            if (!isset($data['email']) || !filter_var($data['email'], FILTER_VALIDATE_EMAIL)){
+
+                return response()->json([
+                    'status_code' => 422,
+                    'message' => 'A valid email is required'
+                ], 422);
+
+            }
+
             if (empty($data['id'])){
 
                 $orignal_password = $data['password'];
@@ -186,9 +235,9 @@ class UserController extends Controller
 
             
             
-            $data['name'] = $data['first_name'] .' '. $data['last_name'];
+            $data['name'] = trim(($data['first_name'] ?? '') .' '. ($data['last_name'] ?? ''));
 
-            $user = User::updateOrCreate(['id' => $data['id']], $data);
+            $user = User::updateOrCreate(['id' => $data['id'] ?? null], $data);
 
             if (empty($data['id'])){
 

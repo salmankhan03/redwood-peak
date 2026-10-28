@@ -19,9 +19,6 @@ use Tymon\JWTAuth\Exceptions\JWTException;
 class UserController extends Controller
 {
 
-    // Values of users.role (lower-cased) that count as administrators
-    const ADMIN_ROLES = ['siteadmin', 'administrator', 'admin'];
-
     public function unauthorized()
     {
 
@@ -130,7 +127,7 @@ class UserController extends Controller
                 return response()->json(['status_code' => 401, 'message' => 'Token not valid'], 401);
             }
 
-            $isAdmin = $actor && in_array(strtolower((string) $actor->role), self::ADMIN_ROLES, true);
+            $isAdmin = $actor && $actor->isAdmin();
 
             // Fields only an administrator may set
             $privileged = ['role', 'role_id', 'status', 'is_disabled'];
@@ -271,6 +268,13 @@ class UserController extends Controller
     public function getById($id){
 
         try {
+
+            // Admins can view anyone; everyone else only their own record
+            $actor = JWTAuth::parseToken()->authenticate();
+
+            if (!$actor || (!$actor->isAdmin() && (int) $actor->id !== (int) $id)) {
+                return response()->json(['status_code' => 403, 'message' => 'Forbidden'], 403);
+            }
 
             $data = User::find($id);
 
@@ -521,15 +525,16 @@ class UserController extends Controller
 
             }
 
-            $user = User::find($data['user_id']);
+            // Always act on the logged-in user; a user_id sent by the client is ignored
+            $user = JWTAuth::parseToken()->authenticate();
 
-            if ($user->count()){
+            if ($user){
 
-                if (Hash::check($data['old_password'] , $user->password)){
+                if (Hash::check((string) ($data['old_password'] ?? '') , $user->password)){
 
                     $newPassword = Hash::make($data['new_password']);
 
-                    User::where('id', $data['user_id'])->update(['password' => $newPassword]);
+                    User::where('id', $user->id)->update(['password' => $newPassword]);
     
                     return response()->json([
                         'status_code' => 500,

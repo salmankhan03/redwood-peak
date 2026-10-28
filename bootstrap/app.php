@@ -19,7 +19,8 @@ return Application::configure(basePath: dirname(__DIR__))
         $middleware->append(StartSession::class);
         $middleware->append(ShareErrorsFromSession::class);
         $middleware->alias([
-            'jwtMiddleware' => JwtMiddleware::class
+            'jwtMiddleware' => JwtMiddleware::class,
+            'adminMiddleware' => \App\Http\Middleware\AdminMiddleware::class,
         ]);
 
     })

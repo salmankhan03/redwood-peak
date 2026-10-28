@@ -24,7 +24,6 @@ Route::post('/post/list', [PostController::class, 'list']);
 
 
 
-Route::get('/send-mail', [ForgetPasswordController::class, 'sendMail']);
 
 // Route::post('/admin/login', [AdminController::class, 'login'])->name('adminLoginPost');
 // Route::post('/admin/signup', [AdminController::class, 'create'])->name('adminUserCreate');
@@ -62,15 +61,22 @@ Route::middleware(['jwtMiddleware'])->group(function () {
     Route::prefix('/user')->group(function () {
 
         // Route::post('/upsert', [UserController::class, 'upsert']);
-        Route::post('/list', [UserController::class, 'list']);
-        Route::get('/count-by-status' , [UserController::class, 'getUserCountByStatus']);
-        Route::get('/{id}/delete', [UserController::class, 'delete']);
-        Route::post('/multiple-delete', [UserController::class, 'multipleDelete']);
+
+        // Administrators only
+        Route::middleware(['adminMiddleware'])->group(function () {
+
+            Route::post('/list', [UserController::class, 'list']);
+            Route::get('/count-by-status' , [UserController::class, 'getUserCountByStatus']);
+            Route::get('/{id}/delete', [UserController::class, 'delete']);
+            Route::post('/multiple-delete', [UserController::class, 'multipleDelete']);
+
+            Route::post('/bulk-role-change', [UserController::class, 'bulkRoleChange']);
+            Route::post('/bulk-status-change', [UserController::class, 'bulkStatusChange']);
+
+        });
+
+        // Any logged-in user, but the controller limits them to their own record
         Route::get('/{id}/get-by-id', [UserController::class, 'getById']);
-
-        Route::post('/bulk-role-change', [UserController::class, 'bulkRoleChange']);
-        Route::post('/bulk-status-change', [UserController::class, 'bulkStatusChange']);
-
         Route::post('/update-password', [UserController::class, 'updatePassword']);
 
     

@@ -17,6 +17,14 @@ class User extends Authenticatable implements JWTSubject
 
     const STATUS_PENDING = "Pending";
 
+    // Values of users.role (lower-cased) that count as administrators
+    const ADMIN_ROLES = ['siteadmin', 'administrator', 'admin'];
+
+    public function isAdmin(): bool
+    {
+        return in_array(strtolower((string) $this->role), self::ADMIN_ROLES, true);
+    }
+
 
     /**
      * The attributes that are mass assignable.

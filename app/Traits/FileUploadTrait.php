@@ -22,7 +22,7 @@ trait FileUploadTrait
         } catch (\InvalidArgumentException $e) {
             return response()->json([
                 'status_code' => 500,
-                'error' => $e->getMessage()
+                'error' => 'File could not be located'
             ]);
         }
     }

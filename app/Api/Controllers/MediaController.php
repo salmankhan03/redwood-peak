@@ -52,7 +52,7 @@ class MediaController extends Controller
         catch (\Exception $e){
             return response()->json([
                 'status_code' => 500,
-                'message' => $e->getMessage()
+                'message' => $this->errorMessage($e)
             ]);
         }
        
@@ -99,7 +99,7 @@ class MediaController extends Controller
         catch (\Exception $e){
             return response()->json([
                 'status_code' => 500,
-                'message' => $e->getMessage()
+                'message' => $this->errorMessage($e)
             ]);
         }
 
@@ -120,7 +120,7 @@ class MediaController extends Controller
         catch (\Exception $e){
             return response()->json([
                 'status_code' => 500,
-                'message' => $e->getMessage()
+                'message' => $this->errorMessage($e)
             ]);
         }
     }

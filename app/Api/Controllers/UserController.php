@@ -83,7 +83,7 @@ class UserController extends Controller
                 
             }
         } catch (JWTException $e) {
-            return response()->json(['message' => $e->getMessage()]);
+            return response()->json(['message' => $this->errorMessage($e)]);
         }
     }
 
@@ -261,7 +261,7 @@ class UserController extends Controller
             } 
 
         } catch (JWTException $e) {
-            return response()->json(['message' => $e->getMessage()]);
+            return response()->json(['message' => $this->errorMessage($e)]);
         }
     }
 
@@ -299,7 +299,7 @@ class UserController extends Controller
         catch (\Exception $e){
             return response()->json([
                 'status_code' => 500,
-                'message' => $e->getMessage()
+                'message' => $this->errorMessage($e)
             ]);
         }
 
@@ -338,7 +338,7 @@ class UserController extends Controller
         catch (\Exception $e){
             return response()->json([
                 'status_code' => 500,
-                'message' => $e->getMessage()
+                'message' => $this->errorMessage($e)
             ]);
         }
     }
@@ -357,7 +357,7 @@ class UserController extends Controller
         } catch (\Exception $e) {
             return response()->json([
                 'status_code' => 500,
-                'message' => $e->getMessage()
+                'message' => $this->errorMessage($e)
             ]);
         }
     }
@@ -389,7 +389,7 @@ class UserController extends Controller
         catch (\Exception $e){
             return response()->json([
                 'status_code' => 500,
-                'message' => $e->getMessage()
+                'message' => $this->errorMessage($e)
             ]);
         }
 
@@ -414,7 +414,7 @@ class UserController extends Controller
         catch (\Exception $e){
             return response()->json([
                 'status_code' => 500,
-                'message' => $e->getMessage()
+                'message' => $this->errorMessage($e)
             ]);
         }
 
@@ -451,7 +451,7 @@ class UserController extends Controller
         } catch (\Exception $e) {
             return response()->json([
                 'status_code' => 500,
-                'message' => $e->getMessage()
+                'message' => $this->errorMessage($e)
             ]);
         }
     }
@@ -505,7 +505,7 @@ class UserController extends Controller
         } catch (\Exception $e) {
             return response()->json([
                 'status_code' => 500,
-                'message' => $e->getMessage()
+                'message' => $this->errorMessage($e)
             ]);
         }
     }
@@ -562,7 +562,7 @@ class UserController extends Controller
 
             return response()->json([
                 'status_code' => 500,
-                'message' => $e->getMessage()
+                'message' => $this->errorMessage($e)
             ]);
 
         }

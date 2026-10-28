@@ -60,7 +60,7 @@ class AdminController extends Controller
                 return response()->json(['message' => 'Invalid Credentials']);
             }
         } catch (JWTException $e) {
-            return response()->json(['message' => $e->getMessage()]);
+            return response()->json(['message' => $this->errorMessage($e)]);
         }
     }
 
@@ -123,7 +123,7 @@ class AdminController extends Controller
                
     
             } catch (JWTException $e) {
-                return response()->json(['message' => $e->getMessage()]);
+                return response()->json(['message' => $this->errorMessage($e)]);
             }
         }
 

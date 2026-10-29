@@ -94,13 +94,10 @@ class AdminController extends Controller
     
                 }
     
-                $orignal_password = $data['password'];
                 $data['password'] = Hash::make($data['password']);
-            
-    
+
+
                 $user = AdminUser::create($data);
-    
-                $user->orignal_password = $orignal_password;
 
                 $token            = \JWTAuth::fromUser($user);
 

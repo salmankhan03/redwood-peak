@@ -218,7 +218,6 @@ class UserController extends Controller
 
             if (empty($data['id'])){
 
-                $orignal_password = $data['password'];
                 $data['password'] = Hash::make($data['password']);
 
             }
@@ -236,29 +235,20 @@ class UserController extends Controller
 
             $user = User::updateOrCreate(['id' => $data['id'] ?? null], $data);
 
-            if (empty($data['id'])){
+            // Only hand out a token to the person the account belongs to (a new signup, or a user
+            // editing themselves). An admin editing someone else must not receive that user's token.
+            $ownAccount = empty($data['id']) || ($actor && (int) $actor->id === (int) $user->id);
 
-                $user->orignal_password = $orignal_password;
+            $response = [
+                'status_code' => 200,
+                'user'        => $user,
+            ];
 
+            if ($ownAccount) {
+                $response['token'] = \JWTAuth::fromUser($user);
             }
 
-            $token            = \JWTAuth::fromUser($user);
-
-            // $credentials = $request->only('email', 'password');
-
-            // $token = JWTAuth::attempt($credentials);
-            
-            if ($token) {
-
-                $currentUser = Auth::user();
-
-                return response()->json([
-                    'status_code' => 200,
-                    'user'        => $user,
-                    'token'       => $token,
-                ]);
-                
-            } 
+            return response()->json($response);
 
         } catch (JWTException $e) {
             return response()->json(['message' => $this->errorMessage($e)]);

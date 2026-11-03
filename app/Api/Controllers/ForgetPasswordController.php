@@ -50,14 +50,14 @@ class ForgetPasswordController extends Controller
             if ($existingToken) {
                 // Update existing token
                 $existingToken->update([
-                    'token' => $token,
+                    'token' => hash('sha256', $token),
                     'created_at' => Carbon::now()
                 ]);
             } else {
-                // Create new token
+                // Create new token (only the hash is stored; the plain token goes in the email)
                 PasswordResetToken::create([
                     'email' => $request->email,
-                    'token' => $token,
+                    'token' => hash('sha256', $token),
                     'created_at' => Carbon::now()
                 ]);
             }
@@ -87,7 +87,7 @@ class ForgetPasswordController extends Controller
         catch (\Exception $e){
             return response()->json([
                 'status_code' => 500,
-                'message' => $e->getMessage()
+                'message' => $this->errorMessage($e)
             ]);
         }
     }
@@ -102,7 +102,8 @@ class ForgetPasswordController extends Controller
                 'password'
             ]);
 
-            if (!isset($data['token']) ||!isset($data['email']) || !isset($data['password'])){
+            if (!isset($data['token']) ||!isset($data['email']) || !isset($data['password'])
+                || !is_string($data['token']) || !is_string($data['email']) || !is_string($data['password'])){
 
                 return response()->json([
                     'status_code' => 500,
@@ -111,25 +112,40 @@ class ForgetPasswordController extends Controller
 
             }
 
-            $updatePassword = PasswordResetToken::where([
-                                'email' => $data['email'], 
-                                'token' => $data['token']
-                              ])->get();
-            
-            if(!$updatePassword){
+            // Tolerate stray whitespace from copy/paste or form fields
+            $data['token'] = trim($data['token']);
+            $data['email'] = trim($data['email']);
+
+            if (strlen($data['password']) < 8){
 
                 return response()->json([
-                    'status_code' => 500,
-                    'message' => 'Email not Found'
-                ]);
+                    'status_code' => 422,
+                    'message' => 'Password must be at least 8 characters'
+                ], 422);
+
+            }
+
+            // The row must exist for this email, the token must match, and it must be recent.
+            $resetRow = PasswordResetToken::where('email', $data['email'])->first();
+
+            $valid = $resetRow
+                && hash_equals((string) $resetRow->token, hash('sha256', $data['token']))
+                && $resetRow->created_at
+                && Carbon::parse($resetRow->created_at)->gt(Carbon::now()->subMinutes(60));
+
+            if (!$valid){
+
+                return response()->json([
+                    'status_code' => 400,
+                    'message' => 'Invalid or expired token'
+                ], 400);
+
             }
 
             User::where('email', $data['email'])->update(['password' => Hash::make($data['password'])]);
 
-            PasswordResetToken::where([
-                'email' => $data['email'], 
-                'token' => $data['token']
-              ])->delete();
+            // Single use: remove the token once the password has changed
+            PasswordResetToken::where('email', $data['email'])->delete();
 
             return response()->json([
                 'status_code' => 200,
@@ -141,39 +157,10 @@ class ForgetPasswordController extends Controller
         catch (\Exception $e){
             return response()->json([
                 'status_code' => 500,
-                'message' => $e->getMessage()
+                'message' => $this->errorMessage($e)
             ]);
         }
 
-    }
-
-    // sendmail function
-
-    public function sendMail()
-    {
-        try {
-            // Use Mailgun HTTP API
-            $mg = \Mailgun\Mailgun::create(env('MAILGUN_API_KEY'));
-            
-            $result = $mg->messages()->send(env('MAILGUN_DOMAIN'), [
-                'from'    => 'redwoodpeak.com <noreply@redwoodpeak.com>',
-                'to'      => 'l.k.aariwala@gmail.com',
-                'subject' => 'Hello Intelli Developer',
-                'text' => 'Congratulations Intelli Developer, you just sent an email with Mailgun! You are truly awesome!'
-            ]);
-            
-            return response()->json([
-                'status_code' => 200,
-                'message'     => 'Mail sent successfully',
-                'id'          => $result->getId()
-            ]);
-
-        } catch (\Exception $e) {
-            return response()->json([
-                'status_code' => 500,
-                'message'     => $e->getMessage()
-            ]);
-        }
     }
 
 

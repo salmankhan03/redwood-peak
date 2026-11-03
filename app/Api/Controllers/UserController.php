@@ -68,6 +68,15 @@ class UserController extends Controller
 
                 $currentUser = Auth::user();
 
+                if (($user ?? $currentUser)->isBlocked()) {
+                    // Same shape as a normal login so the frontend can read user.status and show
+                    // its own "inactive" message, but no token is handed out.
+                    return response()->json([
+                        'status_code' => 200,
+                        'user'        => $currentUser ?? $user,
+                    ]);
+                }
+
                 return response()->json([
                     'status_code' => 200,
                     'user'        => $currentUser,
@@ -83,7 +92,7 @@ class UserController extends Controller
                 
             }
         } catch (JWTException $e) {
-            return response()->json(['message' => $e->getMessage()]);
+            return response()->json(['message' => $this->errorMessage($e)]);
         }
     }
 
@@ -117,21 +126,49 @@ class UserController extends Controller
 
             // }
 
-            $alreadyExistUser = User::where('email', $data['email'])->get()->toArray();
+            // Work out who is calling (the route is public so signup works without a token)
+            $actor = null;
+            try {
+                if ($request->bearerToken()) {
+                    $actor = JWTAuth::parseToken()->authenticate();
+                }
+            } catch (JWTException $e) {
+                return response()->json(['status_code' => 401, 'message' => 'Token not valid'], 401);
+            }
 
-            if (count($alreadyExistUser)){
+            $isAdmin = $actor && $actor->isAdmin();
 
-                if (empty($data['id'])){
+            // Fields only an administrator may set
+            $privileged = ['role', 'role_id', 'status', 'is_disabled'];
 
-                    return response()->json(['message' => 'User With this Email Already Exist' , 'status_code' => 500]);
+            if (!$isAdmin) {
+
+                if (!empty($data['id'])) {
+
+                    // Editing needs a login, and a non-admin may only edit their own record
+                    if (!$actor) {
+                        return response()->json(['status_code' => 401, 'message' => 'Unauthorized'], 401);
+                    }
+
+                    if ((int) $data['id'] !== (int) $actor->id) {
+                        return response()->json(['status_code' => 403, 'message' => 'Forbidden'], 403);
+                    }
 
                 }
 
-                else{
+                foreach ($privileged as $field) {
+                    unset($data[$field]);
+                }
 
-                    if ($data['id'] != $alreadyExistUser[0]['id']){
-                        
-                    }
+            }
+
+            $alreadyExistUser = User::where('email', $data['email'] ?? null)->get()->toArray();
+
+            if (count($alreadyExistUser)){
+
+                if (empty($data['id']) || $data['id'] != $alreadyExistUser[0]['id']){
+
+                    return response()->json(['message' => 'User With this Email Already Exist' , 'status_code' => 500]);
 
                 }
 
@@ -170,9 +207,26 @@ class UserController extends Controller
 
             }
 
+            if (empty($data['id']) && (!is_string($data['password']) || strlen($data['password']) < 8)){
+
+                return response()->json([
+                    'status_code' => 422,
+                    'message' => 'Password must be at least 8 characters'
+                ], 422);
+
+            }
+
+            if (!isset($data['email']) || !filter_var($data['email'], FILTER_VALIDATE_EMAIL)){
+
+                return response()->json([
+                    'status_code' => 422,
+                    'message' => 'A valid email is required'
+                ], 422);
+
+            }
+
             if (empty($data['id'])){
 
-                $orignal_password = $data['password'];
                 $data['password'] = Hash::make($data['password']);
 
             }
@@ -186,42 +240,40 @@ class UserController extends Controller
 
             
             
-            $data['name'] = $data['first_name'] .' '. $data['last_name'];
+            $data['name'] = trim(($data['first_name'] ?? '') .' '. ($data['last_name'] ?? ''));
 
-            $user = User::updateOrCreate(['id' => $data['id']], $data);
+            $user = User::updateOrCreate(['id' => $data['id'] ?? null], $data);
 
-            if (empty($data['id'])){
+            // Only hand out a token to the person the account belongs to (a new signup, or a user
+            // editing themselves). An admin editing someone else must not receive that user's token.
+            $ownAccount = empty($data['id']) || ($actor && (int) $actor->id === (int) $user->id);
 
-                $user->orignal_password = $orignal_password;
+            $response = [
+                'status_code' => 200,
+                'user'        => $user,
+            ];
 
+            if ($ownAccount) {
+                $response['token'] = \JWTAuth::fromUser($user);
             }
 
-            $token            = \JWTAuth::fromUser($user);
-
-            // $credentials = $request->only('email', 'password');
-
-            // $token = JWTAuth::attempt($credentials);
-            
-            if ($token) {
-
-                $currentUser = Auth::user();
-
-                return response()->json([
-                    'status_code' => 200,
-                    'user'        => $user,
-                    'token'       => $token,
-                ]);
-                
-            } 
+            return response()->json($response);
 
         } catch (JWTException $e) {
-            return response()->json(['message' => $e->getMessage()]);
+            return response()->json(['message' => $this->errorMessage($e)]);
         }
     }
 
     public function getById($id){
 
         try {
+
+            // Admins can view anyone; everyone else only their own record
+            $actor = JWTAuth::parseToken()->authenticate();
+
+            if (!$actor || (!$actor->isAdmin() && (int) $actor->id !== (int) $id)) {
+                return response()->json(['status_code' => 403, 'message' => 'Forbidden'], 403);
+            }
 
             $data = User::find($id);
 
@@ -246,7 +298,7 @@ class UserController extends Controller
         catch (\Exception $e){
             return response()->json([
                 'status_code' => 500,
-                'message' => $e->getMessage()
+                'message' => $this->errorMessage($e)
             ]);
         }
 
@@ -256,7 +308,7 @@ class UserController extends Controller
 
         try {
 
-            $pageSize = !empty($request->get('pageSize')) ? $request->get('pageSize') : 10;
+            $pageSize = min(max((int) $request->get('pageSize') ?: 10, 1), 500); // capped to protect the database
 
             $query = $request->only([
                 'status',
@@ -285,7 +337,7 @@ class UserController extends Controller
         catch (\Exception $e){
             return response()->json([
                 'status_code' => 500,
-                'message' => $e->getMessage()
+                'message' => $this->errorMessage($e)
             ]);
         }
     }
@@ -304,7 +356,7 @@ class UserController extends Controller
         } catch (\Exception $e) {
             return response()->json([
                 'status_code' => 500,
-                'message' => $e->getMessage()
+                'message' => $this->errorMessage($e)
             ]);
         }
     }
@@ -336,7 +388,7 @@ class UserController extends Controller
         catch (\Exception $e){
             return response()->json([
                 'status_code' => 500,
-                'message' => $e->getMessage()
+                'message' => $this->errorMessage($e)
             ]);
         }
 
@@ -361,7 +413,7 @@ class UserController extends Controller
         catch (\Exception $e){
             return response()->json([
                 'status_code' => 500,
-                'message' => $e->getMessage()
+                'message' => $this->errorMessage($e)
             ]);
         }
 
@@ -398,7 +450,7 @@ class UserController extends Controller
         } catch (\Exception $e) {
             return response()->json([
                 'status_code' => 500,
-                'message' => $e->getMessage()
+                'message' => $this->errorMessage($e)
             ]);
         }
     }
@@ -452,7 +504,7 @@ class UserController extends Controller
         } catch (\Exception $e) {
             return response()->json([
                 'status_code' => 500,
-                'message' => $e->getMessage()
+                'message' => $this->errorMessage($e)
             ]);
         }
     }
@@ -472,18 +524,28 @@ class UserController extends Controller
 
             }
 
-            $user = User::find($data['user_id']);
+            if (!is_string($data['new_password']) || strlen($data['new_password']) < 8){
 
-            if ($user->count()){
+                return response()->json([
+                    'status_code' => 422,
+                    'message' => 'Password must be at least 8 characters'
+                ], 422);
 
-                if (Hash::check($data['old_password'] , $user->password)){
+            }
+
+            // Always act on the logged-in user; a user_id sent by the client is ignored
+            $user = JWTAuth::parseToken()->authenticate();
+
+            if ($user){
+
+                if (Hash::check((string) ($data['old_password'] ?? '') , $user->password)){
 
                     $newPassword = Hash::make($data['new_password']);
 
-                    User::where('id', $data['user_id'])->update(['password' => $newPassword]);
+                    User::where('id', $user->id)->update(['password' => $newPassword]);
     
                     return response()->json([
-                        'status_code' => 500,
+                        'status_code' => 200,
                         'message' => 'Password Updated Successfully'
                     ]);
 
@@ -508,7 +570,7 @@ class UserController extends Controller
 
             return response()->json([
                 'status_code' => 500,
-                'message' => $e->getMessage()
+                'message' => $this->errorMessage($e)
             ]);
 
         }

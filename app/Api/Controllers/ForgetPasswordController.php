@@ -112,6 +112,10 @@ class ForgetPasswordController extends Controller
 
             }
 
+            // Tolerate stray whitespace from copy/paste or form fields
+            $data['token'] = trim($data['token']);
+            $data['email'] = trim($data['email']);
+
             if (strlen($data['password']) < 8){
 
                 return response()->json([

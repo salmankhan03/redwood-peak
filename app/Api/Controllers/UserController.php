@@ -68,6 +68,15 @@ class UserController extends Controller
 
                 $currentUser = Auth::user();
 
+                if (($user ?? $currentUser)->isBlocked()) {
+                    // Same shape as a normal login so the frontend can read user.status and show
+                    // its own "inactive" message, but no token is handed out.
+                    return response()->json([
+                        'status_code' => 200,
+                        'user'        => $currentUser ?? $user,
+                    ]);
+                }
+
                 return response()->json([
                     'status_code' => 200,
                     'user'        => $currentUser,
@@ -536,7 +545,7 @@ class UserController extends Controller
                     User::where('id', $user->id)->update(['password' => $newPassword]);
     
                     return response()->json([
-                        'status_code' => 500,
+                        'status_code' => 200,
                         'message' => 'Password Updated Successfully'
                     ]);
 

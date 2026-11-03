@@ -91,7 +91,7 @@ class PostController extends Controller
         catch (\Exception $e){
             return response()->json([
                 'status_code' => 500,
-                'message' => $e->getMessage()
+                'message' => $this->errorMessage($e)
             ]);
         }
        
@@ -102,7 +102,7 @@ class PostController extends Controller
 
         // need to add category and filter
 
-        $pageSize = !empty($request->get('pageSize')) ? $request->get('pageSize') : 10;
+        $pageSize = min(max((int) $request->get('pageSize') ?: 10, 1), 500); // capped to protect the database
 
         $searchParam = $request->only([
             'category',
@@ -144,7 +144,7 @@ class PostController extends Controller
         catch (\Exception $e){
             return response()->json([
                 'status_code' => 500,
-                'message' => $e->getMessage()
+                'message' => $this->errorMessage($e)
             ]);
         }
 
@@ -168,7 +168,7 @@ class PostController extends Controller
         catch (\Exception $e){
             return response()->json([
                 'status_code' => 500,
-                'message' => $e->getMessage()
+                'message' => $this->errorMessage($e)
             ]);
         }
 
@@ -191,7 +191,7 @@ class PostController extends Controller
         catch (\Exception $e){
             return response()->json([
                 'status_code' => 500,
-                'message' => $e->getMessage()
+                'message' => $this->errorMessage($e)
             ]);
         }
     }
@@ -223,7 +223,7 @@ class PostController extends Controller
         } catch (\Exception $e) {
             return response()->json([
                 'status_code' => 500,
-                'message' => $e->getMessage()
+                'message' => $this->errorMessage($e)
             ]);
         }
     }
@@ -326,7 +326,7 @@ class PostController extends Controller
         catch (\Exception $e){
             return response()->json([
                 'status_code' => 500,
-                'message' => $e->getMessage()
+                'message' => $this->errorMessage($e)
             ]);
         }
     }

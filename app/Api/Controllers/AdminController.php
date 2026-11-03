@@ -60,7 +60,7 @@ class AdminController extends Controller
                 return response()->json(['message' => 'Invalid Credentials']);
             }
         } catch (JWTException $e) {
-            return response()->json(['message' => $e->getMessage()]);
+            return response()->json(['message' => $this->errorMessage($e)]);
         }
     }
 
@@ -94,13 +94,10 @@ class AdminController extends Controller
     
                 }
     
-                $orignal_password = $data['password'];
                 $data['password'] = Hash::make($data['password']);
-            
-    
+
+
                 $user = AdminUser::create($data);
-    
-                $user->orignal_password = $orignal_password;
 
                 $token            = \JWTAuth::fromUser($user);
 
@@ -123,7 +120,7 @@ class AdminController extends Controller
                
     
             } catch (JWTException $e) {
-                return response()->json(['message' => $e->getMessage()]);
+                return response()->json(['message' => $this->errorMessage($e)]);
             }
         }
 

@@ -35,9 +35,10 @@ class PageController extends Controller
     
             foreach ($files as  $fileName => $file) {
 
-                $type = explode("/",$file['type']);
+                // Use the type detected from the file's content, not the one the browser claims
+                $detected = (string) optional($request->file($fileName))->getMimeType();
 
-                if ($type[0] != 'application'){
+                if (!str_starts_with($detected, 'application/')){
 
                     return response()->json([
                         'status_code' => 500,
